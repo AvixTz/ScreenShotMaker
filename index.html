@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign ID Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+        h2 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            flex-grow: 1;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button#extractBtn {
+            background-color: #3498db;
+        }
+        button#extractBtn:hover {
+            background-color: #2980b9;
+        }
+        button#copyBtn {
+            background-color: #2ecc71;
+        }
+        button#copyBtn:hover {
+            background-color: #27ae60;
+        }
+        button#resetBtn {
+            background-color: #e74c3c;
+        }
+        button#resetBtn:hover {
+            background-color: #c0392b;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Campaign ID Extractor</h2>
+        <p>Paste the copied information from your system below, and click "Extract IDs" to get the campaign IDs.</p>
+        <textarea id="inputText" placeholder="Paste your data here..."></textarea>
+        <div class="button-container">
+            <button id="extractBtn" onclick="extractIDs()">Extract IDs</button>
+            <button id="copyBtn" onclick="copyToClipboard()">Copy Results</button>
+            <button id="resetBtn" onclick="resetFields()">Reset</button>
+        </div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function extractIDs() {
+            const inputText = document.getElementById("inputText").value;
+            const lines = inputText.split("\n");
+            const idPattern = /^\d{7}$/;
+            const ids = lines.filter(line => idPattern.test(line.trim()));
+            
+            if (ids.length > 0) {
+                document.getElementById("output").textContent = ids.join("\n");
+            } else {
+                document.getElementById("output").textContent = "No campaign IDs found.";
+            }
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(output).then(() => {
+                alert("Results copied to clipboard");
+            }).catch(err => {
+                alert("Failed to copy: " + err);
+            });
+        }
+
+        function resetFields() {
+            document.getElementById("inputText").value = '';
+            document.getElementById("output").textContent = '';
+        }
+    </script>
+</body>
+</html>
