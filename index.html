@@ -115,7 +115,7 @@
         function extractIDs() {
             const inputText = document.getElementById("inputText").value;
             const lines = inputText.split("\n");
-            const idPattern = /^\d{7}$/;
+            const idPattern = /^\d{5}$/;
             const ids = lines.filter(line => idPattern.test(line.trim()));
             
             if (ids.length > 0) {
