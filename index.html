@@ -219,15 +219,44 @@
             font-weight: 600;
         }
 
-        /* Preset Templates */
-        .preset-grid {
+        /* Aspect Ratio Controls */
+        .aspect-ratio-control {
+            margin-bottom: 15px;
+        }
+
+        .aspect-ratio-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .aspect-btn {
+            padding: 6px 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            color: white;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .aspect-btn.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        /* Template Grid */
+        .template-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
             margin-bottom: 15px;
         }
 
-        .preset-card {
+        .template-card {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 6px;
@@ -237,29 +266,23 @@
             text-align: center;
         }
 
-        .preset-card.active {
+        .template-card.active {
             background: rgba(59, 130, 246, 0.2);
             border-color: var(--primary-blue);
         }
 
-        .preset-card:hover {
+        .template-card:hover {
             background: rgba(255,255,255,0.15);
         }
 
-        .preset-icon {
+        .template-icon {
             font-size: 16px;
             margin-bottom: 4px;
         }
 
-        .preset-name {
+        .template-name {
             font-size: 11px;
             font-weight: 500;
-        }
-
-        .preset-size {
-            font-size: 9px;
-            color: var(--gray-300);
-            margin-top: 2px;
         }
 
         /* Compact Controls */
@@ -282,7 +305,6 @@
             align-items: center;
         }
 
-        /* NEW: Enhanced control row for text styling */
         .control-row-extended {
             display: grid;
             grid-template-columns: 1fr 35px 30px 40px;
@@ -319,7 +341,6 @@
             text-align: center;
         }
 
-        /* NEW: Bold toggle button */
         .bold-toggle {
             width: 35px;
             height: 24px;
@@ -415,24 +436,6 @@
             cursor: pointer;
         }
 
-        /* Dimensions Controls */
-        .dimensions-control {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .dimension-input {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 4px;
-            padding: 6px 8px;
-            color: white;
-            font-size: 12px;
-            text-align: center;
-        }
-
         /* Layout Division Controls */
         .division-control {
             margin-bottom: 15px;
@@ -445,7 +448,6 @@
             margin-bottom: 8px;
         }
         
-        /* Frame Style specific - 4 columns for frame buttons */
         .frame-options {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -469,7 +471,6 @@
             border-color: var(--primary-blue);
         }
 
-        /* NEW: Frame Width Control */
         .frame-width-control {
             display: flex;
             align-items: center;
@@ -488,7 +489,6 @@
             text-align: center;
         }
 
-        /* NEW: Global Font Size Control */
         .global-font-control {
             display: flex;
             align-items: center;
@@ -517,7 +517,6 @@
             text-align: center;
         }
 
-        /* NEW: Button style controls */
         .button-style-control {
             margin-bottom: 15px;
             padding: 8px;
@@ -629,7 +628,6 @@
             min-height: 0;
         }
 
-        /* Enhanced Preview Frames - FIXED POSITIONING */
         .preview-wrapper {
             background: white;
             border-radius: 16px;
@@ -804,7 +802,6 @@
             min-height: 300px;
         }
 
-        /* Scale wrapper for resolution multiplier */
         .scale-wrapper {
             transform-origin: center;
             transition: transform 0.3s ease;
@@ -904,6 +901,7 @@
             flex-direction: column;
             justify-content: space-between;
             flex-shrink: 0;
+            overflow: hidden;
         }
 
         .ad-primary-title {
@@ -915,6 +913,11 @@
             overflow-wrap: break-word;
             hyphens: auto;
             white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
 
         .ad-secondary-title {
@@ -925,6 +928,11 @@
             overflow-wrap: break-word;
             hyphens: auto;
             white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         .ad-meta {
@@ -937,14 +945,23 @@
             font-weight: 500;
             flex-wrap: nowrap;
             margin-top: auto;
+            overflow: hidden;
         }
 
         .meta-left {
             display: flex;
             align-items: center;
             gap: 6px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .meta-left > * {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .meta-right {
@@ -954,9 +971,9 @@
         }
 
         .action-button {
-            background: #FFFFFF;
-            color: white;
-            border: none;
+            background: transparent !important;
+            color: var(--gray-600) !important;
+            border: 1px solid var(--gray-300) !important;
             border-radius: 4px;
             padding: 6px 12px;
             font-size: 11px;
@@ -964,18 +981,20 @@
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
         }
 
         .action-button:hover {
-            background: #2563eb;
+            background: var(--gray-100) !important;
             transform: translateY(-1px);
         }
 
-        /* NEW: Transparent button style */
-        .action-button.transparent {
-            background: transparent !important;
-            border: 1px solid currentColor !important;
-            color: var(--gray-600) !important;
+        .action-button.filled {
+            background: var(--primary-blue) !important;
+            color: white !important;
+            border: none !important;
         }
 
         .action-button.hidden-style {
@@ -990,6 +1009,9 @@
             letter-spacing: 0.5px;
             font-weight: 600;
             border: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .sponsored-tag.boxed {
@@ -1023,47 +1045,47 @@
             flex-shrink: 0;
         }
 
-        .layout-side-left .ad-container {
+        .layout-left-image .ad-container {
             flex-direction: row;
             height: 100%;
         }
 
-        .layout-side-left .ad-image-container {
+        .layout-left-image .ad-image-container {
             width: var(--image-width, 40%);
             height: 100%;
             flex-shrink: 0;
         }
 
-        .layout-side-left .ad-content {
+        .layout-left-image .ad-content {
             width: var(--content-width, 60%);
             height: 100%;
             flex-shrink: 0;
         }
 
-        .layout-side-right .ad-container {
+        .layout-right-image .ad-container {
             flex-direction: row-reverse;
             height: 100%;
         }
 
-        .layout-side-right .ad-image-container {
+        .layout-right-image .ad-image-container {
             width: var(--image-width, 40%);
             height: 100%;
             flex-shrink: 0;
         }
 
-        .layout-side-right .ad-content {
+        .layout-right-image .ad-content {
             width: var(--content-width, 60%);
             height: 100%;
             flex-shrink: 0;
         }
 
-        .layout-free-position .ad-container {
+        .layout-overlay .ad-container {
             position: relative;
             width: 100%;
             height: 100%;
         }
 
-        .layout-free-position .ad-image-container {
+        .layout-overlay .ad-image-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -1072,7 +1094,7 @@
             z-index: 1;
         }
 
-        .layout-free-position .ad-image {
+        .layout-overlay .ad-image {
             position: absolute;
             top: 0;
             left: 0;
@@ -1081,7 +1103,7 @@
             z-index: 2;
         }
 
-        .layout-free-position .ad-content {
+        .layout-overlay .ad-content {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -1094,7 +1116,7 @@
             -webkit-backdrop-filter: blur(3px);
         }
 
-        .layout-free-position .ad-primary-title {
+        .layout-overlay .ad-primary-title {
             color: white !important;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.9), 1px 1px 3px rgba(0,0,0,0.8) !important;
             font-weight: 800 !important;
@@ -1102,7 +1124,7 @@
             z-index: 1001;
         }
 
-        .layout-free-position .ad-secondary-title {
+        .layout-overlay .ad-secondary-title {
             color: rgba(255,255,255,0.95) !important;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.8), 0px 0px 2px rgba(0,0,0,0.9) !important;
             font-weight: 600 !important;
@@ -1110,14 +1132,14 @@
             z-index: 1001;
         }
 
-        .layout-free-position .ad-meta {
+        .layout-overlay .ad-meta {
             color: rgba(255,255,255,0.9) !important;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important;
             position: relative;
             z-index: 1001;
         }
 
-        .layout-free-position .sponsored-tag {
+        .layout-overlay .sponsored-tag {
             background: rgba(0,0,0,0.6) !important;
             color: white !important;
             border: 1px solid rgba(255,255,255,0.4) !important;
@@ -1129,87 +1151,9 @@
             z-index: 1001;
         }
 
-        /* Additional overlay text visibility fixes */
-        .layout-free-position .ad-primary-title,
-        .layout-free-position .ad-secondary-title,
-        .layout-free-position .ad-meta,
-        .layout-free-position .sponsored-tag,
-        .layout-free-position #adBrandName,
-        .layout-free-position #adBlogName {
+        .layout-overlay .ad-content * {
             position: relative !important;
             z-index: 1001 !important;
-        }
-
-        .layout-free-position .ad-content * {
-            position: relative !important;
-            z-index: 1001 !important;
-        }
-
-        /* Preset Styles */
-        .preset-push {
-            width: 600px;
-            height: 400px;
-        }
-
-        .preset-push .ad-container {
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .preset-push .ad-image-container {
-            width: 100%;
-            height: 160px;
-            flex-shrink: 0;
-        }
-
-        .preset-push .ad-content {
-            height: 90px;
-            padding: 10px;
-            flex-shrink: 0;
-        }
-
-        .preset-push .ad-primary-title {
-            font-size: 14px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .preset-push .ad-secondary-title {
-            font-size: 11px;
-            margin-bottom: 6px;
-        }
-
-        .preset-taboola {
-            width: 600px;
-            height: 400px;
-        }
-
-        .preset-taboola .ad-container {
-            flex-direction: row;
-            height: 100%;
-        }
-
-        .preset-taboola .ad-image-container {
-            width: 128px;
-            height: 100%;
-            flex-shrink: 0;
-        }
-
-        .preset-taboola .ad-content {
-            flex: 1;
-            padding: 10px;
-            height: 100%;
-        }
-
-        .preset-taboola .ad-primary-title {
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .preset-taboola .ad-secondary-title {
-            font-size: 11px;
-            margin-bottom: 6px;
         }
 
         /* Loading States */
@@ -1299,7 +1243,7 @@
                 overflow-y: auto;
             }
 
-            .preset-grid {
+            .template-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
 
@@ -1417,15 +1361,23 @@
                 <input type="url" class="url-input" id="imageUrl" placeholder="Or paste image URL...">
             </div>
 
-            <!-- Dimensions Control -->
+            <!-- Aspect Ratio Control -->
             <div class="section">
                 <div class="section-header">
                     <span>📐</span>
-                    <span>Dimensions</span>
+                    <span>Aspect Ratio</span>
                 </div>
-                <div class="dimensions-control">
-                    <input type="number" class="dimension-input" id="adWidth" placeholder="Width" value="600" min="200" max="800">
-                    <input type="number" class="dimension-input" id="adHeight" placeholder="Height" value="400" min="150" max="600">
+                <div class="aspect-ratio-control">
+                    <div class="aspect-ratio-options">
+                        <div class="aspect-btn active" data-ratio="16:9">16:9</div>
+                        <div class="aspect-btn" data-ratio="2:1">2:1</div>
+                        <div class="aspect-btn" data-ratio="6:5">6:5</div>
+                        <div class="aspect-btn" data-ratio="1:1">1:1</div>
+                        <div class="aspect-btn" data-ratio="1.9:1">1.9:1</div>
+                    </div>
+                    <div style="font-size: 9px; color: var(--gray-300); margin-top: 4px; text-align: center;">
+                        Standard advertising ratios
+                    </div>
                 </div>
                 
                 <!-- Resolution Multiplier -->
@@ -1462,42 +1414,28 @@
                 </div>
             </div>
 
-            <!-- Preset Templates -->
+            <!-- Template Layout -->
             <div class="section">
                 <div class="section-header">
                     <span>📋</span>
                     <span>Templates</span>
                 </div>
-                <div class="preset-grid">
-                    <div class="preset-card active" data-preset="push">
-                        <div class="preset-icon">📱</div>
-                        <div class="preset-name">PUSH</div>
-                        <div class="preset-size">320×250</div>
+                <div class="template-grid">
+                    <div class="template-card active" data-template="top-image">
+                        <div class="template-icon">🖼️</div>
+                        <div class="template-name">Top Image</div>
                     </div>
-                    <div class="preset-card" data-preset="taboola">
-                        <div class="preset-icon">📊</div>
-                        <div class="preset-name">Taboola</div>
-                        <div class="preset-size">320×320</div>
+                    <div class="template-card" data-template="right-image">
+                        <div class="template-icon">▶️</div>
+                        <div class="template-name">Right Image</div>
                     </div>
-                    <div class="preset-card" data-preset="top-image">
-                        <div class="preset-icon">🖼️</div>
-                        <div class="preset-name">Top Image</div>
-                        <div class="preset-size">Custom</div>
+                    <div class="template-card" data-template="left-image">
+                        <div class="template-icon">◀️</div>
+                        <div class="template-name">Left Image</div>
                     </div>
-                    <div class="preset-card" data-preset="side-left">
-                        <div class="preset-icon">◀️</div>
-                        <div class="preset-name">Side Left</div>
-                        <div class="preset-size">Custom</div>
-                    </div>
-                    <div class="preset-card" data-preset="side-right">
-                        <div class="preset-icon">▶️</div>
-                        <div class="preset-name">Side Right</div>
-                        <div class="preset-size">Custom</div>
-                    </div>
-                    <div class="preset-card" data-preset="free-position">
-                        <div class="preset-icon">🎯</div>
-                        <div class="preset-name">Overlay</div>
-                        <div class="preset-size">Custom</div>
+                    <div class="template-card" data-template="overlay">
+                        <div class="template-icon">🎯</div>
+                        <div class="template-name">Overlay</div>
                     </div>
                 </div>
             </div>
@@ -1620,20 +1558,20 @@
                     <label class="control-label">Action Button</label>
                     <div class="control-row-extended">
                         <input type="text" class="control-input" id="actionButtonText" value="Read More" placeholder="Button text...">
-                        <input type="color" class="control-color" id="actionButtonColor" value="#ffffff">
+                        <input type="color" class="control-color" id="actionButtonColor" value="#6b7280">
                         <input type="number" class="control-input control-number" id="actionButtonSize" value="11" min="8" max="16">
                         <button class="bold-toggle active" id="actionButtonBold" onclick="toggleBold('button')">B</button>
                     </div>
                     
-                    <!-- NEW: Button Style Control -->
+                    <!-- Button Style Control -->
                     <div class="button-style-control">
                         <label style="font-size: 10px; color: var(--gray-300);">Button Style:</label>
                         <div class="button-style-options">
-                            <button class="button-style-btn active" data-button-style="filled" onclick="setButtonStyle('filled')">Filled</button>
-                            <button class="button-style-btn" data-button-style="transparent" onclick="setButtonStyle('transparent')">Border</button>
+                            <button class="button-style-btn" data-button-style="filled" onclick="setButtonStyle('filled')">Filled</button>
+                            <button class="button-style-btn active" data-button-style="transparent" onclick="setButtonStyle('transparent')">Border</button>
                             <button class="button-style-btn" data-button-style="hidden" onclick="setButtonStyle('hidden')">Hidden</button>
                         </div>
-                        <input type="color" class="control-color" id="actionButtonBg" value="#ffffff" style="width: 100%; height: 20px; margin-top: 6px;">
+                        <input type="color" class="control-color" id="actionButtonBg" value="#3b82f6" style="width: 100%; height: 20px; margin-top: 6px;">
                         <label style="font-size: 9px; color: var(--gray-300); margin-top: 2px; display: block;">Background Color</label>
                     </div>
                 </div>
@@ -1738,7 +1676,7 @@
             <div class="preview-container">
                 <div class="preview-wrapper" id="previewWrapper">
                     <div class="scale-wrapper" id="scaleWrapper">
-                        <div class="native-ad preset-push" id="nativeAd">
+                        <div class="native-ad layout-top-image" id="nativeAd">
                             <div class="ad-container">
                                 <div class="ad-image-container">
                                     <div class="ad-image" id="adImage">
@@ -1789,7 +1727,7 @@
     </div>
 
     <script>
-        let currentPreset = 'push';
+        let currentTemplate = 'top-image';
         let currentMode = 'auto';
         let imagePosition = { x: 0, y: 0 };
         let extractedImages = [];
@@ -1799,18 +1737,28 @@
         let currentFrame = 'none';
         let frameWidth = 30;
         let currentImageUrl = '';
-        let currentButtonStyle = 'transparent';
-        let wasInOverlayMode = false; // NEW: Track overlay state
+        let currentButtonStyle = 'transparent'; // Changed default to transparent
+        let wasInOverlayMode = false;
+        let currentAspectRatio = '16:9';
 
-        // NEW: Store original colors for reset functionality
+        // Store original colors for reset functionality
         let originalColors = {
             primary: '#111827',
             secondary: '#6b7280',
             brand: '#6b7280',
             blog: '#6b7280',
             sponsored: '#9ca3af',
-            actionButton: '#ffffff',
+            actionButton: '#6b7280', // Changed to gray for transparent default
             actionButtonBg: '#3b82f6'
+        };
+
+        // Aspect ratio calculations
+        const aspectRatios = {
+            '16:9': { width: 800, height: 450 },
+            '2:1': { width: 800, height: 400 },
+            '6:5': { width: 720, height: 600 },
+            '1:1': { width: 600, height: 600 },
+            '1.9:1': { width: 760, height: 400 }
         };
 
         // Elements
@@ -1836,8 +1784,6 @@
             contentPadding: document.getElementById('contentPadding'),
             lineHeight: document.getElementById('lineHeight'),
             quickUrl: document.getElementById('quickUrl'),
-            adWidth: document.getElementById('adWidth'),
-            adHeight: document.getElementById('adHeight'),
             imageSplit: document.getElementById('imageSplit'),
             sponsoredText: document.getElementById('sponsoredText'),
             sponsoredTextColor: document.getElementById('sponsoredTextColor'),
@@ -1878,7 +1824,6 @@
             isExtracted: false
         };
 
-        // Store current state
         function storeCurrentState() {
             extractedContent = {
                 title: elements.primaryTitle.value,
@@ -1898,7 +1843,6 @@
             }
         }
 
-        // Restore current state
         function restoreCurrentState() {
             if (extractedContent.isExtracted) {
                 if (!elements.primaryTitle.value || elements.primaryTitle.value === extractedContent.title) {
@@ -1940,7 +1884,7 @@
             }
         }
 
-        // NEW: Bold toggle functionality
+        // Bold toggle functionality
         function toggleBold(type) {
             const boldBtn = document.getElementById(type + (type === 'button' ? '' : type === 'sponsored' ? 'Text' : type === 'primary' ? 'Title' : type === 'secondary' ? 'Title' : type === 'brand' ? 'Name' : 'Name') + 'Bold');
             const previewElement = type === 'primary' ? preview.adPrimaryTitle :
@@ -1959,30 +1903,31 @@
             }
         }
 
-        // NEW: Button style functionality
+        // Button style functionality
         function setButtonStyle(style) {
             document.querySelectorAll('.button-style-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`[data-button-style="${style}"]`).classList.add('active');
             
             currentButtonStyle = style;
             
-            preview.actionButton.classList.remove('transparent', 'hidden-style');
+            preview.actionButton.classList.remove('filled', 'hidden-style');
             
             switch(style) {
                 case 'filled':
+                    preview.actionButton.classList.add('filled');
                     preview.actionButton.style.backgroundColor = elements.actionButtonBg.value;
-                    preview.actionButton.style.color = elements.actionButtonColor.value;
+                    preview.actionButton.style.color = 'white';
                     preview.actionButton.style.border = 'none';
                     break;
                 case 'transparent':
-                    preview.actionButton.classList.add('transparent');
+                    // Default transparent style is handled by CSS
                     break;
                 case 'hidden':
                     preview.actionButton.classList.add('hidden-style');
                     break;
             }
             
-            const styleText = style === 'filled' ? 'filled' : style === 'transparent' ? 'border only' : 'hidden';
+            const styleText = style === 'filled' ? 'filled' : style === 'transparent' ? 'transparent' : 'hidden';
             showNotification(`🎨 Button style: ${styleText}`);
         }
 
@@ -1998,15 +1943,40 @@
             });
         });
 
-        // Preset Selection
-        document.querySelectorAll('.preset-card').forEach(card => {
-            card.addEventListener('click', function() {
-                document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+        // Aspect Ratio Selection
+        document.querySelectorAll('.aspect-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.aspect-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                currentPreset = this.dataset.preset;
+                
+                currentAspectRatio = this.dataset.ratio;
+                updateDimensionsFromAspectRatio();
+                showNotification(`📐 Aspect ratio: ${currentAspectRatio}`);
+            });
+        });
+
+        function updateDimensionsFromAspectRatio() {
+            const ratio = aspectRatios[currentAspectRatio];
+            if (ratio) {
+                const baseWidth = ratio.width;
+                const baseHeight = ratio.height;
+                
+                preview.nativeAd.style.width = (baseWidth * resolutionMultiplier) + 'px';
+                preview.nativeAd.style.height = (baseHeight * resolutionMultiplier) + 'px';
+                
+                showNotification(`📏 Size: ${baseWidth * resolutionMultiplier}×${baseHeight * resolutionMultiplier}px`);
+            }
+        }
+
+        // Template Selection
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                currentTemplate = this.dataset.template;
                 
                 storeCurrentState();
-                applyPreset(currentPreset);
+                applyTemplate(currentTemplate);
                 setTimeout(() => {
                     restoreCurrentState();
                     updatePreview();
@@ -2068,7 +2038,6 @@
             applyGlobalFontSize(multiplier);
         });
 
-        // Apply global font size multiplier
         function applyGlobalFontSize(multiplier) {
             const baseSize1 = parseInt(elements.primaryTitleSize.value);
             const baseSize2 = parseInt(elements.secondaryTitleSize.value);
@@ -2087,7 +2056,6 @@
             showNotification(`📝 All fonts scaled to ${Math.round(multiplier * 100)}%`);
         }
 
-        // Update preview frame style
         function updatePreviewFrame() {
             if (preview.previewWrapper) {
                 storeCurrentImage();
@@ -2117,7 +2085,6 @@
             }
         }
 
-        // Create social media feed frame
         function createFeedFrame() {
             const feedBackground = document.createElement('div');
             feedBackground.className = 'feed-background';
@@ -2146,9 +2113,8 @@
             }
         }
 
-        // NEW: Enhanced reset colors function with overlay state tracking
-        function resetNormalColors() {
-            // Only reset if we were in overlay mode
+        // Fixed overlay reset colors function
+        function resetFromOverlayColors() {
             if (wasInOverlayMode) {
                 elements.primaryTitleColor.value = originalColors.primary;
                 elements.secondaryTitleColor.value = originalColors.secondary;
@@ -2158,40 +2124,22 @@
                 elements.actionButtonColor.value = originalColors.actionButton;
                 elements.actionButtonBg.value = originalColors.actionButtonBg;
                 
-                // Remove overlay-specific styles
-                preview.adPrimaryTitle.style.removeProperty('text-shadow');
-                preview.adPrimaryTitle.style.removeProperty('z-index');
-                preview.adSecondaryTitle.style.removeProperty('text-shadow');
-                preview.adSecondaryTitle.style.removeProperty('z-index');
-                preview.adBrandName.style.removeProperty('text-shadow');
-                preview.adBrandName.style.removeProperty('z-index');
-                preview.adBlogName.style.removeProperty('text-shadow');
-                preview.adBlogName.style.removeProperty('z-index');
-                preview.sponsoredTag.style.removeProperty('backdrop-filter');
-                preview.sponsoredTag.style.removeProperty('text-shadow');
-                preview.sponsoredTag.style.removeProperty('z-index');
-                preview.adContent.style.removeProperty('z-index');
-                
-                // Reset to normal styles
-                preview.adPrimaryTitle.style.color = elements.primaryTitleColor.value;
-                preview.adSecondaryTitle.style.color = elements.secondaryTitleColor.value;
-                preview.adBrandName.style.color = elements.brandNameColor.value;
-                preview.adBlogName.style.color = elements.blogNameColor.value;
-                preview.sponsoredTag.style.color = elements.sponsoredTextColor.value;
+                // Reset button style to transparent
+                setButtonStyle('transparent');
                 
                 wasInOverlayMode = false;
-                showNotification('🎨 Colors reset to normal styling');
+                showNotification('🎨 Colors reset from overlay mode');
             }
         }
 
-        function applyPreset(preset) {
+        function applyTemplate(template) {
             // Track if switching from overlay mode
-            wasInOverlayMode = preview.nativeAd.classList.contains('layout-free-position');
+            wasInOverlayMode = preview.nativeAd.classList.contains('layout-overlay');
             
             preview.nativeAd.className = `native-ad`;
             
             const divisionSection = document.getElementById('divisionSection');
-            const showDivision = ['side-left', 'side-right', 'top-image'].includes(preset);
+            const showDivision = ['left-image', 'right-image', 'top-image'].includes(template);
             divisionSection.classList.toggle('hidden', !showDivision);
             
             const imageContainer = preview.nativeAd.querySelector('.ad-image-container');
@@ -2205,45 +2153,23 @@
                 contentContainer.style.height = '';
             }
             
-            let baseWidth, baseHeight;
-            
-            switch(preset) {
-                case 'push':
-                    preview.nativeAd.className += ' preset-push';
-                    baseWidth = 500;
-                    baseHeight = 500;
-                    resetNormalColors();
-                    break;
-                case 'taboola':
-                    preview.nativeAd.className += ' preset-taboola';
-                    baseWidth = 600;
-                    baseHeight = 400;
-                    resetNormalColors();
-                    break;
+            switch(template) {
                 case 'top-image':
                     preview.nativeAd.className += ' layout-top-image';
-                    baseWidth = 600;
-                    baseHeight = 400;
-                    resetNormalColors();
+                    resetFromOverlayColors();
                     break;
-                case 'side-left':
-                    preview.nativeAd.className += ' layout-side-left';
-                    baseWidth = 600;
-                    baseHeight = 400;
-                    resetNormalColors();
+                case 'left-image':
+                    preview.nativeAd.className += ' layout-left-image';
+                    resetFromOverlayColors();
                     break;
-                case 'side-right':
-                    preview.nativeAd.className += ' layout-side-right';
-                    baseWidth = 600;
-                    baseHeight = 400;
-                    resetNormalColors();
+                case 'right-image':
+                    preview.nativeAd.className += ' layout-right-image';
+                    resetFromOverlayColors();
                     break;
-                case 'free-position':
-                    preview.nativeAd.className += ' layout-free-position';
-                    baseWidth = 600;
-                    baseHeight = 400;
+                case 'overlay':
+                    preview.nativeAd.className += ' layout-overlay';
                     setOverlayColors();
-                    wasInOverlayMode = true; // Track overlay state
+                    wasInOverlayMode = true;
                     setTimeout(() => {
                         setOverlayColors();
                         showNotification('🎯 Overlay mode: Text optimized for maximum visibility over image');
@@ -2251,20 +2177,16 @@
                     break;
             }
             
-            elements.adWidth.value = baseWidth * resolutionMultiplier;
-            elements.adHeight.value = baseHeight * resolutionMultiplier;
-            
-            updateDimensions();
+            updateDimensionsFromAspectRatio();
             updateLayoutSplit();
             
             if (!(currentMode === 'auto' && (extractedImages.length > 0 || currentImageUrl))) {
-                optimizeImageForPreset(preset);
+                optimizeImageForTemplate(template);
             }
             
             updatePreview();
         }
 
-        // Set light colors for overlay mode
         function setOverlayColors() {
             elements.primaryTitleColor.value = '#ffffff';
             elements.secondaryTitleColor.value = '#f3f4f6';
@@ -2274,19 +2196,12 @@
             elements.actionButtonColor.value = '#ffffff';
             elements.actionButtonBg.value = 'rgba(59, 130, 246, 0.9)';
             
+            // Force transparent button in overlay
+            setButtonStyle('transparent');
+            
             updatePreview();
         }
 
-        // Update dimensions
-        function updateDimensions() {
-            const width = elements.adWidth.value + 'px';
-            const height = elements.adHeight.value + 'px';
-            
-            preview.nativeAd.style.width = width;
-            preview.nativeAd.style.height = height;
-        }
-
-        // Update layout split
         function updateLayoutSplit() {
             const imagePercent = elements.imageSplit.value;
             const contentPercent = 100 - imagePercent;
@@ -2296,7 +2211,7 @@
             preview.nativeAd.style.setProperty('--image-width', imagePercent + '%');
             preview.nativeAd.style.setProperty('--content-width', contentPercent + '%');
             
-            if (currentPreset === 'top-image') {
+            if (currentTemplate === 'top-image') {
                 const imageContainer = preview.nativeAd.querySelector('.ad-image-container');
                 const contentContainer = preview.nativeAd.querySelector('.ad-content');
                 
@@ -2306,7 +2221,7 @@
                     imageContainer.style.width = '100%';
                     contentContainer.style.width = '100%';
                 }
-            } else if (['side-left', 'side-right'].includes(currentPreset)) {
+            } else if (['left-image', 'right-image'].includes(currentTemplate)) {
                 const imageContainer = preview.nativeAd.querySelector('.ad-image-container');
                 const contentContainer = preview.nativeAd.querySelector('.ad-content');
                 
@@ -2317,35 +2232,20 @@
             }
         }
 
-        // Image optimization for each preset
-        function optimizeImageForPreset(preset) {
+        function optimizeImageForTemplate(template) {
             const imageElement = preview.adImage;
             
-            switch(preset) {
-                case 'push':
-                    imageElement.style.backgroundSize = 'cover';
-                    imageElement.style.backgroundPosition = 'center';
-                    elements.imageZoom.value = '100';
-                    elements.imageScale.value = '100';
-                    break;
-                    
-                case 'taboola':
-                    imageElement.style.backgroundSize = 'cover';
-                    imageElement.style.backgroundPosition = 'center';
-                    elements.imageZoom.value = '110';
-                    elements.imageScale.value = '100';
-                    break;
-                    
+            switch(template) {
                 case 'top-image':
-                case 'side-left':
-                case 'side-right':
+                case 'left-image':
+                case 'right-image':
                     imageElement.style.backgroundSize = 'cover';
                     imageElement.style.backgroundPosition = 'center';
                     elements.imageZoom.value = '100';
                     elements.imageScale.value = '100';
                     break;
                     
-                case 'free-position':
+                case 'overlay':
                     imageElement.style.backgroundSize = 'cover';
                     imageElement.style.backgroundPosition = 'center';
                     elements.imageZoom.value = '105';
@@ -2456,7 +2356,7 @@
                     preview.adImage.style.backgroundImage = `url('${e.target.result}')`;
                     preview.adImage.classList.add('has-image');
                     preview.adImage.textContent = '';
-                    optimizeImageForPreset(currentPreset);
+                    optimizeImageForTemplate(currentTemplate);
                 };
                 reader.readAsDataURL(file);
             }
@@ -2481,7 +2381,7 @@
                         if (badge) badge.remove();
                     });
                     
-                    optimizeImageForPreset(currentPreset);
+                    optimizeImageForTemplate(currentTemplate);
                     showNotification('📁 Custom image uploaded successfully!');
                 };
                 reader.readAsDataURL(file);
@@ -2503,7 +2403,7 @@
                     if (badge) badge.remove();
                 });
                 
-                optimizeImageForPreset(currentPreset);
+                optimizeImageForTemplate(currentTemplate);
                 showNotification('🔗 Custom image URL applied!');
             }
         });
@@ -2950,7 +2850,7 @@
             
             elements.imageUrl.value = selectedImageUrl;
             
-            optimizeImageForPreset(currentPreset);
+            optimizeImageForTemplate(currentTemplate);
             
             document.querySelectorAll('.image-option').forEach((option, i) => {
                 option.classList.remove('selected', 'auto-selected');
@@ -2982,21 +2882,15 @@
         function autoOptimize() {
             showNotification('✨ Optimizing ad layout...');
             
-            switch(currentPreset) {
-                case 'push':
-                    optimizePushStyle();
-                    break;
-                case 'taboola':
-                    optimizeTaboolaStyle();
-                    break;
+            switch(currentTemplate) {
                 case 'top-image':
                     optimizeTopImageStyle();
                     break;
-                case 'side-left':
-                case 'side-right':
+                case 'left-image':
+                case 'right-image':
                     optimizeSideStyle();
                     break;
-                case 'free-position':
+                case 'overlay':
                     optimizeOverlayStyle();
                     break;
                 default:
@@ -3007,42 +2901,6 @@
             updateAllRangeDisplays();
             updatePreview();
             showNotification('✅ Ad optimized successfully!');
-        }
-
-        function optimizePushStyle() {
-            elements.primaryTitleSize.value = '18';
-            elements.secondaryTitleSize.value = '14';
-            elements.primaryTitleColor.value = '#111827';
-            elements.secondaryTitleColor.value = '#4b5563';
-            elements.brandNameSize.value = '11';
-            elements.blogNameSize.value = '11';
-            elements.contentPadding.value = '16';
-            elements.lineHeight.value = '1.3';
-            elements.imageZoom.value = '105';
-            elements.imageScale.value = '100';
-            elements.imagePositionX.value = '0';
-            elements.imagePositionY.value = '-5';
-            
-            preview.adImage.style.backgroundSize = 'cover';
-            preview.adImage.style.backgroundPosition = 'center top';
-        }
-
-        function optimizeTaboolaStyle() {
-            elements.primaryTitleSize.value = '14';
-            elements.secondaryTitleSize.value = '12';
-            elements.primaryTitleColor.value = '#1f2937';
-            elements.secondaryTitleColor.value = '#6b7280';
-            elements.brandNameSize.value = '10';
-            elements.blogNameSize.value = '10';
-            elements.contentPadding.value = '12';
-            elements.lineHeight.value = '1.4';
-            elements.imageZoom.value = '110';
-            elements.imageScale.value = '100';
-            elements.imagePositionX.value = '0';
-            elements.imagePositionY.value = '0';
-            
-            preview.adImage.style.backgroundSize = 'cover';
-            preview.adImage.style.backgroundPosition = 'center';
         }
 
         function optimizeTopImageStyle() {
@@ -3119,7 +2977,6 @@
             elements.imagePositionY.value = '0';
         }
 
-        // Update all range displays
         function updateAllRangeDisplays() {
             document.getElementById('imageZoomValue').textContent = elements.imageZoom.value + '%';
             document.getElementById('imageScaleValue').textContent = elements.imageScale.value + '%';
@@ -3142,23 +2999,14 @@
             const oldMultiplier = resolutionMultiplier;
             resolutionMultiplier = newMultiplier;
             
-            const currentWidth = parseInt(elements.adWidth.value);
-            const currentHeight = parseInt(elements.adHeight.value);
-            
-            const baseWidth = Math.round(currentWidth / oldMultiplier);
-            const baseHeight = Math.round(currentHeight / oldMultiplier);
-            
-            elements.adWidth.value = baseWidth * newMultiplier;
-            elements.adHeight.value = baseHeight * newMultiplier;
-            
             preview.scaleWrapper.style.transform = `scale(${1 / newMultiplier})`;
             
-            updateDimensions();
-            showNotification(`📐 Resolution: ${newMultiplier}x (${elements.adWidth.value}×${elements.adHeight.value})`);
+            updateDimensionsFromAspectRatio();
+            showNotification(`📐 Resolution: ${newMultiplier}x`);
         }
 
         function updatePreview() {
-            updateDimensions();
+            updateDimensionsFromAspectRatio();
             
             const imageUrl = elements.imageUrl.value.trim();
             if (imageUrl && isValidUrl(imageUrl)) {
@@ -3224,28 +3072,8 @@
             preview.sponsoredTag.style.fontSize = Math.round(parseInt(elements.sponsoredTextSize.value) * globalMultiplier) + 'px';
             preview.actionButton.style.fontSize = Math.round(parseInt(elements.actionButtonSize.value) * globalMultiplier) + 'px';
 
-            // NEW: Ensure blog name and sponsored tag have matching style
-            const blogSize = Math.round(parseInt(elements.blogNameSize.value) * globalMultiplier);
-            const sponsoredSize = Math.round(parseInt(elements.sponsoredTextSize.value) * globalMultiplier);
-            const matchingSize = Math.max(blogSize, sponsoredSize);
-            
-            preview.adBlogName.style.fontSize = matchingSize + 'px';
-            preview.sponsoredTag.style.fontSize = matchingSize + 'px';
-            
-            // Match colors too
-            const blogBold = document.getElementById('blogNameBold').classList.contains('active');
-            const sponsoredBold = document.getElementById('sponsoredTextBold').classList.contains('active');
-            
-            if (blogBold || sponsoredBold) {
-                preview.adBlogName.style.fontWeight = 'bold';
-                preview.sponsoredTag.style.fontWeight = 'bold';
-            } else {
-                preview.adBlogName.style.fontWeight = 'normal';
-                preview.sponsoredTag.style.fontWeight = 'normal';
-            }
-
             // Force overlay styles if in overlay mode
-            if (preview.nativeAd.classList.contains('layout-free-position')) {
+            if (preview.nativeAd.classList.contains('layout-overlay')) {
                 preview.adPrimaryTitle.style.setProperty('color', '#ffffff', 'important');
                 preview.adPrimaryTitle.style.setProperty('text-shadow', '2px 2px 6px rgba(0,0,0,0.9), 1px 1px 3px rgba(0,0,0,0.8)', 'important');
                 preview.adPrimaryTitle.style.setProperty('font-weight', '800', 'important');
@@ -3274,7 +3102,7 @@
                 
                 preview.actionButton.style.setProperty('background-color', 'transparent', 'important');
                 preview.actionButton.style.setProperty('color', '#ffffff', 'important');
-                preview.actionButton.style.setProperty('border', '1px solid #9ca3af', 'important');
+                preview.actionButton.style.setProperty('border', '1px solid rgba(255,255,255,0.6)', 'important');
                 preview.actionButton.style.setProperty('backdrop-filter', 'blur(6px)', 'important');
                 preview.actionButton.style.setProperty('text-shadow', '1px 1px 2px rgba(0,0,0,0.6)', 'important');
                 preview.actionButton.style.setProperty('z-index', '1001', 'important');
@@ -3334,8 +3162,9 @@
                                 new ClipboardItem({ 'image/png': blob })
                             ]);
                             
-                            const width = elements.adWidth.value;
-                            const height = elements.adHeight.value;
+                            const ratio = aspectRatios[currentAspectRatio];
+                            const width = ratio.width * resolutionMultiplier;
+                            const height = ratio.height * resolutionMultiplier;
                             const frameText = currentFrame === 'none' ? '' : ` with ${currentFrame} frame`;
                             showNotification(`✅ Ad copied (${width}×${height})${frameText}!`);
                         } catch (err) {
@@ -3343,7 +3172,10 @@
                             const url = URL.createObjectURL(blob);
                             const a = document.createElement('a');
                             a.href = url;
-                            a.download = `native-ad-${elements.adWidth.value}x${elements.adHeight.value}-${currentFrame}.png`;
+                            const ratio = aspectRatios[currentAspectRatio];
+                            const width = ratio.width * resolutionMultiplier;
+                            const height = ratio.height * resolutionMultiplier;
+                            a.download = `native-ad-${width}x${height}-${currentFrame}.png`;
                             document.body.appendChild(a);
                             a.click();
                             document.body.removeChild(a);
@@ -3362,15 +3194,16 @@
 
         // Reset Form
         function resetForm() {
-            currentPreset = 'push';
+            currentTemplate = 'top-image';
             currentMode = 'auto';
             autoSelectedImage = false;
             resolutionMultiplier = 1;
             currentFrame = 'none';
             frameWidth = 30;
             currentImageUrl = '';
-            currentButtonStyle = 'filled';
+            currentButtonStyle = 'transparent';
             wasInOverlayMode = false;
+            currentAspectRatio = '16:9';
             
             extractedContent = {
                 title: '',
@@ -3381,8 +3214,11 @@
                 isExtracted: false
             };
             
-            document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
-            document.querySelector('[data-preset="push"]').classList.add('active');
+            document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+            document.querySelector('[data-template="top-image"]').classList.add('active');
+            
+            document.querySelectorAll('.aspect-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('[data-ratio="16:9"]').classList.add('active');
             
             document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('[data-mode="auto"]').classList.add('active');
@@ -3416,8 +3252,6 @@
             elements.imagePositionY.value = '0';
             elements.contentPadding.value = '10';
             elements.lineHeight.value = '1.0';
-            elements.adWidth.value = '600';
-            elements.adHeight.value = '400';
             elements.primaryTitleSize.value = '14';
             elements.secondaryTitleSize.value = '11';
             elements.imageSplit.value = '40';
@@ -3446,9 +3280,9 @@
             document.getElementById('sponsoredTextBold').classList.remove('active');
             document.getElementById('actionButtonBold').classList.add('active');
 
-            // Reset button style
+            // Reset button style to transparent default
             document.querySelectorAll('.button-style-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('[data-button-style="filled"]').classList.add('active');
+            document.querySelector('[data-button-style="transparent"]').classList.add('active');
 
             document.querySelectorAll('.toggle-item').forEach(item => {
                 const checkbox = item.querySelector('.toggle-checkbox');
@@ -3477,7 +3311,7 @@
 
             preview.scaleWrapper.style.transform = 'scale(1)';
 
-            applyPreset('push');
+            applyTemplate('top-image');
             toggleComponent('brandname', false);
             toggleComponent('actionbutton', true);
             updateAllRangeDisplays();
@@ -3492,7 +3326,7 @@
                 preview.adImage.style.backgroundImage = `url('${imageUrl}')`;
                 preview.adImage.classList.add('has-image');
                 preview.adImage.textContent = '';
-                optimizeImageForPreset(currentPreset);
+                optimizeImageForTemplate(currentTemplate);
             }
         });
 
@@ -3512,6 +3346,11 @@
             toggleComponent('actionbutton', true);
             updateAllRangeDisplays();
             updatePreviewFrame();
+            updateDimensionsFromAspectRatio();
+            
+            // Set default transparent button style
+            setButtonStyle('transparent');
+            
             updatePreview();
         });
     </script>
