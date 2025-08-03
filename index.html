@@ -1619,7 +1619,7 @@
                 <div class="control-group" id="actionButtonGroup">
                     <label class="control-label">Action Button</label>
                     <div class="control-row-extended">
-                        <input type="text" class="control-input" id="actionButtonText" value="Buy Now" placeholder="Button text...">
+                        <input type="text" class="control-input" id="actionButtonText" value="Read More" placeholder="Button text...">
                         <input type="color" class="control-color" id="actionButtonColor" value="#ffffff">
                         <input type="number" class="control-input control-number" id="actionButtonSize" value="11" min="8" max="16">
                         <button class="bold-toggle active" id="actionButtonBold" onclick="toggleBold('button')">B</button>
@@ -1769,7 +1769,7 @@
                                             <span class="sponsored-tag free" id="sponsoredTag">Sponsored</span>
                                         </div>
                                         <div class="meta-right">
-                                            <button class="action-button" id="actionButton">Buy Now</button>
+                                            <button class="action-button" id="actionButton">Read More</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1799,7 +1799,7 @@
         let currentFrame = 'none';
         let frameWidth = 30;
         let currentImageUrl = '';
-        let currentButtonStyle = 'filled';
+        let currentButtonStyle = 'transparent';
         let wasInOverlayMode = false; // NEW: Track overlay state
 
         // NEW: Store original colors for reset functionality
@@ -3202,7 +3202,7 @@
             preview.sponsoredTag.style.color = elements.sponsoredTextColor.value;
 
             const actionButtonText = elements.actionButtonText.value.trim();
-            preview.actionButton.textContent = actionButtonText || 'Buy Now';
+            preview.actionButton.textContent = actionButtonText || 'Read More';
             preview.actionButton.style.color = elements.actionButtonColor.value;
 
             // Apply button style
@@ -3272,9 +3272,9 @@
                 preview.sponsoredTag.style.setProperty('font-weight', '600', 'important');
                 preview.sponsoredTag.style.setProperty('z-index', '1001', 'important');
                 
-                preview.actionButton.style.setProperty('background-color', 'rgba(59, 130, 246, 0.9)', 'important');
+                preview.actionButton.style.setProperty('background-color', 'transparent', 'important');
                 preview.actionButton.style.setProperty('color', '#ffffff', 'important');
-                preview.actionButton.style.setProperty('border', '1px solid rgba(255,255,255,0.3)', 'important');
+                preview.actionButton.style.setProperty('border', '1px solid #9ca3af', 'important');
                 preview.actionButton.style.setProperty('backdrop-filter', 'blur(6px)', 'important');
                 preview.actionButton.style.setProperty('text-shadow', '1px 1px 2px rgba(0,0,0,0.6)', 'important');
                 preview.actionButton.style.setProperty('z-index', '1001', 'important');
@@ -3433,7 +3433,7 @@
             elements.actionButtonColor.value = originalColors.actionButton;
             elements.actionButtonBg.value = originalColors.actionButtonBg;
             
-            elements.actionButtonText.value = 'Buy Now';
+            elements.actionButtonText.value = 'Read More';
             elements.actionButtonSize.value = '11';
             elements.sponsoredTextSize.value = '10';
             elements.sponsoredText.value = 'Sponsored';
