@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Native Ad Studio</title>
+    <title>Advanced Native Ad Studio with Email Marketing</title>
     <style>
         * {
             margin: 0;
@@ -246,6 +246,19 @@
         .aspect-btn.active {
             background: var(--primary-blue);
             border-color: var(--primary-blue);
+        }
+
+        .aspect-btn.email-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            border-color: #ff6b6b;
+            color: white;
+            font-weight: 600;
+        }
+
+        .aspect-btn.email-btn.active {
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+            box-shadow: 0 4px 15px rgba(255, 82, 82, 0.4);
+            transform: translateY(-1px);
         }
 
         /* Template Grid */
@@ -724,6 +737,82 @@
             z-index: 3;
         }
 
+        /* Gmail Frame */
+        .preview-wrapper.frame-gmail {
+            background: #f6f8fc;
+            padding: 0;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .gmail-topbar {
+            background: #ffffff;
+            height: 60px;
+            border-bottom: 1px solid #dadce0;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .gmail-topbar::before {
+            content: '📧 Gmail                                                                  👤 Settings ⋮';
+            color: #5f6368;
+            font-size: 14px;
+            font-weight: 500;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gmail-sidebar {
+            position: absolute;
+            left: 0;
+            top: 60px;
+            bottom: 0;
+            width: 250px;
+            background: #fafafa;
+            border-right: 1px solid #dadce0;
+            z-index: 2;
+            padding: 10px;
+        }
+
+        .gmail-sidebar::before {
+            content: '📝 Compose\A\A📥 Inbox (127)\A⭐ Starred\A📤 Sent\A📋 Drafts\A🗑️ Trash\A\A📧 Categories\A👥 Social\A🛒 Promotions\A📰 Updates';
+            white-space: pre-line;
+            font-size: 12px;
+            color: #5f6368;
+            line-height: 1.8;
+        }
+
+        .gmail-content {
+            margin-left: 250px;
+            margin-top: 60px;
+            background: white;
+            min-height: 600px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .gmail-email-header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .gmail-email-header::before {
+            content: '📧 Newsletter from ' attr(data-blog-name) '\A👤 From: newsletter@' attr(data-blog-domain) '\A📅 ' attr(data-current-date) '\A⭐ ⚠️ 🗑️ 📤';
+            white-space: pre-line;
+            font-size: 12px;
+            color: #5f6368;
+            line-height: 1.6;
+        }
+
         /* Social Media Feed Frame */
         .preview-wrapper.frame-feed {
             background: #f0f2f5;
@@ -824,6 +913,235 @@
         .native-ad:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Email Marketing Layout */
+        .layout-email {
+            width: 600px !important;
+            height: auto !important;
+            min-height: 800px;
+            max-height: none !important;
+            background: white;
+            border-radius: 0;
+            box-shadow: none;
+            border: 1px solid #e0e0e0;
+            overflow: visible;
+        }
+
+        .layout-email:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .email-container {
+            width: 100%;
+            height: auto;
+            min-height: 800px;
+            max-height: 100vh;
+            background: white;
+            position: relative;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .email-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+            padding: 25px 20px;
+            border-bottom: 3px solid #e2e8f0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .email-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+            background-size: 200% 100%;
+            animation: headerShimmer 3s linear infinite;
+        }
+        
+        @keyframes headerShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .email-logo {
+            display: inline-block;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            border-radius: 12px;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .email-logo::before {
+            content: '📧';
+            margin-right: 10px;
+            font-size: 26px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+        
+        .email-logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .email-logo:hover::after {
+            left: 100%;
+        }
+
+        .email-content {
+            padding: 30px 40px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            min-height: 600px;
+        }
+
+        .email-article-content {
+            margin: 30px 0;
+            min-height: 400px;
+        }
+
+        .email-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        .email-content-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            color: white;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+            margin-bottom: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+        }
+        
+        .email-content-logo .logo-text {
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .email-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .email-images {
+            margin: 30px 0;
+        }
+
+        .email-article-content {
+            margin: 30px 0;
+            min-height: 400px;
+        }
+
+        .email-image {
+            width: 100%;
+            max-width: 520px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .email-cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .email-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .email-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .email-footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .email-footer-logo {
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #374151;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            letter-spacing: -0.3px;
+            position: relative;
+        }
+        
+        .email-footer-logo::before {
+            content: '📰';
+            margin-right: 8px;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+        .email-unsubscribe {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .email-unsubscribe a {
+            color: #666;
+            text-decoration: none;
         }
 
         .ad-container {
@@ -1293,6 +1611,11 @@
             .native-ad {
                 transform: scale(0.7);
             }
+
+            .layout-email {
+                width: 95% !important;
+                transform: scale(0.8);
+            }
         }
     </style>
 </head>
@@ -1302,7 +1625,7 @@
         <div class="sidebar">
             <div class="logo">
                 <h1>🎯 Ad Studio Pro</h1>
-                <p>Professional Native Ads</p>
+                <p>Professional Native Ads & Email Marketing</p>
             </div>
 
             <!-- Mode Toggle -->
@@ -1314,9 +1637,6 @@
                 <div class="mode-toggle">
                     <div class="mode-btn active" data-mode="auto">
                         <span>🚀 Auto</span>
-                    </div>
-                    <div class="mode-btn" data-mode="manual">
-                        <span>✋ Manual</span>
                     </div>
                 </div>
             </div>
@@ -1333,6 +1653,12 @@
                     <span>Extract Content & Images</span>
                 </button>
                 
+                <!-- Test button for debugging -->
+                <button class="quick-action" id="testBtn" onclick="testExtraction()" style="background: #059669; margin-top: 8px; font-size: 12px;">
+                    <span>🧪</span>
+                    <span>Test Extraction (Debug)</span>
+                </button>
+                
                 <!-- Image Grid (hidden by default) -->
                 <div class="image-grid hidden" id="imageGrid"></div>
                 
@@ -1347,25 +1673,11 @@
                 </div>
             </div>
 
-            <!-- Manual Mode Section -->
-            <div class="section hidden" id="manualModeSection">
-                <div class="section-header">
-                    <span>🖼️</span>
-                    <span>Manual Image</span>
-                </div>
-                <input type="file" id="imageUpload" accept=".png,.jpg,.jpeg" style="display:none">
-                <button class="quick-action" onclick="document.getElementById('imageUpload').click()">
-                    <span>📁</span>
-                    <span>Upload Image</span>
-                </button>
-                <input type="url" class="url-input" id="imageUrl" placeholder="Or paste image URL...">
-            </div>
-
             <!-- Aspect Ratio Control -->
             <div class="section">
                 <div class="section-header">
                     <span>📐</span>
-                    <span>Aspect Ratio</span>
+                    <span>Format & Size</span>
                 </div>
                 <div class="aspect-ratio-control">
                     <div class="aspect-ratio-options">
@@ -1374,14 +1686,15 @@
                         <div class="aspect-btn" data-ratio="6:5">6:5</div>
                         <div class="aspect-btn" data-ratio="1:1">1:1</div>
                         <div class="aspect-btn" data-ratio="1.9:1">1.9:1</div>
+                        <div class="aspect-btn email-btn" data-ratio="email">📧 Email</div>
                     </div>
                     <div style="font-size: 9px; color: var(--gray-300); margin-top: 4px; text-align: center;">
-                        Standard advertising ratios
+                        Standard advertising ratios + Email Marketing
                     </div>
                 </div>
                 
                 <!-- Resolution Multiplier -->
-                <div class="control-group" style="margin-top: 15px;">
+                <div class="control-group" style="margin-top: 15px;" id="resolutionSection">
                     <label class="control-label">Export Resolution</label>
                     <div class="division-options">
                         <div class="division-btn active" data-resolution="1">1x</div>
@@ -1400,6 +1713,7 @@
                         <div class="division-btn active" data-frame="none">Clean</div>
                         <div class="division-btn" data-frame="desktop">Desktop</div>
                         <div class="division-btn" data-frame="browser">Browser</div>
+                        <div class="division-btn" data-frame="gmail">Gmail</div>
                         <div class="division-btn" data-frame="feed">Feed</div>
                     </div>
                     <!-- Frame Width Control -->
@@ -1409,13 +1723,13 @@
                         <span id="frameWidthValue" style="font-size: 9px; color: var(--primary-blue);">30px</span>
                     </div>
                     <div style="font-size: 9px; color: var(--gray-300); margin-top: 3px;">
-                        Add realistic context frames around the ad
+                        Add realistic context frames around content
                     </div>
                 </div>
             </div>
 
             <!-- Template Layout -->
-            <div class="section">
+            <div class="section" id="templateSection">
                 <div class="section-header">
                     <span>📋</span>
                     <span>Templates</span>
@@ -1589,7 +1903,7 @@
             </div>
 
             <!-- Image Controls -->
-            <div class="section">
+            <div class="section" id="imageControlsSection">
                 <div class="section-header">
                     <span>🎨</span>
                     <span>Image Settings</span>
@@ -1658,6 +1972,10 @@
             <div class="top-bar">
                 <h2>Live Preview</h2>
                 <div class="action-buttons">
+                    <button class="btn btn-secondary" id="scrollToTopBtn" onclick="scrollToTop()" style="display: none;">
+                        <span>⬆️</span>
+                        <span>גלול לראש</span>
+                    </button>
                     <button class="btn btn-auto" onclick="autoOptimize()">
                         <span>✨</span>
                         <span>Auto Optimize</span>
@@ -1677,7 +1995,34 @@
                 <div class="preview-wrapper" id="previewWrapper">
                     <div class="scale-wrapper" id="scaleWrapper">
                         <div class="native-ad layout-top-image" id="nativeAd">
-                            <div class="ad-container">
+                            <!-- Email Marketing Container (Hidden by default) -->
+                            <div class="email-container hidden" id="emailContainer">
+                                <div class="email-header">
+                                    <div class="email-logo" id="emailLogo">PrettyHow</div>
+                                </div>
+                                <div class="email-content">
+                                    <h1 class="email-title" id="emailTitle">Your primary title will appear here...</h1>
+                                    <p class="email-subtitle" id="emailSubtitle">Your secondary title will appear here...</p>
+                                    
+                                    <div class="email-article-content" id="emailImages">
+                                        <!-- Article content will be dynamically added here -->
+                                    </div>
+                                    
+                                    <div class="email-cta">
+                                        <a href="#" class="email-button" id="emailButton">Read More</a>
+                                    </div>
+                                </div>
+                                <div class="email-footer">
+                                    <div class="email-footer-logo" id="emailFooterLogo">PrettyHow</div>
+                                    <p>Thank you for reading our newsletter!</p>
+                                    <div class="email-unsubscribe">
+                                        <a href="#">Unsubscribe</a> | <a href="#">Update Preferences</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Regular Ad Container -->
+                            <div class="ad-container" id="adContainer">
                                 <div class="ad-image-container">
                                     <div class="ad-image" id="adImage">
                                         📷 Image will appear here
@@ -1723,7 +2068,7 @@
     </div>
 
     <div class="notification" id="notification">
-        ✅ Ad copied to clipboard successfully!
+        ✅ Content copied to clipboard successfully!
     </div>
 
     <script>
@@ -1737,9 +2082,10 @@
         let currentFrame = 'none';
         let frameWidth = 30;
         let currentImageUrl = '';
-        let currentButtonStyle = 'transparent'; // Changed default to transparent
+        let currentButtonStyle = 'transparent';
         let wasInOverlayMode = false;
         let currentAspectRatio = '16:9';
+        let isEmailMode = false;
 
         // Store original colors for reset functionality
         let originalColors = {
@@ -1748,7 +2094,7 @@
             brand: '#6b7280',
             blog: '#6b7280',
             sponsored: '#9ca3af',
-            actionButton: '#6b7280', // Changed to gray for transparent default
+            actionButton: '#6b7280',
             actionButtonBg: '#3b82f6'
         };
 
@@ -1758,7 +2104,8 @@
             '2:1': { width: 800, height: 400 },
             '6:5': { width: 720, height: 600 },
             '1:1': { width: 600, height: 600 },
-            '1.9:1': { width: 760, height: 400 }
+            '1.9:1': { width: 760, height: 400 },
+            'email': { width: 600, height: 'auto' }
         };
 
         // Elements
@@ -1801,6 +2148,7 @@
             nativeAd: document.getElementById('nativeAd'),
             adImage: document.getElementById('adImage'),
             adContent: document.getElementById('adContent'),
+            adContainer: document.getElementById('adContainer'),
             adPrimaryTitle: document.getElementById('adPrimaryTitle'),
             adSecondaryTitle: document.getElementById('adSecondaryTitle'),
             adBrandName: document.getElementById('adBrandName'),
@@ -1811,7 +2159,14 @@
             blogSeparator: document.getElementById('blogSeparator'),
             loadingOverlay: document.getElementById('loadingOverlay'),
             previewWrapper: document.getElementById('previewWrapper'),
-            scaleWrapper: document.getElementById('scaleWrapper')
+            scaleWrapper: document.getElementById('scaleWrapper'),
+            emailContainer: document.getElementById('emailContainer'),
+            emailTitle: document.getElementById('emailTitle'),
+            emailSubtitle: document.getElementById('emailSubtitle'),
+            emailLogo: document.getElementById('emailLogo'),
+            emailFooterLogo: document.getElementById('emailFooterLogo'),
+            emailButton: document.getElementById('emailButton'),
+            emailImages: document.getElementById('emailImages')
         };
 
         // Store and preserve all extracted content
@@ -1821,30 +2176,49 @@
             blogName: '',
             imageUrl: '',
             extractedImages: [],
+            fullContent: [], // Array of content blocks (text and images in order)
             isExtracted: false
         };
 
         function storeCurrentState() {
+            console.log('Storing current state - currentImageUrl:', currentImageUrl); // Debug log
+            
+            // Always store the current image state first
+            let imageUrlToStore = currentImageUrl;
+            
+            // If no currentImageUrl but image is displayed, extract it from background
+            if (!imageUrlToStore && preview.adImage.classList.contains('has-image')) {
+                const bgImage = window.getComputedStyle(preview.adImage).backgroundImage;
+                if (bgImage && bgImage !== 'none') {
+                    imageUrlToStore = bgImage.slice(5, -2);
+                    currentImageUrl = imageUrlToStore; // Update currentImageUrl
+                }
+            }
+            
             extractedContent = {
                 title: elements.primaryTitle.value,
                 subtitle: elements.secondaryTitle.value,
                 blogName: elements.blogName.value,
-                imageUrl: currentImageUrl,
+                imageUrl: imageUrlToStore,
                 extractedImages: [...extractedImages],
-                isExtracted: extractedImages.length > 0
+                fullContent: extractedContent.fullContent || [],
+                isExtracted: extractedImages.length > 0 || extractedContent.fullContent.length > 0,
+                // Store additional image state information
+                hasImage: preview.adImage.classList.contains('has-image'),
+                selectedImageIndex: selectedImageIndex,
+                // Store current template and aspect ratio for complete state preservation
+                currentTemplate: currentTemplate,
+                currentAspectRatio: document.querySelector('.aspect-btn.active')?.dataset.ratio || '16:9'
             };
-
-            if (preview.adImage.classList.contains('has-image')) {
-                const bgImage = window.getComputedStyle(preview.adImage).backgroundImage;
-                if (bgImage && bgImage !== 'none') {
-                    currentImageUrl = bgImage.slice(5, -2);
-                    extractedContent.imageUrl = currentImageUrl;
-                }
-            }
+            
+            console.log('State stored with imageUrl:', imageUrlToStore); // Debug log
         }
 
         function restoreCurrentState() {
-            if (extractedContent.isExtracted) {
+            console.log('Restoring current state - stored imageUrl:', extractedContent.imageUrl); // Debug log
+            
+            if (extractedContent.isExtracted || extractedContent.imageUrl) {
+                // Restore text fields
                 if (!elements.primaryTitle.value || elements.primaryTitle.value === extractedContent.title) {
                     elements.primaryTitle.value = extractedContent.title;
                 }
@@ -1855,32 +2229,56 @@
                     elements.blogName.value = extractedContent.blogName;
                 }
 
+                // Restore extracted images array - CRITICAL FIX
+                if (extractedContent.extractedImages && extractedContent.extractedImages.length > 0) {
+                    extractedImages = [...extractedContent.extractedImages];
+                    console.log('Restored extractedImages:', extractedImages.length, 'images'); // Debug log
+                    
+                    // Update image grid UI
+                    updateImageGrid();
+                }
+
+                // Always restore image if we have one stored
                 if (extractedContent.imageUrl) {
                     currentImageUrl = extractedContent.imageUrl;
-                    elements.imageUrl.value = extractedContent.imageUrl;
+                    selectedImageIndex = extractedContent.selectedImageIndex || 0;
+                    if (elements.imageUrl) elements.imageUrl.value = extractedContent.imageUrl;
+                    
+                    // Apply image to preview
                     preview.adImage.style.backgroundImage = `url("${extractedContent.imageUrl}")`;
                     preview.adImage.classList.add('has-image');
                     preview.adImage.textContent = '';
+                    
+                    // Update image selection in UI
+                    setTimeout(() => {
+                        document.querySelectorAll('.image-option').forEach((option, i) => {
+                            option.classList.remove('selected', 'auto-selected');
+                            if (i === selectedImageIndex) {
+                                option.classList.add('selected');
+                            }
+                        });
+                    }, 100);
+                    
+                    console.log('Image restored:', extractedContent.imageUrl, 'at index:', selectedImageIndex); // Debug log
+                } else if (extractedContent.hasImage === false) {
+                    // Explicitly clear image if it was not supposed to be there
+                    preview.adImage.style.backgroundImage = 'none';
+                    preview.adImage.classList.remove('has-image');
+                    preview.adImage.textContent = '📷 Image will appear here';
+                    currentImageUrl = '';
                 }
 
-                if (extractedContent.extractedImages.length > 0) {
+                // Restore extracted images array and grid
+                if (extractedContent.extractedImages && extractedContent.extractedImages.length > 0) {
                     extractedImages = [...extractedContent.extractedImages];
                     displayImageGrid();
                     document.getElementById('autoImageUpload').classList.remove('hidden');
+                    
+                    // Restore selected image index if available
+                    if (typeof extractedContent.selectedImageIndex === 'number') {
+                        selectedImageIndex = extractedContent.selectedImageIndex;
+                    }
                 }
-            }
-        }
-
-        function storeCurrentImage() {
-            storeCurrentState();
-        }
-
-        function restoreCurrentImage() {
-            if (currentImageUrl || extractedContent.imageUrl) {
-                const imageUrl = currentImageUrl || extractedContent.imageUrl;
-                preview.adImage.style.backgroundImage = `url("${imageUrl}")`;
-                preview.adImage.classList.add('has-image');
-                preview.adImage.textContent = '';
             }
         }
 
@@ -1931,33 +2329,561 @@
             showNotification(`🎨 Button style: ${styleText}`);
         }
 
-        // Mode Toggle
-        document.querySelectorAll('.mode-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentMode = this.dataset.mode;
-                
-                document.getElementById('autoModeSection').classList.toggle('hidden', currentMode !== 'auto');
-                document.getElementById('manualModeSection').classList.toggle('hidden', currentMode !== 'manual');
-            });
-        });
-
         // Aspect Ratio Selection
         document.querySelectorAll('.aspect-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                // CRITICAL FIX: Store current state before aspect ratio change
+                storeCurrentState();
+                
                 document.querySelectorAll('.aspect-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 
                 currentAspectRatio = this.dataset.ratio;
-                updateDimensionsFromAspectRatio();
-                showNotification(`📐 Aspect ratio: ${currentAspectRatio}`);
+                isEmailMode = currentAspectRatio === 'email';
+                
+                // Hide/Show relevant sections for email mode
+                toggleEmailMode(isEmailMode);
+                
+                if (isEmailMode) {
+                    applyEmailLayout();
+                    
+                    // Show detailed info about email content
+                    const contentBlocks = extractedContent.fullContent ? extractedContent.fullContent.length : 0;
+                    const textBlocks = extractedContent.fullContent ? extractedContent.fullContent.filter(item => item.type === 'text').length : 0;
+                    const imageBlocks = extractedContent.fullContent ? extractedContent.fullContent.filter(item => item.type === 'image').length : 0;
+                    
+                    setTimeout(() => {
+                        showNotification(`📧 Email: ${textBlocks} paragraphs, ${imageBlocks} images in correct sequence`);
+                    }, 100);
+                } else {
+                    applyRegularLayout();
+                    updateDimensionsFromAspectRatio();
+                    showNotification(`📐 Aspect ratio: ${currentAspectRatio}`);
+                }
+                
+                // CRITICAL FIX: Restore state after aspect ratio change
+                restoreCurrentState();
             });
         });
 
+        function toggleEmailMode(emailMode) {
+            // Toggle sections visibility
+            document.getElementById('templateSection').classList.toggle('hidden', emailMode);
+            document.getElementById('divisionSection').classList.toggle('hidden', emailMode);
+            document.getElementById('imageControlsSection').classList.toggle('hidden', emailMode);
+            document.getElementById('resolutionSection').classList.toggle('hidden', emailMode);
+            
+            // Show/hide scroll to top button
+            document.getElementById('scrollToTopBtn').style.display = emailMode ? 'flex' : 'none';
+            
+            // Update frame options
+            const frameOptions = document.querySelector('.frame-options');
+            if (emailMode) {
+                frameOptions.innerHTML = `
+                    <div class="division-btn active" data-frame="none">Clean</div>
+                    <div class="division-btn" data-frame="gmail">Gmail</div>
+                `;
+            } else {
+                frameOptions.innerHTML = `
+                    <div class="division-btn active" data-frame="none">Clean</div>
+                    <div class="division-btn" data-frame="desktop">Desktop</div>
+                    <div class="division-btn" data-frame="browser">Browser</div>
+                    <div class="division-btn" data-frame="gmail">Gmail</div>
+                    <div class="division-btn" data-frame="feed">Feed</div>
+                `;
+            }
+            
+            // Re-attach event listeners for frame buttons
+            attachFrameEventListeners();
+        }
+
+        function scrollToTop() {
+            const previewContainer = document.querySelector('.preview-container');
+            const emailContainer = document.getElementById('emailContainer');
+            
+            console.log('Scroll to top triggered'); // Debug log
+            
+            if (previewContainer) {
+                // Scroll the preview container to top
+                previewContainer.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // Also ensure email container is scrolled to top if it exists
+                if (emailContainer && !emailContainer.classList.contains('hidden')) {
+                    emailContainer.scrollTop = 0;
+                }
+                
+                console.log('Scrolled to top'); // Debug log
+                showNotification('📧 Scrolled to top of email');
+            } else {
+                console.log('Preview container not found'); // Debug log
+            }
+        }
+
+        function attachFrameEventListeners() {
+            document.querySelectorAll('[data-frame]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('[data-frame]').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    storeCurrentState();
+                    currentFrame = this.dataset.frame;
+                    updatePreviewFrame();
+                    setTimeout(() => {
+                        restoreCurrentState();
+                        updatePreview();
+                    }, 100);
+                });
+            });
+        }
+
+        function applyEmailLayout() {
+            storeCurrentState();
+            
+            // Hide regular ad container and show email container
+            preview.adContainer.classList.add('hidden');
+            preview.emailContainer.classList.remove('hidden');
+            
+            // Apply email layout class
+            preview.nativeAd.className = 'native-ad layout-email';
+            
+            // Scroll to top of preview
+            setTimeout(() => {
+                const previewContainer = document.querySelector('.preview-container');
+                if (previewContainer) {
+                    previewContainer.scrollTop = 0;
+                }
+                
+                restoreCurrentState();
+                updateEmailContent();
+                showNotification('📧 Email mode: Full article with images displayed. Scroll to see full content.');
+            }, 50);
+        }
+
+        function applyRegularLayout() {
+            storeCurrentState();
+            
+            // Show regular ad container and hide email container
+            preview.adContainer.classList.remove('hidden');
+            preview.emailContainer.classList.add('hidden');
+            
+            // Hide scroll to top button
+            document.getElementById('scrollToTopBtn').style.display = 'none';
+            
+            // Apply template
+            applyTemplate(currentTemplate);
+            
+            setTimeout(() => {
+                restoreCurrentState();
+                updatePreview();
+            }, 50);
+        }
+
+        function updateEmailContent() {
+            // Update email title and subtitle
+            const title = elements.primaryTitle.value.trim() || 'Your primary title will appear here...';
+            const subtitle = elements.secondaryTitle.value.trim() || 'Your secondary title will appear here...';
+            const blogName = elements.blogName.value.trim() || 'PrettyHow';
+            const buttonText = elements.actionButtonText.value.trim() || 'Read More';
+
+            // Replace title with blog logo styling - CRITICAL UPDATE
+            preview.emailTitle.innerHTML = `
+                <div class="email-content-logo">
+                    ${extractedContent.faviconUrl ? `<img src="${extractedContent.faviconUrl}" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 12px; border-radius: 8px;" onerror="this.style.display='none'" alt="Site icon">` : '📰'}
+                    <span class="logo-text">${blogName}</span>
+                </div>
+            `;
+            preview.emailSubtitle.textContent = subtitle;
+            preview.emailLogo.textContent = blogName;
+            preview.emailFooterLogo.textContent = blogName;
+            preview.emailButton.textContent = buttonText;
+
+            // Apply styling
+            preview.emailTitle.style.color = elements.primaryTitleColor.value;
+            preview.emailTitle.style.fontSize = Math.round(parseInt(elements.primaryTitleSize.value) * parseFloat(elements.globalFontSize.value)) + 'px';
+            
+            preview.emailSubtitle.style.color = elements.secondaryTitleColor.value;
+            preview.emailSubtitle.style.fontSize = Math.round(parseInt(elements.secondaryTitleSize.value) * parseFloat(elements.globalFontSize.value)) + 'px';
+            
+            preview.emailButton.style.backgroundColor = elements.actionButtonBg.value;
+            preview.emailButton.style.fontSize = Math.round(parseInt(elements.actionButtonSize.value) * parseFloat(elements.globalFontSize.value)) + 'px';
+
+            // Update full article content
+            updateEmailFullContent();
+        }
+
+        function updateEmailFullContent() {
+            preview.emailImages.innerHTML = '';
+            
+            console.log('Updating email content with:', extractedContent.fullContent); // Debug log
+            console.log('Available extracted images:', extractedImages); // Debug log
+            
+            // COMPLETE EMAIL CONTENT - Perfect Article Replication
+            let contentAdded = false;
+            
+            // Add newsletter intro paragraph
+            const introPara = document.createElement('p');
+            introPara.textContent = 'Thank you for subscribing to our newsletter. Here\'s today\'s featured article.';
+            introPara.style.cssText = `
+                margin: 20px 0;
+                font-size: 14px;
+                line-height: 1.5;
+                color: #666;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segue UI', Roboto, Arial, sans-serif;
+                text-align: left;
+                font-style: italic;
+            `;
+            preview.emailImages.appendChild(introPara);
+            
+            // If we have extracted full content, display COMPLETE ARTICLE with ALL elements in EXACT order
+            if (extractedContent.fullContent && extractedContent.fullContent.length > 0) {
+                console.log('Rendering complete article with', extractedContent.fullContent.length, 'content blocks');
+                
+                extractedContent.fullContent.forEach((item, index) => {
+                    if (item.type === 'text') {
+                        const p = document.createElement('p');
+                        p.textContent = item.content;
+                        p.style.cssText = `
+                            margin: 18px 0;
+                            font-size: 16px;
+                            line-height: 1.6;
+                            color: #333;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                            text-align: left;
+                        `;
+                        preview.emailImages.appendChild(p);
+                        contentAdded = true;
+                        
+                    } else if (item.type === 'heading') {
+                        const heading = document.createElement(item.level ? item.level.toLowerCase() : 'h3');
+                        heading.textContent = item.content;
+                        heading.style.cssText = `
+                            margin: 35px 0 18px 0;
+                            font-size: ${item.level === 'H1' ? '28px' : item.level === 'H2' ? '24px' : '20px'};
+                            font-weight: bold;
+                            color: #222;
+                            line-height: 1.3;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                            text-align: left;
+                        `;
+                        preview.emailImages.appendChild(heading);
+                        contentAdded = true;
+                        
+                    } else if (item.type === 'image') {
+                        // CRITICAL FIX: Render ALL images in their exact positions
+                        const imgContainer = document.createElement('div');
+                        imgContainer.style.cssText = 'margin: 25px 0; text-align: center;';
+                        
+                        const img = document.createElement('img');
+                        img.src = item.content;
+                        img.alt = item.alt || 'Article image';
+                        img.style.cssText = `
+                            max-width: 100%;
+                            width: 100%;
+                            max-width: 520px;
+                            height: auto;
+                            border-radius: 8px;
+                            display: block;
+                            margin: 0 auto;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        `;
+                        
+                        img.onerror = function() {
+                            console.log('Article image failed to load:', item.content);
+                            // Don't remove - show placeholder instead for complete structure
+                            this.style.display = 'none';
+                            const placeholder = document.createElement('div');
+                            placeholder.textContent = '[Image not available]';
+                            placeholder.style.cssText = `
+                                padding: 20px;
+                                background: #f0f0f0;
+                                border-radius: 8px;
+                                color: #666;
+                                font-style: italic;
+                                text-align: center;
+                            `;
+                            imgContainer.appendChild(placeholder);
+                        };
+                        
+                        imgContainer.appendChild(img);
+                        preview.emailImages.appendChild(imgContainer);
+                        contentAdded = true;
+                        
+                    } else if (item.type === 'quote') {
+                        const quote = document.createElement('blockquote');
+                        quote.textContent = item.content;
+                        quote.style.cssText = `
+                            margin: 25px 20px;
+                            padding: 20px;
+                            border-left: 4px solid #3b82f6;
+                            background: #f8fafc;
+                            font-style: italic;
+                            font-size: 16px;
+                            line-height: 1.6;
+                            color: #374151;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                        `;
+                        preview.emailImages.appendChild(quote);
+                        contentAdded = true;
+                        
+                    } else if (item.type === 'list') {
+                        const list = document.createElement(item.ordered ? 'ol' : 'ul');
+                        if (Array.isArray(item.items)) {
+                            item.items.forEach(listItem => {
+                                const li = document.createElement('li');
+                                li.textContent = listItem;
+                                li.style.cssText = `
+                                    margin: 8px 0;
+                                    font-size: 16px;
+                                    line-height: 1.6;
+                                    color: #333;
+                                `;
+                                list.appendChild(li);
+                            });
+                        }
+                        list.style.cssText = `
+                            margin: 20px 0;
+                            padding-left: 25px;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                        `;
+                        preview.emailImages.appendChild(list);
+                        contentAdded = true;
+                    }
+                });
+            }
+            
+            // If no structured content, show comprehensive fallback
+            if (!contentAdded) {
+                console.log('No extracted content, creating comprehensive fallback');
+                showComprehensiveFallbackContent();
+            } else {
+                // Add newsletter footer
+                addNewsletterFooter();
+            }
+        }
+
+        function showComprehensiveFallbackContent() {
+            // Add main image if available
+            if (currentImageUrl) {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.cssText = 'margin: 30px 0; text-align: center;';
+                
+                const img = document.createElement('img');
+                img.src = currentImageUrl;
+                img.alt = elements.primaryTitle.value || 'Article image';
+                img.style.cssText = `
+                    max-width: 100%;
+                    width: 100%;
+                    max-width: 520px;
+                    height: auto;
+                    border-radius: 8px;
+                    display: block;
+                    margin: 0 auto;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                `;
+                
+                imgContainer.appendChild(img);
+                preview.emailImages.appendChild(imgContainer);
+            }
+            
+            // Add comprehensive article content
+            const comprehensiveContent = [
+                'This comprehensive article provides valuable insights and detailed analysis of the topic at hand. Our expert team has carefully researched the subject to bring you the most relevant and up-to-date information available.',
+                'Understanding the complexities of this subject requires a thorough examination of various factors and considerations. Through extensive research and analysis, we\'ve compiled the most important points that readers need to know.',
+                'The research methodology involved collecting data from multiple sources, analyzing trends, and consulting with industry experts. This approach ensures that the information presented is both accurate and practical for our readers.',
+                'Key findings from our research indicate several important trends and developments that are shaping this field. These insights provide valuable context for understanding the current landscape and future possibilities.',
+                'Practical applications of this knowledge can be implemented in various scenarios. Our analysis shows that readers who apply these concepts typically see significant improvements in their outcomes and understanding.',
+                'Additional considerations include the long-term implications of these developments and how they might impact different stakeholder groups. This broader perspective helps readers make more informed decisions.',
+                'The methodology used in this analysis follows industry best practices and has been validated through peer review. This ensures the reliability and credibility of the findings presented in this article.',
+                'Case studies and real-world examples demonstrate the practical value of these insights. These examples show how the concepts can be applied effectively in different contexts and situations.',
+                'Future research directions and emerging trends suggest several areas that warrant continued attention. Staying informed about these developments will be crucial for professionals in this field.',
+                'In conclusion, this analysis provides a comprehensive foundation for understanding the topic and its implications. Readers are encouraged to explore the additional resources provided for deeper insight.'
+            ];
+            
+            comprehensiveContent.forEach((text, index) => {
+                // Add subheadings for better structure
+                if (index % 3 === 0 && index > 0) {
+                    const subheading = document.createElement('h3');
+                    const headings = ['Key Research Findings', 'Practical Applications', 'Future Implications'];
+                    subheading.textContent = headings[Math.floor(index / 3) - 1] || 'Additional Insights';
+                    subheading.style.cssText = `
+                        margin: 40px 0 20px 0;
+                        font-size: 22px;
+                        font-weight: bold;
+                        color: #222;
+                        line-height: 1.3;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                        text-align: left;
+                    `;
+                    preview.emailImages.appendChild(subheading);
+                }
+                
+                const p = document.createElement('p');
+                p.textContent = text;
+                p.style.cssText = `
+                    margin: 18px 0;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    color: #333;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                    text-align: left;
+                `;
+                preview.emailImages.appendChild(p);
+                
+                // Insert extracted images between paragraphs
+                if (extractedImages.length > 0 && (index === 2 || index === 5 || index === 8)) {
+                    const imageIndex = index === 2 ? 0 : index === 5 ? 1 : 2;
+                    if (extractedImages[imageIndex] && extractedImages[imageIndex] !== currentImageUrl) {
+                        const imgContainer = document.createElement('div');
+                        imgContainer.style.cssText = 'margin: 30px 0; text-align: center;';
+                        
+                        const img = document.createElement('img');
+                        img.src = extractedImages[imageIndex];
+                        img.alt = `Article image ${imageIndex + 1}`;
+                        img.style.cssText = `
+                            max-width: 100%;
+                            width: 100%;
+                            max-width: 520px;
+                            height: auto;
+                            border-radius: 8px;
+                            display: block;
+                            margin: 0 auto;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        `;
+                        
+                        img.onerror = function() {
+                            console.log('Fallback image failed to load:', extractedImages[imageIndex]);
+                            imgContainer.remove();
+                        };
+                        
+                        imgContainer.appendChild(img);
+                        preview.emailImages.appendChild(imgContainer);
+                    }
+                }
+            });
+            
+            addNewsletterFooter();
+        }
+        
+        function addNewsletterFooter() {
+            // Add newsletter footer
+            const footerSeparator = document.createElement('div');
+            footerSeparator.style.cssText = `
+                margin: 40px 0 30px 0;
+                height: 2px;
+                background: linear-gradient(to right, #e5e7eb, #9ca3af, #e5e7eb);
+                border-radius: 1px;
+            `;
+            preview.emailImages.appendChild(footerSeparator);
+            
+            const footerText = document.createElement('p');
+            footerText.textContent = 'Thank you for reading! Don\'t forget to share this article with your friends and colleagues. For more insights and updates, visit our website or follow us on social media.';
+            footerText.style.cssText = `
+                margin: 20px 0;
+                font-size: 14px;
+                line-height: 1.5;
+                color: #666;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                text-align: center;
+                font-style: italic;
+            `;
+            preview.emailImages.appendChild(footerText);
+            
+            const copyrightText = document.createElement('p');
+            copyrightText.textContent = `© ${new Date().getFullYear()} Newsletter. All rights reserved. | Unsubscribe | Privacy Policy`;
+            copyrightText.style.cssText = `
+                margin: 30px 0 40px 0;
+                font-size: 12px;
+                line-height: 1.4;
+                color: #9ca3af;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                text-align: center;
+            `;
+            preview.emailImages.appendChild(copyrightText);
+        }
+
+        function showFallbackContent() {
+            // Add main image if available
+            if (currentImageUrl) {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.cssText = 'margin: 25px 0; text-align: center;';
+                
+                const img = document.createElement('img');
+                img.src = currentImageUrl;
+                img.alt = elements.primaryTitle.value || 'Article image';
+                img.style.cssText = `
+                    max-width: 100%;
+                    width: 100%;
+                    max-width: 520px;
+                    height: auto;
+                    border-radius: 8px;
+                    display: block;
+                    margin: 0 auto;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                `;
+                
+                imgContainer.appendChild(img);
+                preview.emailImages.appendChild(imgContainer);
+            }
+            
+            // Add sample content that looks like a real article
+            const sampleContent = [
+                'This comprehensive article provides valuable insights and detailed information that will enhance your understanding of the topic.',
+                'Our research team has carefully analyzed the latest trends and developments to bring you the most up-to-date information available.',
+                'Throughout this article, you\'ll discover practical tips, expert advice, and actionable strategies that you can implement immediately.',
+                'The information presented here is based on extensive research and real-world experience from industry professionals.',
+                'Continue reading to uncover more fascinating details and gain a deeper understanding of how this topic impacts your daily life.',
+                'We\'ve also included additional resources and references to help you explore this subject further.'
+            ];
+            
+            sampleContent.forEach((text, index) => {
+                const p = document.createElement('p');
+                p.textContent = text;
+                p.style.cssText = `
+                    margin: 20px 0;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    color: #333;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                    text-align: left;
+                `;
+                preview.emailImages.appendChild(p);
+                
+                // Add images from extracted content between paragraphs
+                if (index === 1 || index === 3) {
+                    const imageIndex = index === 1 ? 1 : 2;
+                    if (extractedImages[imageIndex] && extractedImages[imageIndex] !== currentImageUrl) {
+                        const imgContainer = document.createElement('div');
+                        imgContainer.style.cssText = 'margin: 25px 0; text-align: center;';
+                        
+                        const img = document.createElement('img');
+                        img.src = extractedImages[imageIndex];
+                        img.alt = 'Article image';
+                        img.style.cssText = `
+                            max-width: 100%;
+                            width: 100%;
+                            max-width: 520px;
+                            height: auto;
+                            border-radius: 8px;
+                            display: block;
+                            margin: 0 auto;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        `;
+                        
+                        imgContainer.appendChild(img);
+                        preview.emailImages.appendChild(imgContainer);
+                    }
+                }
+            });
+        }
+
         function updateDimensionsFromAspectRatio() {
+            if (isEmailMode) return; // Don't apply dimensions in email mode
+            
             const ratio = aspectRatios[currentAspectRatio];
-            if (ratio) {
+            if (ratio && ratio.width && ratio.height) {
                 const baseWidth = ratio.width;
                 const baseHeight = ratio.height;
                 
@@ -1971,6 +2897,8 @@
         // Template Selection
         document.querySelectorAll('.template-card').forEach(card => {
             card.addEventListener('click', function() {
+                if (isEmailMode) return; // Ignore template changes in email mode
+                
                 document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
                 currentTemplate = this.dataset.template;
@@ -2024,6 +2952,9 @@
             });
         });
 
+        // Attach initial frame event listeners
+        attachFrameEventListeners();
+
         // Frame Width Control
         elements.frameWidth.addEventListener('input', function() {
             frameWidth = parseInt(this.value);
@@ -2035,7 +2966,11 @@
         elements.globalFontSize.addEventListener('input', function() {
             const multiplier = parseFloat(this.value);
             document.getElementById('globalFontValue').textContent = Math.round(multiplier * 100) + '%';
-            applyGlobalFontSize(multiplier);
+            if (isEmailMode) {
+                updateEmailContent();
+            } else {
+                applyGlobalFontSize(multiplier);
+            }
         });
 
         function applyGlobalFontSize(multiplier) {
@@ -2058,11 +2993,27 @@
 
         function updatePreviewFrame() {
             if (preview.previewWrapper) {
-                storeCurrentImage();
+                // Store current image state
+                const currentImageState = {
+                    url: currentImageUrl,
+                    hasImage: preview.adImage.classList.contains('has-image'),
+                    bgImage: window.getComputedStyle(preview.adImage).backgroundImage
+                };
                 
-                preview.previewWrapper.classList.remove('frame-desktop', 'frame-browser', 'frame-feed');
+                preview.previewWrapper.classList.remove('frame-desktop', 'frame-browser', 'frame-feed', 'frame-gmail');
+                
+                // Remove existing frame elements
                 const feedBg = preview.previewWrapper.querySelector('.feed-background');
                 if (feedBg) feedBg.remove();
+                
+                const gmailTopbar = preview.previewWrapper.querySelector('.gmail-topbar');
+                if (gmailTopbar) gmailTopbar.remove();
+                
+                const gmailSidebar = preview.previewWrapper.querySelector('.gmail-sidebar');
+                if (gmailSidebar) gmailSidebar.remove();
+                
+                const gmailContent = preview.previewWrapper.querySelector('.gmail-content');
+                if (gmailContent) gmailContent.remove();
                 
                 const frameWidthControl = document.getElementById('frameWidthControl');
                 frameWidthControl.style.display = currentFrame !== 'none' ? 'flex' : 'none';
@@ -2073,14 +3024,24 @@
                     
                     if (currentFrame === 'feed') {
                         createFeedFrame();
+                    } else if (currentFrame === 'gmail') {
+                        createGmailFrame();
                     }
                 }
                 
                 const frameText = currentFrame === 'none' ? 'clean' : currentFrame;
-                showNotification(`🖼️ Frame: ${frameText} (${frameWidth}px padding)`);
+                showNotification(`🖼️ Frame: ${frameText} ${currentFrame !== 'none' ? `(${frameWidth}px padding)` : ''}`);
                 
+                // Restore image state
                 setTimeout(() => {
-                    restoreCurrentImage();
+                    if (currentImageState.hasImage && currentImageState.url) {
+                        preview.adImage.style.backgroundImage = `url("${currentImageState.url}")`;
+                        preview.adImage.classList.add('has-image');
+                        preview.adImage.textContent = '';
+                    }
+                    if (isEmailMode) {
+                        updateEmailContent();
+                    }
                 }, 50);
             }
         }
@@ -2113,6 +3074,36 @@
             }
         }
 
+        function createGmailFrame() {
+            // Create Gmail UI frame
+            const gmailTopbar = document.createElement('div');
+            gmailTopbar.className = 'gmail-topbar';
+            preview.previewWrapper.appendChild(gmailTopbar);
+            
+            const gmailSidebar = document.createElement('div');
+            gmailSidebar.className = 'gmail-sidebar';
+            preview.previewWrapper.appendChild(gmailSidebar);
+            
+            const gmailContent = document.createElement('div');
+            gmailContent.className = 'gmail-content';
+            
+            const gmailHeader = document.createElement('div');
+            gmailHeader.className = 'gmail-email-header';
+            gmailHeader.setAttribute('data-blog-name', elements.blogName.value || 'PrettyHow');
+            gmailHeader.setAttribute('data-blog-domain', (elements.blogName.value || 'prettyhow').toLowerCase() + '.com');
+            gmailHeader.setAttribute('data-current-date', new Date().toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }));
+            
+            gmailContent.appendChild(gmailHeader);
+            gmailContent.appendChild(preview.scaleWrapper);
+            preview.previewWrapper.appendChild(gmailContent);
+        }
+
         // Fixed overlay reset colors function
         function resetFromOverlayColors() {
             if (wasInOverlayMode) {
@@ -2133,6 +3124,11 @@
         }
 
         function applyTemplate(template) {
+            if (isEmailMode) return; // Don't apply templates in email mode
+            
+            // CRITICAL FIX: Store current state before template change
+            storeCurrentState();
+            
             // Track if switching from overlay mode
             wasInOverlayMode = preview.nativeAd.classList.contains('layout-overlay');
             
@@ -2185,6 +3181,9 @@
             }
             
             updatePreview();
+            
+            // CRITICAL FIX: Restore state after template change
+            restoreCurrentState();
         }
 
         function setOverlayColors() {
@@ -2203,6 +3202,8 @@
         }
 
         function updateLayoutSplit() {
+            if (isEmailMode) return; // Don't apply layout split in email mode
+            
             const imagePercent = elements.imageSplit.value;
             const contentPercent = 100 - imagePercent;
             
@@ -2339,28 +3340,16 @@
                             frameWidth = parseInt(this.value);
                             updatePreviewFrame();
                         } else {
-                            updatePreview();
+                            if (isEmailMode) {
+                                updateEmailContent();
+                            } else {
+                                updatePreview();
+                            }
                         }
                     });
                 }
             });
         }
-
-        // File Upload Handler - Original
-        elements.imageUpload.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    currentImageUrl = e.target.result;
-                    preview.adImage.style.backgroundImage = `url('${e.target.result}')`;
-                    preview.adImage.classList.add('has-image');
-                    preview.adImage.textContent = '';
-                    optimizeImageForTemplate(currentTemplate);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
 
         // File Upload Handler for Auto Mode
         document.getElementById('autoImageUploadInput').addEventListener('change', function(e) {
@@ -2382,6 +3371,9 @@
                     });
                     
                     optimizeImageForTemplate(currentTemplate);
+                    if (isEmailMode) {
+                        updateEmailContent();
+                    }
                     showNotification('📁 Custom image uploaded successfully!');
                 };
                 reader.readAsDataURL(file);
@@ -2404,11 +3396,16 @@
                 });
                 
                 optimizeImageForTemplate(currentTemplate);
+                if (isEmailMode) {
+                    updateEmailContent();
+                }
                 showNotification('🔗 Custom image URL applied!');
             }
         });
 
         function adjustImagePosition(deltaX, deltaY) {
+            if (isEmailMode) return; // Don't adjust image position in email mode
+            
             const currentX = parseInt(elements.imagePositionX.value);
             const currentY = parseInt(elements.imagePositionY.value);
             
@@ -2421,36 +3418,113 @@
             updatePreview();
         }
 
-        async function extractContent() {
+        function extractContent() {
+            // Alert removed - button click confirmed
+            console.log('extractContent called');
+            
             const url = elements.quickUrl.value.trim();
-            if (!url || !isValidUrl(url)) {
+            console.log('URL from input:', url);
+            
+            if (!url) {
+                alert('אין URL - אנא הכנס כתובת');
+                showNotification('❌ Please enter a valid URL', true);
+                return;
+            }
+            
+            if (!isValidUrl(url)) {
+                alert('URL לא תקין');
                 showNotification('❌ Please enter a valid URL', true);
                 return;
             }
 
+            // Alert removed - extraction starting
+            console.log('Starting extraction for:', url);
+            
             const extractBtn = document.getElementById('extractBtn');
-            extractBtn.disabled = true;
-            extractBtn.innerHTML = '<span>⏳</span><span>Extracting...</span>';
-
-            try {
-                await realContentExtraction(url);
-                showNotification('✅ Content extracted successfully!');
-            } catch (error) {
-                console.error('Error extracting content:', error);
-                showNotification('❌ Error extracting content. Using intelligent fallback.', true);
-                await smartFallbackExtraction(url);
-            } finally {
-                extractBtn.disabled = false;
-                extractBtn.innerHTML = '<span>🔍</span><span>Extract Content & Images</span>';
+            if (extractBtn) {
+                extractBtn.disabled = true;
+                extractBtn.innerHTML = '<span>⏳</span><span>Extracting...</span>';
+                console.log('Button disabled and text changed');
+            } else {
+                console.error('Extract button not found!');
+                alert('שגיאה: לא נמצא כפתור החילוץ');
+                return;
             }
+
+            console.log('About to call realContentExtraction...');
+            
+            realContentExtraction(url)
+                .then(() => {
+                    console.log('realContentExtraction succeeded');
+                    showNotification('✅ Content extracted successfully!');
+                    // Alert removed - extraction successful
+                })
+                .catch((error) => {
+                    console.error('Error extracting content:', error);
+                    alert('שגיאה בחילוץ, מנסה שיטה חלופית...');
+                    showNotification('❌ Error extracting content. Using intelligent fallback.', true);
+                    return smartFallbackExtraction(url);
+                })
+                .then(() => {
+                    console.log('All extraction attempts completed');
+                    // Alert removed - extraction completed
+                })
+                .catch((finalError) => {
+                    console.error('Final extraction error:', finalError);
+                    alert('שגיאה סופית בחילוץ');
+                })
+                .finally(() => {
+                    console.log('Restoring button state');
+                    if (extractBtn) {
+                        extractBtn.disabled = false;
+                        extractBtn.innerHTML = '<span>🔍</span><span>Extract Content & Images</span>';
+                    }
+                    // Alert removed - button reset to normal
+                });
         }
 
         async function realContentExtraction(url) {
             try {
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+                console.log('Starting content extraction for URL:', url);
                 
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
+                // Try multiple proxy services for better reliability
+                const proxyServices = [
+                    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+                    `https://cors-anywhere.herokuapp.com/${url}`,
+                    `https://thingproxy.freeboard.io/fetch/${url}`
+                ];
+                
+                let response, data;
+                let lastError;
+                
+                for (let i = 0; i < proxyServices.length; i++) {
+                    try {
+                        console.log(`Trying proxy ${i + 1}:`, proxyServices[i]);
+                        response = await fetch(proxyServices[i]);
+                        
+                        if (response.ok) {
+                            if (i === 0) { // allorigins returns JSON
+                                data = await response.json();
+                                if (data.contents) {
+                                    console.log('Successfully fetched content via allorigins');
+                                    break;
+                                }
+                            } else { // Other proxies return raw HTML
+                                data = { contents: await response.text() };
+                                console.log('Successfully fetched content via proxy', i + 1);
+                                break;
+                            }
+                        }
+                    } catch (error) {
+                        console.log(`Proxy ${i + 1} failed:`, error.message);
+                        lastError = error;
+                        continue;
+                    }
+                }
+                
+                if (!data || !data.contents) {
+                    throw new Error(`All proxy services failed. Last error: ${lastError?.message || 'Unknown error'}`);
+                }
                 
                 if (data.contents) {
                     const parser = new DOMParser();
@@ -2541,13 +3615,425 @@
                         }
                     }
                     
+                    // Extract favicon/logo
+                    let faviconUrl = '';
+                    const faviconSelectors = [
+                        'link[rel="icon"]',
+                        'link[rel="shortcut icon"]',
+                        'link[rel="apple-touch-icon"]',
+                        'link[rel="apple-touch-icon-precomposed"]',
+                        'meta[property="og:image"]'
+                    ];
+                    
+                    for (const selector of faviconSelectors) {
+                        const element = doc.querySelector(selector);
+                        if (element) {
+                            faviconUrl = element.href || element.content || element.getAttribute('href') || element.getAttribute('content') || '';
+                            if (faviconUrl) {
+                                faviconUrl = convertToAbsoluteUrl(faviconUrl, url);
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Fallback to default favicon path
+                    if (!faviconUrl) {
+                        try {
+                            const urlObj = new URL(url);
+                            faviconUrl = `${urlObj.protocol}//${urlObj.host}/favicon.ico`;
+                        } catch (e) {
+                            faviconUrl = '';
+                        }
+                    }
+                    
+                    // Extract full article content with better precision
+                    const fullContent = [];
+                    const contentSelectors = [
+                        '.entry-content',
+                        '.post-content', 
+                        '.article-content',
+                        '.content',
+                        'article',
+                        '.post-body',
+                        '.story-body',
+                        '[data-module="ArticleBody"]',
+                        '.post',
+                        '.article-body',
+                        '.main-content',
+                        // Enhanced selectors for PrettyHow and similar sites
+                        '.entry',
+                        '.single-post',
+                        '.blog-content',
+                        '.page-content',
+                        '.text-content',
+                        'main',
+                        '[role="main"]',
+                        '#content',
+                        '#main',
+                        '.article-wrap'
+                    ];
+                    
+                    let contentContainer = null;
+                    let bestScore = 0;
+                    
+                    // Smart content container detection - choose the best one
+                    for (const selector of contentSelectors) {
+                        const candidate = doc.querySelector(selector);
+                        if (candidate) {
+                            const textLength = candidate.textContent.trim().length;
+                            const paragraphCount = candidate.querySelectorAll('p').length;
+                            const imageCount = candidate.querySelectorAll('img').length;
+                            const childCount = candidate.children.length;
+                            
+                            // Score based on content richness
+                            let score = 0;
+                            if (textLength > 1000) score += 3;
+                            else if (textLength > 500) score += 2;
+                            else if (textLength > 200) score += 1;
+                            
+                            if (paragraphCount > 5) score += 2;
+                            else if (paragraphCount > 2) score += 1;
+                            
+                            if (imageCount > 0) score += 1;
+                            if (childCount > 10) score += 1;
+                            
+                            console.log(`Content candidate ${selector}: score ${score}, text ${textLength}, paragraphs ${paragraphCount}, images ${imageCount}`);
+                            
+                            if (score > bestScore) {
+                                bestScore = score;
+                                contentContainer = candidate;
+                            }
+                        }
+                    }
+                    
+                    if (contentContainer) {
+                        // Function to process text content
+                        const processTextElement = (element) => {
+                            const text = element.textContent.trim();
+                            if (text && text.length > 20) { // More lenient for completeness
+                                const tagName = element.tagName.toLowerCase();
+                                return {
+                                    type: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tagName) ? 'heading' : 
+                                          tagName === 'blockquote' ? 'quote' :
+                                          tagName === 'li' ? 'list-item' : 'text',
+                                    content: text,
+                                    level: element.tagName,
+                                    originalTag: element.tagName
+                                };
+                            }
+                            return null;
+                        };
+
+                        // Function to process image element
+                        const processImageElement = (imgElement) => {
+                            let imgSrc = imgElement.src || 
+                                        imgElement.getAttribute('src') || 
+                                        imgElement.getAttribute('data-src') || 
+                                        imgElement.getAttribute('data-lazy-src') || 
+                                        imgElement.getAttribute('data-original') ||
+                                        imgElement.getAttribute('data-srcset') ||
+                                        '';
+                            
+                            // Handle srcset - get the largest available image
+                            if (!imgSrc && imgElement.getAttribute('srcset')) {
+                                const srcset = imgElement.getAttribute('srcset');
+                                const urls = srcset.split(',');
+                                if (urls.length > 0) {
+                                    // Get the last URL (usually the largest)
+                                    imgSrc = urls[urls.length - 1].trim().split(' ')[0];
+                                }
+                            }
+                            
+                            // Also check parent picture element for sources
+                            if (!imgSrc) {
+                                const pictureParent = imgElement.closest('picture');
+                                if (pictureParent) {
+                                    const source = pictureParent.querySelector('source');
+                                    if (source) {
+                                        imgSrc = source.getAttribute('srcset') || source.getAttribute('src') || '';
+                                        if (imgSrc.includes(',')) {
+                                            imgSrc = imgSrc.split(',')[0].trim().split(' ')[0];
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if (imgSrc && isValidImageUrl(imgSrc)) {
+                                imgSrc = convertToAbsoluteUrl(imgSrc, url);
+                                
+                                // Filter out small/icon images
+                                const width = parseInt(imgElement.width || imgElement.naturalWidth || 0);
+                                const height = parseInt(imgElement.height || imgElement.naturalHeight || 0);
+                                const alt = (imgElement.alt || '').toLowerCase();
+                                const className = (imgElement.className || '').toLowerCase();
+                                const srcLower = imgSrc.toLowerCase();
+                                
+                                // VERY lenient filtering - only skip truly irrelevant content
+                                if (width > 0 && height > 0 && width < 80 && height < 80) return null; // Very small icons only
+                                if (srcLower.includes('gravatar') || srcLower.includes('/icon/') || srcLower.includes('emoji')) return null;
+                                if (srcLower.includes('/ads/') || srcLower.includes('doubleclick') || srcLower.includes('googleadservices')) return null;
+                                
+                                return {
+                                    type: 'image',
+                                    content: imgSrc,
+                                    alt: imgElement.alt || 'Article image'
+                                };
+                            }
+                            return null;
+                        };
+
+                        // Recursively process all elements maintaining order
+                        const processElement = (element) => {
+                            // Skip script, style, and other non-content elements
+                            if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'HEAD', 'META', 'LINK'].includes(element.tagName)) {
+                                return;
+                            }
+
+                            // Direct image element
+                            if (element.tagName === 'IMG') {
+                                const imageContent = processImageElement(element);
+                                if (imageContent) {
+                                    fullContent.push(imageContent);
+                                }
+                                return;
+                            }
+
+                            // Text elements
+                            if (['P', 'DIV', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'LI'].includes(element.tagName)) {
+                                // Check if this element contains only images
+                                const images = element.querySelectorAll('img');
+                                const textContent = element.textContent.trim();
+                                
+                                if (images.length > 0 && textContent.length < 50) {
+                                    // This is likely an image container
+                                    images.forEach(img => {
+                                        const imageContent = processImageElement(img);
+                                        if (imageContent) {
+                                            fullContent.push(imageContent);
+                                        }
+                                    });
+                                    return;
+                                }
+
+                                // Process as text if it has meaningful content
+                                if (textContent.length > 30) {
+                                    const textContent = processTextElement(element);
+                                    if (textContent) {
+                                        fullContent.push(textContent);
+                                    }
+                                }
+                                return;
+                            }
+
+                            // For other elements, process their children in order
+                            Array.from(element.children).forEach(child => {
+                                processElement(child);
+                            });
+                        };
+
+                        // Enhanced processing - deep walk through ALL elements preserving order
+                        const walkThroughContent = (container) => {
+                            const walker = doc.createTreeWalker(
+                                container,
+                                NodeFilter.SHOW_ELEMENT,
+                                {
+                                    acceptNode: function(node) {
+                                        // Accept all meaningful content elements
+                                        if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'HEAD', 'META', 'LINK'].includes(node.tagName)) {
+                                            return NodeFilter.FILTER_REJECT;
+                                        }
+                                        return NodeFilter.FILTER_ACCEPT;
+                                    }
+                                }
+                            );
+                            
+                            let node;
+                            const processedNodes = new Set();
+                            
+                            while (node = walker.nextNode()) {
+                                if (processedNodes.has(node)) continue;
+                                processedNodes.add(node);
+                                
+                                // Handle images first
+                                if (node.tagName === 'IMG') {
+                                    const imageContent = processImageElement(node);
+                                    if (imageContent) {
+                                        fullContent.push(imageContent);
+                                    }
+                                }
+                                // Handle text content elements
+                                else if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'LI', 'DIV'].includes(node.tagName)) {
+                                    const text = node.textContent.trim();
+                                    const childImages = node.querySelectorAll('img');
+                                    
+                                    // If this element has meaningful text and no child images, process as text
+                                    if (text.length > 15 && childImages.length === 0) { // More lenient threshold
+                                        const textContent = processTextElement(node);
+                                        if (textContent) {
+                                            fullContent.push(textContent);
+                                        }
+                                        // Mark children as processed to avoid duplication
+                                        node.querySelectorAll('*').forEach(child => processedNodes.add(child));
+                                    }
+                                    // If it has child images but minimal text, it's an image container
+                                    else if (childImages.length > 0 && text.length < 100) {
+                                        childImages.forEach(img => {
+                                            if (!processedNodes.has(img)) {
+                                                const imageContent = processImageElement(img);
+                                                if (imageContent) {
+                                                    fullContent.push(imageContent);
+                                                }
+                                                processedNodes.add(img);
+                                            }
+                                        });
+                                    }
+                                    // Mixed content - handle text and images separately
+                                    else if (childImages.length > 0 && text.length >= 50) { // More lenient for mixed content
+                                        // Add text content
+                                        const cleanText = node.cloneNode(true);
+                                        cleanText.querySelectorAll('img').forEach(img => img.remove());
+                                        const textOnly = cleanText.textContent.trim();
+                                        
+                                        if (textOnly.length > 20) {
+                                            fullContent.push({
+                                                type: node.tagName.toLowerCase().startsWith('h') ? 'heading' : 'text',
+                                                content: textOnly,
+                                                level: node.tagName
+                                            });
+                                        }
+                                        
+                                        // Add images
+                                        childImages.forEach(img => {
+                                            if (!processedNodes.has(img)) {
+                                                const imageContent = processImageElement(img);
+                                                if (imageContent) {
+                                                    fullContent.push(imageContent);
+                                                }
+                                                processedNodes.add(img);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        };
+                        
+                        // Process all content preserving document order
+                        walkThroughContent(contentContainer);
+                        
+                        console.log(`Extracted ${fullContent.length} content items from article`);
+                        
+                        // If still no content, try a more aggressive approach
+                        if (fullContent.length < 3) {
+                            console.log('Low content count, trying aggressive extraction...');
+                            // Try to get all text and images from the document
+                            const allElements = contentContainer.querySelectorAll('p, div, h1, h2, h3, img, blockquote');
+                            
+                            allElements.forEach(element => {
+                                if (element.tagName === 'IMG') {
+                                    const imageContent = processImageElement(element);
+                                    if (imageContent) {
+                                        fullContent.push(imageContent);
+                                    }
+                                } else {
+                                    const textContent = processTextElement(element);
+                                    if (textContent) {
+                                        fullContent.push(textContent);
+                                    }
+                                }
+                            });
+                        }
+
+                        console.log('Extracted full content:', fullContent); // Debug log
+                    }
+
+                    // If no structured content found, create meaningful fallback
+                    if (fullContent.length === 0) {
+                        console.log('No structured content found, using fallback');
+                        fullContent.push(
+                            { type: 'text', content: 'Welcome to this comprehensive article that covers important insights and valuable information.' },
+                            { type: 'text', content: 'Our expert team has carefully researched and compiled the most relevant details to help you understand this topic better.' },
+                            { type: 'text', content: 'This article contains practical tips and actionable advice that you can implement right away.' }
+                        );
+                    }
+                    
                     const additionalImages = [];
-                    const allImages = doc.querySelectorAll('img');
                     const processedUrls = new Set();
                     
-                    allImages.forEach(img => {
-                        let imgSrc = img.src || img.getAttribute('src') || img.getAttribute('data-src') || 
-                                    img.getAttribute('data-lazy-src') || img.getAttribute('data-original') || '';
+                    // Enhanced selectors for comprehensive image extraction
+                    const enhancedImageSelectors = [
+                        // Standard and semantic image selectors
+                        'img', // All standard images
+                        'picture img', // Picture elements with sources
+                        'figure img', // Figure elements
+                        'article img', // Article content images
+                        '.content img', // Content container images
+                        '.post img', // Post container images
+                        '.entry img', // Entry container images
+                        '.single-post img', // Single post images
+                        '.post-content img', // Post content images
+                        '.entry-content img', // Entry content images
+                        '.article-content img', // Article content images
+                        '.story-body img', // Story body images
+                        '.text img', // Text content images
+                        '.body img', // Body content images
+                        
+                        // Gallery and slideshow images
+                        '.gallery img',
+                        '.slideshow img', 
+                        '.carousel img',
+                        '.slider img',
+                        '.image-gallery img',
+                        
+                        // Lazy loading and responsive selectors
+                        '[data-src]', // Lazy loaded images
+                        '[data-lazy-src]', // Lazy loaded images  
+                        '[data-original]', // Lazy loaded images
+                        '[data-srcset]', // Responsive images
+                        '[data-background-image]', // Background images as data attributes
+                        '[srcset]', // Images with srcset attribute
+                        
+                        // WordPress specific selectors
+                        '.wp-image', // WordPress images
+                        '[class*="wp-image"]', // WordPress image classes
+                        '.attachment-full', // WordPress full size images
+                        '.attachment-large', // WordPress large images
+                        
+                        // Media and content specific
+                        '.featured-image img',
+                        '.hero-image img',
+                        '.thumbnail img',
+                        '.media img',
+                        '.image-container img'
+                    ];
+                    
+                    // Collect all images from all selectors
+                    const allImageElements = new Set();
+                    enhancedImageSelectors.forEach(selector => {
+                        doc.querySelectorAll(selector).forEach(img => allImageElements.add(img));
+                    });
+                    
+                    console.log(`Found ${allImageElements.size} total image elements`); // Debug log
+                    
+                    allImageElements.forEach(img => {
+                        // Enhanced image source extraction
+                        let imgSrc = img.src || 
+                                    img.getAttribute('src') || 
+                                    img.getAttribute('data-src') || 
+                                    img.getAttribute('data-lazy-src') || 
+                                    img.getAttribute('data-original') ||
+                                    img.getAttribute('data-srcset') ||
+                                    img.getAttribute('srcset') ||
+                                    '';
+                        
+                        // Handle srcset - get the largest image
+                        if (!imgSrc && img.getAttribute('srcset')) {
+                            const srcset = img.getAttribute('srcset');
+                            const urls = srcset.split(',');
+                            if (urls.length > 0) {
+                                // Get the first URL (usually largest or original)
+                                imgSrc = urls[urls.length - 1].trim().split(' ')[0];
+                            }
+                        }
                         
                         if (imgSrc && isValidImageUrl(imgSrc)) {
                             imgSrc = convertToAbsoluteUrl(imgSrc, url);
@@ -2556,41 +4042,37 @@
                                 return;
                             }
                             
+                            // VERY lenient size filtering - only exclude truly tiny images (under 80px)
                             const imgWidth = parseInt(img.getAttribute('width') || img.naturalWidth || 0);
                             const imgHeight = parseInt(img.getAttribute('height') || img.naturalHeight || 0);
                             const imgAlt = (img.alt || '').toLowerCase();
                             const imgClass = (img.className || '').toLowerCase();
                             const imgSrcLower = imgSrc.toLowerCase();
                             
-                            if (imgWidth && imgHeight && (imgWidth < 200 || imgHeight < 150)) return;
-                            if (imgAlt.includes('avatar') || imgAlt.includes('icon') || imgAlt.includes('logo')) return;
-                            if (imgClass.includes('avatar') || imgClass.includes('icon') || imgClass.includes('logo')) return;
-                            if (imgSrcLower.includes('avatar') || imgSrcLower.includes('icon') || imgSrcLower.includes('logo')) return;
-                            if (imgSrcLower.includes('ads') || imgSrcLower.includes('banner') || imgSrcLower.includes('sponsor')) return;
+                            // Only exclude very small icons and obvious non-content images
+                            if (imgWidth && imgHeight && imgWidth < 80 && imgHeight < 80) return; // Very small icons only
+                            if (imgSrcLower.includes('/icon') && (imgWidth < 150 || imgHeight < 150)) return; // Small icons in icon folders
+                            if (imgSrcLower.includes('gravatar') || imgSrcLower.includes('avatar')) return; // Avatar services
+                            if (imgSrcLower.includes('/ads/') || imgSrcLower.includes('doubleclick') || imgSrcLower.includes('googleadservices')) return; // Ad networks
+                            if (imgClass.includes('emoji') || imgAlt.includes('emoji')) return; // Emoji images
                             
+                            // Prioritize content images but don't exclude others
                             const isContentImage = img.closest('article') || img.closest('.post-content') || 
                                                  img.closest('.entry-content') || img.closest('.content') ||
-                                                 img.closest('.post-body');
+                                                 img.closest('.post-body') || img.closest('main') ||
+                                                 img.closest('.story') || img.closest('.article-body');
                             
-                            if (isContentImage && additionalImages.length < 8) {
-                                additionalImages.push(imgSrc);
-                                processedUrls.add(imgSrc);
+                            // Add all valid images, not just content images, but prioritize content images
+                            if (isContentImage) {
+                                additionalImages.unshift(imgSrc); // Add to beginning
+                            } else {
+                                additionalImages.push(imgSrc); // Add to end
                             }
+                            processedUrls.add(imgSrc);
                         }
                     });
                     
-                    if (additionalImages.length < 4) {
-                        allImages.forEach(img => {
-                            let imgSrc = img.src || img.getAttribute('src') || img.getAttribute('data-src') || '';
-                            if (imgSrc && isValidImageUrl(imgSrc) && additionalImages.length < 8) {
-                                imgSrc = convertToAbsoluteUrl(imgSrc, url);
-                                if (!processedUrls.has(imgSrc) && imgSrc !== mainImage) {
-                                    additionalImages.push(imgSrc);
-                                    processedUrls.add(imgSrc);
-                                }
-                            }
-                        });
-                    }
+                    console.log(`Extracted ${additionalImages.length} additional images`); // Debug log
                     
                     const domain = new URL(url).hostname.replace('www.', '');
                     const cleanDomain = domain.split('.')[0];
@@ -2608,7 +4090,9 @@
                         subtitle: finalSubtitle,
                         blogName: blogName,
                         imageUrl: mainImage,
+                        faviconUrl: faviconUrl,
                         extractedImages: [],
+                        fullContent: fullContent,
                         isExtracted: true
                     };
                     
@@ -2616,16 +4100,14 @@
                     if (mainImage) {
                         extractedImages.push(mainImage);
                         currentImageUrl = mainImage;
-                        elements.imageUrl.value = mainImage;
                         preview.adImage.style.backgroundImage = `url('${mainImage}')`;
                         preview.adImage.classList.add('has-image');
                         preview.adImage.textContent = '';
                     }
                     
+                    // CRITICAL FIX: Add ALL additional images, don't limit to 8
                     additionalImages.forEach(img => {
-                        if (extractedImages.length < 8) {
-                            extractedImages.push(img);
-                        }
+                        extractedImages.push(img);
                     });
                     
                     if (extractedImages.length === 0) {
@@ -2643,10 +4125,26 @@
                     document.getElementById('autoImageUpload').classList.remove('hidden');
                     
                     const imageCount = extractedImages.length;
+                    const contentCount = fullContent.length;
                     const hasMainImage = mainImage ? '✅ Main image found' : '⚠️ No main image';
-                    showNotification(`🖼️ ${hasMainImage} | ${imageCount} images extracted`);
                     
-                    updatePreview();
+                    console.log('Extraction results:', {
+                        title: finalTitle,
+                        subtitle: finalSubtitle,
+                        blogName: blogName,
+                        mainImage: mainImage,
+                        imageCount: imageCount,
+                        contentCount: contentCount,
+                        fullContent: fullContent.slice(0, 3) // Show first 3 items for debugging
+                    });
+                    
+                    showNotification(`🖼️ ${hasMainImage} | ${imageCount} images | ${contentCount} content blocks extracted`);
+                    
+                    if (isEmailMode) {
+                        updateEmailContent();
+                    } else {
+                        updatePreview();
+                    }
                     
                 } else {
                     throw new Error('No content received from proxy');
@@ -2759,6 +4257,13 @@
                         blogName: blogName,
                         imageUrl: '',
                         extractedImages: getFallbackImages(),
+                        fullContent: [
+                            { type: 'text', content: `Welcome to ${cleanDomain}! This is where amazing content begins.` },
+                            { type: 'text', content: 'Our team works tirelessly to bring you the most relevant and engaging articles that will help you stay ahead of the curve.' },
+                            { type: 'text', content: 'From industry insights to practical tips, we cover everything you need to know in your field of interest.' },
+                            { type: 'text', content: 'Join thousands of readers who trust us to deliver quality content that makes a difference in their daily lives.' },
+                            { type: 'text', content: 'Subscribe to our newsletter and never miss an update from our expert writers and industry professionals.' }
+                        ],
                         isExtracted: true
                     };
                     
@@ -2770,9 +4275,18 @@
                     
                     document.getElementById('autoImageUpload').classList.remove('hidden');
                     
-                    showNotification(`🔄 Smart fallback | ${extractedImages.length} demo images loaded`);
+                    showNotification(`🔄 Smart fallback | ${extractedImages.length} demo images | Sample content created`);
                     
-                    updatePreview();
+                    console.log('Fallback content created:', {
+                        extractedImages: extractedImages.length,
+                        fullContent: extractedContent.fullContent.length
+                    });
+                    
+                    if (isEmailMode) {
+                        updateEmailContent();
+                    } else {
+                        updatePreview();
+                    }
                     resolve();
                 }, 1000);
             });
@@ -2848,8 +4362,6 @@
             preview.adImage.classList.add('has-image');
             preview.adImage.textContent = '';
             
-            elements.imageUrl.value = selectedImageUrl;
-            
             optimizeImageForTemplate(currentTemplate);
             
             document.querySelectorAll('.image-option').forEach((option, i) => {
@@ -2876,31 +4388,56 @@
                 showNotification('🎯 Best image auto-selected');
             }
 
-            updatePreview();
+            if (isEmailMode) {
+                updateEmailContent();
+            } else {
+                updatePreview();
+            }
         }
 
         function autoOptimize() {
-            showNotification('✨ Optimizing ad layout...');
+            showNotification('✨ Optimizing layout...');
             
-            switch(currentTemplate) {
-                case 'top-image':
-                    optimizeTopImageStyle();
-                    break;
-                case 'left-image':
-                case 'right-image':
-                    optimizeSideStyle();
-                    break;
-                case 'overlay':
-                    optimizeOverlayStyle();
-                    break;
-                default:
-                    optimizeGeneralStyle();
-                    break;
+            if (isEmailMode) {
+                optimizeEmailStyle();
+            } else {
+                switch(currentTemplate) {
+                    case 'top-image':
+                        optimizeTopImageStyle();
+                        break;
+                    case 'left-image':
+                    case 'right-image':
+                        optimizeSideStyle();
+                        break;
+                    case 'overlay':
+                        optimizeOverlayStyle();
+                        break;
+                    default:
+                        optimizeGeneralStyle();
+                        break;
+                }
             }
             
             updateAllRangeDisplays();
-            updatePreview();
-            showNotification('✅ Ad optimized successfully!');
+            if (isEmailMode) {
+                updateEmailContent();
+            } else {
+                updatePreview();
+            }
+            showNotification('✅ Layout optimized successfully!');
+        }
+
+        function optimizeEmailStyle() {
+            elements.primaryTitleSize.value = '28';
+            elements.secondaryTitleSize.value = '18';
+            elements.actionButtonSize.value = '16';
+            elements.primaryTitleColor.value = '#333333';
+            elements.secondaryTitleColor.value = '#666666';
+            elements.actionButtonBg.value = '#667eea';
+            elements.contentPadding.value = '30';
+            elements.lineHeight.value = '1.6';
+            
+            showNotification('📧 Email optimized: Larger fonts, better spacing for email reading');
         }
 
         function optimizeTopImageStyle() {
@@ -2996,6 +4533,8 @@
         }
 
         function handleResolutionChange(newMultiplier) {
+            if (isEmailMode) return; // Don't apply resolution multiplier in email mode
+            
             const oldMultiplier = resolutionMultiplier;
             resolutionMultiplier = newMultiplier;
             
@@ -3006,19 +4545,24 @@
         }
 
         function updatePreview() {
+            if (isEmailMode) {
+                updateEmailContent();
+                return;
+            }
+            
             updateDimensionsFromAspectRatio();
             
-            const imageUrl = elements.imageUrl.value.trim();
-            if (imageUrl && isValidUrl(imageUrl)) {
-                currentImageUrl = imageUrl;
-                extractedContent.imageUrl = imageUrl;
-                preview.adImage.style.backgroundImage = `url('${imageUrl}')`;
+            // Handle image display - preserve current image state
+            if (currentImageUrl) {
+                preview.adImage.style.backgroundImage = `url('${currentImageUrl}')`;
                 preview.adImage.classList.add('has-image');
                 preview.adImage.textContent = '';
-            } else if (!preview.adImage.classList.contains('has-image') && !currentImageUrl) {
+                console.log('Preview updated with preserved image:', currentImageUrl); // Debug log
+            } else if (!preview.adImage.classList.contains('has-image')) {
                 preview.adImage.style.backgroundImage = 'none';
                 preview.adImage.textContent = '📷 Image will appear here';
             }
+            // Note: If has-image class is present but no currentImageUrl, preserve existing image
 
             const zoom = elements.imageZoom.value;
             const scale = elements.imageScale.value;
@@ -3140,7 +4684,7 @@
                 if (typeof html2canvas !== 'undefined') {
                     showNotification('📸 Creating high-quality screenshot...');
                     
-                    let targetElement = preview.nativeAd;
+                    let targetElement = isEmailMode ? preview.emailContainer : preview.nativeAd;
                     if (currentFrame !== 'none') {
                         targetElement = preview.previewWrapper;
                     }
@@ -3162,25 +4706,35 @@
                                 new ClipboardItem({ 'image/png': blob })
                             ]);
                             
-                            const ratio = aspectRatios[currentAspectRatio];
-                            const width = ratio.width * resolutionMultiplier;
-                            const height = ratio.height * resolutionMultiplier;
-                            const frameText = currentFrame === 'none' ? '' : ` with ${currentFrame} frame`;
-                            showNotification(`✅ Ad copied (${width}×${height})${frameText}!`);
+                            if (isEmailMode) {
+                                showNotification(`✅ Email marketing design copied!`);
+                            } else {
+                                const ratio = aspectRatios[currentAspectRatio];
+                                const width = ratio.width * resolutionMultiplier;
+                                const height = ratio.height * resolutionMultiplier;
+                                const frameText = currentFrame === 'none' ? '' : ` with ${currentFrame} frame`;
+                                showNotification(`✅ Ad copied (${width}×${height})${frameText}!`);
+                            }
                         } catch (err) {
                             console.error('Clipboard error:', err);
                             const url = URL.createObjectURL(blob);
                             const a = document.createElement('a');
                             a.href = url;
-                            const ratio = aspectRatios[currentAspectRatio];
-                            const width = ratio.width * resolutionMultiplier;
-                            const height = ratio.height * resolutionMultiplier;
-                            a.download = `native-ad-${width}x${height}-${currentFrame}.png`;
+                            
+                            if (isEmailMode) {
+                                a.download = `email-marketing-${Date.now()}.png`;
+                            } else {
+                                const ratio = aspectRatios[currentAspectRatio];
+                                const width = ratio.width * resolutionMultiplier;
+                                const height = ratio.height * resolutionMultiplier;
+                                a.download = `native-ad-${width}x${height}-${currentFrame}.png`;
+                            }
+                            
                             document.body.appendChild(a);
                             a.click();
                             document.body.removeChild(a);
                             URL.revokeObjectURL(url);
-                            showNotification('📥 Ad downloaded as image file');
+                            showNotification('📥 Design downloaded as image file');
                         }
                     }, 'image/png', 0.95);
                 } else {
@@ -3204,6 +4758,7 @@
             currentButtonStyle = 'transparent';
             wasInOverlayMode = false;
             currentAspectRatio = '16:9';
+            isEmailMode = false;
             
             extractedContent = {
                 title: '',
@@ -3211,6 +4766,7 @@
                 blogName: '',
                 imageUrl: '',
                 extractedImages: [],
+                fullContent: [],
                 isExtracted: false
             };
             
@@ -3220,27 +4776,14 @@
             document.querySelectorAll('.aspect-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('[data-ratio="16:9"]').classList.add('active');
             
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('[data-mode="auto"]').classList.add('active');
+            // Reset email mode
+            toggleEmailMode(false);
+            applyRegularLayout();
             
-            document.getElementById('autoModeSection').classList.remove('hidden');
-            document.getElementById('manualModeSection').classList.add('hidden');
-            document.getElementById('autoImageUpload').classList.add('hidden');
-            
-            // Reset toggles
-            document.getElementById('togglePrimaryTitle').checked = true;
-            document.getElementById('toggleSecondaryTitle').checked = true;
-            document.getElementById('toggleBrandName').checked = false;
-            document.getElementById('toggleBlogName').checked = true;
-            document.getElementById('toggleSponsored').checked = true;
-            document.getElementById('toggleActionButton').checked = true;
-
-            // Reset values
             elements.brandName.value = 'Amsalem';
             elements.blogName.value = 'PrettyHow';
             elements.primaryTitle.value = '';
             elements.secondaryTitle.value = '';
-            elements.imageUrl.value = '';
             elements.quickUrl.value = '';
             
             document.getElementById('autoImageUrl').value = '';
@@ -3272,7 +4815,13 @@
             elements.sponsoredTextSize.value = '10';
             elements.sponsoredText.value = 'Sponsored';
 
-            // Reset bold toggles
+            document.getElementById('togglePrimaryTitle').checked = true;
+            document.getElementById('toggleSecondaryTitle').checked = true;
+            document.getElementById('toggleBrandName').checked = false;
+            document.getElementById('toggleBlogName').checked = true;
+            document.getElementById('toggleSponsored').checked = true;
+            document.getElementById('toggleActionButton').checked = true;
+
             document.getElementById('primaryTitleBold').classList.add('active');
             document.getElementById('secondaryTitleBold').classList.remove('active');
             document.getElementById('brandNameBold').classList.remove('active');
@@ -3280,7 +4829,6 @@
             document.getElementById('sponsoredTextBold').classList.remove('active');
             document.getElementById('actionButtonBold').classList.add('active');
 
-            // Reset button style to transparent default
             document.querySelectorAll('.button-style-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-button-style="transparent"]').classList.add('active');
 
@@ -3296,51 +4844,94 @@
             preview.adImage.style.backgroundPosition = 'center';
 
             document.getElementById('imageGrid').classList.add('hidden');
+            document.getElementById('autoImageUpload').classList.add('hidden');
             extractedImages = [];
             selectedImageIndex = 0;
 
             document.querySelectorAll('.division-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('[data-split="40/60"]').classList.add('active');
-            document.querySelector('[data-resolution="1"]').classList.add('active');
+            document.querySelector('[data-split="40/60"]')?.classList.add('active');
+            document.querySelector('[data-resolution="1"]')?.classList.add('active');
             document.querySelector('[data-frame="none"]').classList.add('active');
             document.getElementById('frameWidthControl').style.display = 'none';
 
-            preview.previewWrapper.classList.remove('frame-desktop', 'frame-browser', 'frame-feed');
+            preview.previewWrapper.classList.remove('frame-desktop', 'frame-browser', 'frame-feed', 'frame-gmail');
             const feedBg = preview.previewWrapper.querySelector('.feed-background');
             if (feedBg) feedBg.remove();
 
             preview.scaleWrapper.style.transform = 'scale(1)';
+            preview.adContainer.classList.remove('hidden');
+            preview.emailContainer.classList.add('hidden');
 
             applyTemplate('top-image');
             toggleComponent('brandname', false);
             toggleComponent('actionbutton', true);
             updateAllRangeDisplays();
             updatePreview();
+            
+            showNotification('🔄 All settings reset to default');
         }
-
-        // Manual image URL handler
-        elements.imageUrl.addEventListener('input', function() {
-            const imageUrl = this.value.trim();
-            if (imageUrl && isValidUrl(imageUrl)) {
-                currentImageUrl = imageUrl;
-                preview.adImage.style.backgroundImage = `url('${imageUrl}')`;
-                preview.adImage.classList.add('has-image');
-                preview.adImage.textContent = '';
-                optimizeImageForTemplate(currentTemplate);
-            }
-        });
 
         // Add event listeners
         Object.values(elements).forEach(element => {
-            if (element && element !== elements.imageUpload && element !== elements.quickUrl && 
+            if (element && element !== elements.quickUrl && 
                 element !== elements.globalFontSize && element !== elements.frameWidth) {
-                element.addEventListener('input', updatePreview);
-                element.addEventListener('change', updatePreview);
+                element.addEventListener('input', () => {
+                    if (isEmailMode) {
+                        updateEmailContent();
+                    } else {
+                        updatePreview();
+                    }
+                });
+                element.addEventListener('change', () => {
+                    if (isEmailMode) {
+                        updateEmailContent();
+                    } else {
+                        updatePreview();
+                    }
+                });
             }
         });
 
         // Initialize
         window.addEventListener('load', function() {
+            console.log('Page loaded, starting initialization...');
+            // Alert removed - page loaded script running
+            
+            // Re-initialize elements object after DOM is loaded
+            const elementsReInit = {
+                quickUrl: document.getElementById('quickUrl'),
+                extractBtn: document.getElementById('extractBtn'),
+                testBtn: document.getElementById('testBtn')
+            };
+            
+            console.log('Elements found:');
+            console.log('quickUrl:', !!elementsReInit.quickUrl);
+            console.log('extractBtn:', !!elementsReInit.extractBtn);
+            console.log('testBtn:', !!elementsReInit.testBtn);
+            
+            // Add manual event listeners as backup
+            if (elementsReInit.extractBtn) {
+                elementsReInit.extractBtn.addEventListener('click', function() {
+                    // Alert removed - extract button clicked via event listener
+                    extractContent();
+                });
+                console.log('Extract button event listener added');
+            } else {
+                console.error('Extract button not found!');
+                alert('שגיאה: כפתור החילוץ לא נמצא');
+            }
+            
+            if (elementsReInit.testBtn) {
+                elementsReInit.testBtn.addEventListener('click', function() {
+                    // Alert removed - test button clicked via event listener
+                    testExtraction();
+                });
+                console.log('Test button event listener added');
+            } else {
+                console.error('Test button not found!');
+                alert('שגיאה: כפתור הבדיקה לא נמצא');
+            }
+            
             setupRangeDisplays();
             toggleComponent('brandname', false);
             toggleComponent('actionbutton', true);
@@ -3352,7 +4943,26 @@
             setButtonStyle('transparent');
             
             updatePreview();
+            
+            console.log('Initialization completed');
         });
+
+        // Test function for debugging extraction
+        function testExtraction() {
+            // Alert removed - test button clicked
+            console.log('testExtraction called');
+            
+            const url = 'https://www.prettyhow.com/elegant-earrings-to-elevate-your-style-discover-the-tjc-collection/';
+            
+            if (elements && elements.quickUrl) {
+                elements.quickUrl.value = url;
+                showNotification('🧪 Test URL loaded - now click Extract Content button');
+                alert('URL נטען בשדה, עכשיו לחץ על כפתור החילוץ');
+            } else {
+                console.error('elements or quickUrl not found');
+                alert('שגיאה: לא נמצא שדה הURL');
+            }
+        }
     </script>
 
     <!-- HTML2Canvas for screenshot functionality -->
