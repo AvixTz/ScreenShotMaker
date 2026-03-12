@@ -6,34 +6,54 @@
     <meta name="description" content="יוסי כהן - סוכן ביטוח מוסמך. ביטוח חיים, בריאות, רכב ודירה. ייעוץ מקצועי וליווי אישי.">
     <title>יוסי כהן - סוכן ביטוח | הגנה מקצועית למשפחה שלך</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary: #0f62fe;
-            --primary-light: #4589ff;
-            --primary-dark: #0043ce;
-            --accent: #be95ff;
-            --accent2: #08bdba;
-            --accent3: #ff7eb6;
-            --bg: #0a0a0f;
-            --bg-card: rgba(255,255,255,0.04);
-            --bg-glass: rgba(255,255,255,0.06);
-            --border: rgba(255,255,255,0.08);
-            --border-hover: rgba(255,255,255,0.15);
-            --text: #ffffff;
-            --text-secondary: rgba(255,255,255,0.6);
-            --text-tertiary: rgba(255,255,255,0.4);
-            --glow-primary: rgba(15,98,254,0.4);
-            --glow-accent: rgba(190,149,255,0.3);
-            --radius: 20px;
-            --radius-sm: 12px;
-            --radius-xs: 8px;
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+            --rose: #f43f5e;
+
+            --bg: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --surface: #ffffff;
+            --surface-hover: #f8fafc;
+
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #94a3b8;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.15);
+
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 24px;
+            --radius-full: 9999px;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Heebo', 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
@@ -44,640 +64,641 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ===== ANIMATED BACKGROUND ===== */
-        .bg-gradient {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .bg-gradient .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.35;
-            animation: orbFloat 20s ease-in-out infinite;
-        }
-        .bg-gradient .orb:nth-child(1) {
-            width: 600px; height: 600px;
-            background: var(--primary);
-            top: -10%; right: -10%;
-            animation-delay: 0s;
-        }
-        .bg-gradient .orb:nth-child(2) {
-            width: 500px; height: 500px;
-            background: var(--accent);
-            bottom: -10%; left: -10%;
-            animation-delay: -7s;
-        }
-        .bg-gradient .orb:nth-child(3) {
-            width: 400px; height: 400px;
-            background: var(--accent2);
-            top: 40%; left: 30%;
-            animation-delay: -14s;
-        }
-
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(60px, -40px) scale(1.1); }
-            66% { transform: translate(-40px, 60px) scale(0.9); }
-        }
-
-        /* ===== NOISE TEXTURE ===== */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            pointer-events: none;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
         /* ===== HEADER ===== */
         .header {
             position: fixed;
             top: 0; right: 0; left: 0;
             z-index: 100;
-            padding: 16px 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
         }
         .header.scrolled {
-            background: rgba(10,10,15,0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            border-bottom-color: var(--border);
+            box-shadow: var(--shadow-sm);
         }
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            height: 72px;
         }
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 800;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
+            color: var(--text);
         }
-        .logo-icon {
-            width: 42px; height: 42px;
+        .logo-mark {
+            width: 40px; height: 40px;
             border-radius: 12px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
             color: white;
             font-weight: 900;
+            font-size: 0.85rem;
         }
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
         }
         .nav-links a {
             padding: 8px 16px;
-            border-radius: 10px;
+            border-radius: var(--radius);
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-secondary);
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
         .nav-links a:hover {
             color: var(--text);
-            background: var(--bg-glass);
+            background: var(--bg-secondary);
         }
         .nav-cta {
             background: var(--primary) !important;
             color: white !important;
             font-weight: 600 !important;
-            padding: 10px 24px !important;
-            border-radius: 12px !important;
+            padding: 9px 20px !important;
+            border-radius: var(--radius-full) !important;
+            font-size: 0.85rem !important;
+            transition: all 0.2s !important;
         }
         .nav-cta:hover {
-            background: var(--primary-light) !important;
-            box-shadow: 0 0 30px var(--glow-primary);
+            background: var(--primary-dark) !important;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3) !important;
         }
 
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            color: white;
             cursor: pointer;
             padding: 8px;
+            color: var(--text);
         }
 
         /* ===== HERO ===== */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
+            padding-top: 140px;
+            padding-bottom: 100px;
             position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--primary-50) 0%, var(--bg) 60%);
         }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 800px; height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37,99,235,0.06), transparent 70%);
+            top: -300px; left: -200px;
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139,92,246,0.05), transparent 70%);
+            bottom: -200px; right: -100px;
+            pointer-events: none;
+        }
+
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 64px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
-        .hero-badge {
+
+        .hero-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 16px;
-            border-radius: 100px;
-            background: rgba(190,149,255,0.1);
-            border: 1px solid rgba(190,149,255,0.2);
-            color: var(--accent);
-            font-size: 0.85rem;
+            padding: 6px 14px 6px 8px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
             font-weight: 500;
+            color: var(--text-secondary);
             margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
         }
+        .hero-tag .tag-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            display: inline-block;
+        }
+
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--text);
+            letter-spacing: -0.025em;
         }
-        .hero h1 .gradient-text {
-            background: linear-gradient(135deg, var(--primary-light), var(--accent), var(--accent3));
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            background-size: 200% 200%;
-            animation: gradientShift 5s ease-in-out infinite;
         }
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+
         .hero-desc {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             line-height: 1.8;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             max-width: 480px;
         }
+
         .hero-actions {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
+            margin-bottom: 48px;
         }
+
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 14px 32px;
-            border-radius: 14px;
-            font-family: 'Heebo', 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-family: 'Heebo', sans-serif;
             font-weight: 600;
-            font-size: 1rem;
             border: none;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-height: 48px;
+            transition: all 0.2s ease;
+            border-radius: var(--radius);
+        }
+        .btn-lg {
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            border-radius: var(--radius-lg);
         }
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--primary);
             color: white;
-            box-shadow: 0 4px 20px var(--glow-primary);
+            box-shadow: 0 2px 8px rgba(37,99,235,0.25);
         }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 40px var(--glow-primary);
+            background: var(--primary-dark);
+            box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+            transform: translateY(-1px);
         }
-        .btn-glass {
-            background: var(--bg-glass);
-            color: white;
+        .btn-outline {
+            background: white;
+            color: var(--text);
             border: 1px solid var(--border);
-            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
         }
-        .btn-glass:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--border-hover);
+        .btn-outline:hover {
+            background: var(--bg-secondary);
+            border-color: #cbd5e1;
         }
 
-        /* Hero Stats Bar */
-        .hero-stats {
+        /* Trust Bar */
+        .trust-bar {
             display: flex;
-            gap: 40px;
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
+            align-items: center;
+            gap: 32px;
         }
-        .hero-stat strong {
-            display: block;
-            font-size: 2rem;
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .trust-icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: var(--primary-50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .trust-item strong {
+            font-size: 1.1rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text);
         }
-        .hero-stat small {
-            font-size: 0.85rem;
+        .trust-item small {
+            font-size: 0.75rem;
             color: var(--text-tertiary);
+            display: block;
         }
 
-        /* Hero Visual - Floating Cards */
+        /* Hero Visual */
         .hero-visual {
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 500px;
-        }
-        .hero-main-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 32px;
-            width: 100%;
-            max-width: 380px;
-            position: relative;
-            z-index: 2;
-        }
-        .hero-main-card::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 24px;
-            background: linear-gradient(135deg, rgba(15,98,254,0.3), transparent 40%, rgba(190,149,255,0.3));
-            z-index: -1;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: xor;
-            -webkit-mask-composite: xor;
-            padding: 1px;
         }
 
-        .card-profile {
+        .profile-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-2xl);
+            padding: 28px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .profile-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 14px;
+            margin-bottom: 20px;
         }
-        .card-avatar {
-            width: 56px; height: 56px;
-            border-radius: 16px;
+        .profile-avatar {
+            width: 52px; height: 52px;
+            border-radius: 14px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            font-weight: 800;
             color: white;
-        }
-        .card-name { font-weight: 700; font-size: 1.1rem; }
-        .card-title { color: var(--text-tertiary); font-size: 0.85rem; }
-
-        .card-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        .card-badge {
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-        }
-        .card-rating {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 24px;
-            color: #fbbf24;
+            font-weight: 800;
             font-size: 1.1rem;
         }
-        .card-rating span {
-            color: var(--text-tertiary);
-            font-size: 0.85rem;
-        }
-        .card-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-family: 'Heebo', 'Segoe UI', Tahoma, Arial, sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .card-btn:hover {
-            box-shadow: 0 8px 30px var(--glow-primary);
-            transform: translateY(-2px);
+        .profile-name { font-weight: 700; font-size: 1.05rem; color: var(--text); }
+        .profile-role { font-size: 0.8rem; color: var(--text-tertiary); }
+
+        .profile-verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            background: #ecfdf5;
+            color: var(--emerald);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
         }
 
-        /* Floating mini cards */
-        .float-card {
-            position: absolute;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px 20px;
+        .profile-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .specialty {
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .profile-rating {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 0.85rem;
-            z-index: 3;
-            animation: float 6s ease-in-out infinite;
+            gap: 8px;
+            padding: 12px 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 16px;
         }
-        .float-card .icon {
-            width: 40px; height: 40px;
+        .stars { color: var(--amber); font-size: 0.9rem; letter-spacing: 1px; }
+        .rating-text { font-size: 0.8rem; color: var(--text-tertiary); }
+        .rating-text strong { color: var(--text); font-weight: 700; }
+
+        .profile-cta {
+            width: 100%;
+            padding: 13px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Heebo', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .profile-cta:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        }
+
+        /* Floating badges */
+        .float-badge {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 12px 16px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.82rem;
+            animation: floatY 5s ease-in-out infinite;
+            z-index: 2;
+        }
+        .float-badge .fb-icon {
+            width: 36px; height: 36px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
-        .float-card:nth-child(2) {
-            top: 10%; left: -10%;
-            animation-delay: -2s;
-        }
-        .float-card:nth-child(2) .icon { background: rgba(8,189,186,0.15); }
-        .float-card:nth-child(3) {
-            bottom: 15%; right: -5%;
-            animation-delay: -4s;
-        }
-        .float-card:nth-child(3) .icon { background: rgba(255,126,182,0.15); }
-        .float-card .value { font-weight: 700; }
-        .float-card .label { color: var(--text-tertiary); font-size: 0.75rem; }
+        .float-badge .fb-value { font-weight: 700; color: var(--text); }
+        .float-badge .fb-label { font-size: 0.7rem; color: var(--text-tertiary); }
 
-        @keyframes float {
+        .float-badge:nth-child(2) {
+            top: 20px; left: -30px;
+            animation-delay: -1.5s;
+        }
+        .float-badge:nth-child(2) .fb-icon { background: #ecfdf5; }
+        .float-badge:nth-child(3) {
+            bottom: 40px; right: -20px;
+            animation-delay: -3s;
+        }
+        .float-badge:nth-child(3) .fb-icon { background: #fef3c7; }
+
+        @keyframes floatY {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-8px); }
         }
 
-        /* ===== BENTO GRID - SERVICES ===== */
-        .section { padding: 120px 0; position: relative; z-index: 1; }
-        .section-label {
+        /* ===== SECTIONS ===== */
+        .section { padding: 100px 0; }
+        .section-alt { background: var(--bg-secondary); }
+
+        .section-header { text-align: center; margin-bottom: 56px; }
+        .section-tag {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            border-radius: 100px;
-            background: rgba(15,98,254,0.1);
-            border: 1px solid rgba(15,98,254,0.2);
-            color: var(--primary-light);
-            font-size: 0.85rem;
-            font-weight: 500;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            background: var(--primary-50);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
             margin-bottom: 16px;
         }
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
             font-weight: 900;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            color: var(--text);
             letter-spacing: -0.02em;
         }
-        .section-desc {
-            font-size: 1.1rem;
+        .section-subtitle {
+            font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 500px;
-            margin-bottom: 64px;
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .bento-grid {
+        /* ===== SERVICES GRID ===== */
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: auto auto;
-            gap: 16px;
+            gap: 20px;
         }
-        .bento-card {
-            background: var(--bg-card);
+        .service-card {
+            background: white;
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            transition: all 0.25s ease;
             position: relative;
             overflow: hidden;
         }
-        .bento-card::before {
+        .service-card::after {
             content: '';
             position: absolute;
-            inset: 0;
-            border-radius: var(--radius);
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06) 0%, transparent 60%);
+            top: 0; right: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             opacity: 0;
-            transition: opacity 0.4s;
+            transition: opacity 0.3s;
         }
-        .bento-card:hover::before { opacity: 1; }
-        .bento-card:hover {
-            border-color: var(--border-hover);
+        .service-card:hover::after { opacity: 1; }
+        .service-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-200);
         }
-
-        .bento-card.large { grid-column: span 2; }
-        .bento-card.featured {
-            grid-column: span 2;
-            grid-row: span 2;
-            background: linear-gradient(135deg, rgba(15,98,254,0.1), rgba(190,149,255,0.05));
-        }
-
-        .bento-icon {
-            width: 56px; height: 56px;
-            border-radius: 16px;
+        .service-icon {
+            width: 52px; height: 52px;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
         }
-        .bento-icon.blue { background: rgba(15,98,254,0.15); }
-        .bento-icon.purple { background: rgba(190,149,255,0.15); }
-        .bento-icon.teal { background: rgba(8,189,186,0.15); }
-        .bento-icon.pink { background: rgba(255,126,182,0.15); }
+        .service-icon.blue { background: #eff6ff; }
+        .service-icon.emerald { background: #ecfdf5; }
+        .service-icon.violet { background: #f5f3ff; }
+        .service-icon.amber { background: #fffbeb; }
 
-        .bento-card h3 {
-            font-size: 1.25rem;
+        .service-card h3 {
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            color: var(--text);
         }
-        .bento-card p {
+        .service-card p {
+            font-size: 0.88rem;
             color: var(--text-secondary);
-            font-size: 0.95rem;
             line-height: 1.7;
         }
 
-        /* ===== FEATURES / WHY US ===== */
+        /* ===== FEATURES ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            gap: 20px;
         }
         .feature-card {
-            background: var(--bg-card);
+            background: white;
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            transition: all 0.25s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .feature-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-100);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .feature-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .feature-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ===== STATS BANNER ===== */
+        .stats-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark), var(--accent));
+            border-radius: var(--radius-2xl);
+            padding: 48px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+            color: white;
+            margin-bottom: 80px;
             position: relative;
             overflow: hidden;
         }
-        .feature-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        .stats-banner::before {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+            top: -200px; left: -100px;
         }
-        .feature-num {
-            font-size: 3rem;
+        .stat-item strong {
+            display: block;
+            font-size: 2.25rem;
             font-weight: 900;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-            line-height: 1;
+            margin-bottom: 4px;
         }
-        .feature-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .feature-card p {
-            color: var(--text-secondary);
+        .stat-item span {
             font-size: 0.9rem;
-            line-height: 1.7;
+            opacity: 0.85;
         }
 
         /* ===== TESTIMONIALS ===== */
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            gap: 20px;
         }
         .testimonial-card {
-            background: var(--bg-card);
+            background: white;
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            transition: all 0.25s ease;
         }
         .testimonial-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-        }
-        .testimonial-card:first-child {
-            background: linear-gradient(135deg, rgba(15,98,254,0.08), rgba(190,149,255,0.05));
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
         .testimonial-stars {
-            color: #fbbf24;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            color: var(--amber);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
             letter-spacing: 2px;
         }
         .testimonial-text {
-            font-size: 1rem;
+            font-size: 0.92rem;
             color: var(--text-secondary);
             line-height: 1.8;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
-        .testimonial-author {
+        .testimonial-footer {
             display: flex;
             align-items: center;
             gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
         }
         .testimonial-avatar {
-            width: 44px; height: 44px;
-            border-radius: 12px;
+            width: 40px; height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
             color: white;
+            font-weight: 700;
+            font-size: 0.8rem;
         }
         .testimonial-card:nth-child(1) .testimonial-avatar { background: linear-gradient(135deg, var(--primary), var(--accent)); }
-        .testimonial-card:nth-child(2) .testimonial-avatar { background: linear-gradient(135deg, var(--accent2), var(--primary-light)); }
-        .testimonial-card:nth-child(3) .testimonial-avatar { background: linear-gradient(135deg, var(--accent3), var(--accent)); }
-        .testimonial-name { font-weight: 700; font-size: 0.95rem; }
-        .testimonial-role { color: var(--text-tertiary); font-size: 0.8rem; }
+        .testimonial-card:nth-child(2) .testimonial-avatar { background: linear-gradient(135deg, var(--emerald), var(--primary-light)); }
+        .testimonial-card:nth-child(3) .testimonial-avatar { background: linear-gradient(135deg, var(--rose), var(--accent)); }
+        .testimonial-name { font-weight: 700; font-size: 0.88rem; }
+        .testimonial-role { font-size: 0.75rem; color: var(--text-tertiary); }
 
         /* ===== CTA ===== */
-        .cta {
-            position: relative;
-            overflow: hidden;
-        }
         .cta-box {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--accent));
-            border-radius: 32px;
-            padding: 80px 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-2xl);
+            padding: 64px 48px;
             text-align: center;
+            color: white;
             position: relative;
             overflow: hidden;
         }
         .cta-box::before {
             content: '';
             position: absolute;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
-            top: -200px; left: -100px;
-            animation: orbFloat 15s ease-in-out infinite;
-        }
-        .cta-box::after {
-            content: '';
-            position: absolute;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%);
-            bottom: -150px; right: -100px;
-            animation: orbFloat 15s ease-in-out infinite reverse;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+            top: -300px; right: -200px;
         }
         .cta-box h2 {
-            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
             font-weight: 900;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             position: relative;
-            z-index: 1;
         }
         .cta-box p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            margin-bottom: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.05rem;
+            opacity: 0.9;
+            max-width: 480px;
+            margin: 0 auto 32px;
             position: relative;
-            z-index: 1;
         }
         .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
             background: white;
             color: var(--primary-dark);
-            padding: 16px 40px;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1;
             border: none;
+            border-radius: var(--radius-lg);
+            font-family: 'Heebo', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
-            font-family: 'Heebo', 'Segoe UI', Tahoma, Arial, sans-serif;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            position: relative;
         }
         .btn-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
         /* ===== CONTACT ===== */
@@ -687,162 +708,160 @@
             gap: 48px;
             align-items: start;
         }
-        .contact-info-list {
+        .contact-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .contact-info > p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .contact-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            margin-top: 32px;
+            gap: 12px;
         }
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            transition: all 0.3s;
+            gap: 14px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            transition: all 0.2s;
         }
         .contact-item:hover {
-            border-color: var(--border-hover);
-            background: var(--bg-glass);
+            background: white;
+            border-color: var(--border);
+            box-shadow: var(--shadow);
         }
-        .contact-item-icon {
-            width: 48px; height: 48px;
-            border-radius: 12px;
-            background: rgba(15,98,254,0.1);
+        .contact-icon {
+            width: 42px; height: 42px;
+            border-radius: 10px;
+            background: var(--primary-50);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             flex-shrink: 0;
         }
-        .contact-item strong { font-size: 0.95rem; display: block; }
-        .contact-item span { color: var(--text-secondary); font-size: 0.9rem; }
-        .contact-item a { color: var(--text-secondary); transition: color 0.3s; }
-        .contact-item a:hover { color: var(--primary-light); }
+        .contact-item strong { font-size: 0.9rem; }
+        .contact-item span { color: var(--text-secondary); font-size: 0.85rem; }
+        .contact-item a { color: var(--text-secondary); transition: color 0.2s; }
+        .contact-item a:hover { color: var(--primary); }
 
-        .contact-form-box {
-            background: var(--bg-card);
+        .contact-form {
+            background: white;
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
+            border-radius: var(--radius-2xl);
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
         }
-        .form-group { margin-bottom: 20px; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block;
             font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
+            font-size: 0.85rem;
+            color: var(--text);
+            margin-bottom: 6px;
         }
         .form-input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 14px;
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            background: rgba(255,255,255,0.03);
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
             color: var(--text);
-            font-family: 'Heebo', 'Segoe UI', Tahoma, Arial, sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s;
+            background: var(--bg);
+            transition: all 0.2s;
             outline: none;
         }
         .form-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(15,98,254,0.15);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
         }
         .form-input::placeholder { color: var(--text-tertiary); }
-        textarea.form-input { resize: vertical; min-height: 120px; }
+        textarea.form-input { resize: vertical; min-height: 100px; }
         select.form-input { cursor: pointer; }
-        select.form-input option { background: var(--bg); }
 
         .form-submit {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 14px;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 14px;
-            font-family: 'Heebo', 'Segoe UI', Tahoma, Arial, sans-serif;
+            border-radius: var(--radius);
+            font-family: 'Heebo', sans-serif;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
         .form-submit:hover {
-            box-shadow: 0 8px 30px var(--glow-primary);
-            transform: translateY(-2px);
+            background: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            border-top: 1px solid var(--border);
-            padding: 64px 0 32px;
-            position: relative;
-            z-index: 1;
+            background: var(--text);
+            color: #94a3b8;
+            padding: 56px 0 28px;
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 48px;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-        .footer-brand p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.8;
-            margin-top: 16px;
-        }
-        .footer h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .footer-links { display: flex; flex-direction: column; gap: 12px; }
-        .footer-links a {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover { color: var(--primary-light); }
+        .footer-brand p { font-size: 0.85rem; line-height: 1.8; margin-top: 12px; }
+        .footer h4 { color: white; font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-links { display: flex; flex-direction: column; gap: 10px; }
+        .footer-links a { font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a:hover { color: white; }
         .footer-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--text-tertiary);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
 
-        /* ===== SCROLL ANIMATIONS ===== */
+        /* ===== SCROLL REVEAL ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+        .reveal-d4 { transition-delay: 0.4s; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 48px; }
-            .hero-desc { margin: 0 auto 40px; }
+            .hero-desc { margin: 0 auto 32px; }
             .hero-actions { justify-content: center; }
-            .hero-stats { justify-content: center; }
-            .hero-visual { min-height: 400px; }
-            .bento-grid { grid-template-columns: repeat(2, 1fr); }
-            .bento-card.featured { grid-column: span 2; grid-row: span 1; }
+            .trust-bar { justify-content: center; }
+            .hero-visual { order: -1; }
+            .profile-card { max-width: 340px; margin: 0 auto; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
             .features-grid { grid-template-columns: repeat(2, 1fr); }
-            .testimonials-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+            .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+            .stats-banner { grid-template-columns: repeat(2, 1fr); }
             .contact-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -850,14 +869,14 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
-            .hero { min-height: auto; padding-top: 120px; padding-bottom: 60px; }
-            .hero h1 { font-size: 2.25rem; }
-            .hero-stats { flex-direction: column; gap: 16px; align-items: center; }
-            .bento-grid { grid-template-columns: 1fr; }
-            .bento-card.featured, .bento-card.large { grid-column: span 1; }
+            .hero { padding-top: 110px; padding-bottom: 60px; }
+            .hero h1 { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
             .features-grid { grid-template-columns: 1fr; }
-            .float-card { display: none; }
-            .cta-box { padding: 48px 24px; border-radius: 20px; }
+            .stats-banner { grid-template-columns: 1fr; padding: 32px; gap: 24px; }
+            .float-badge { display: none; }
+            .cta-box { padding: 40px 24px; }
+            .form-row { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 
@@ -865,65 +884,46 @@
                 display: none;
                 position: fixed;
                 top: 72px; right: 0; left: 0;
-                background: rgba(10,10,15,0.95);
-                backdrop-filter: blur(20px);
+                background: white;
                 border-bottom: 1px solid var(--border);
-                padding: 16px;
+                padding: 12px;
                 z-index: 99;
+                box-shadow: var(--shadow-lg);
             }
             .mobile-nav.open { display: block; }
             .mobile-nav a {
                 display: block;
-                padding: 14px 20px;
+                padding: 12px 16px;
                 color: var(--text);
                 font-weight: 500;
-                border-radius: 10px;
-                transition: background 0.3s;
+                border-radius: var(--radius-sm);
             }
-            .mobile-nav a:hover { background: var(--bg-glass); }
+            .mobile-nav a:hover { background: var(--bg-secondary); }
         }
 
         @media (prefers-reduced-motion: reduce) {
             .reveal { opacity: 1; transform: none; transition: none; }
-            .float-card, .hero-main-card { animation: none; }
-            .bg-gradient .orb { animation: none; }
-        }
-
-        @media print {
-            .header, .bg-gradient, .cta { display: none; }
-            body { background: white; color: black; }
-            body::before { display: none; }
+            .float-badge { animation: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-gradient" aria-hidden="true">
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
-    </div>
-
     <!-- Header -->
     <header class="header" id="header">
         <div class="container header-inner">
-            <a href="#" class="logo" aria-label="יוסי כהן ביטוח - דף הבית">
-                <div class="logo-icon" aria-hidden="true">יכ</div>
+            <a href="#" class="logo">
+                <div class="logo-mark">יכ</div>
                 יוסי כהן ביטוח
             </a>
-            <nav class="nav-links" aria-label="ניווט ראשי">
+            <nav class="nav-links">
                 <a href="#services">שירותים</a>
                 <a href="#why-us">למה אנחנו</a>
                 <a href="#testimonials">המלצות</a>
                 <a href="#contact">צור קשר</a>
-                <a href="tel:+972501234567" class="nav-cta">050-123-4567 &#128222;</a>
+                <a href="tel:+972501234567" class="nav-cta">&#128222; 050-123-4567</a>
             </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="פתח תפריט" type="button">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="תפריט" type="button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav" id="mobileNav">
@@ -931,7 +931,7 @@
             <a href="#why-us">למה אנחנו</a>
             <a href="#testimonials">המלצות</a>
             <a href="#contact">צור קשר</a>
-            <a href="tel:+972501234567">050-123-4567 &#128222;</a>
+            <a href="tel:+972501234567">&#128222; 050-123-4567</a>
         </div>
     </header>
 
@@ -941,142 +941,147 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-content">
-                        <div class="hero-badge">&#10024; סוכן מוסמך מאז 2005</div>
-                        <h1>הגנה <span class="gradient-text">מקצועית</span><br>למשפחה שלך</h1>
+                        <div class="hero-tag"><span class="tag-dot"></span> סוכן מוסמך | פעיל מאז 2005</div>
+                        <h1>הגנה <span class="highlight">מקצועית</span><br>למשפחה שלך</h1>
                         <p class="hero-desc">עם ניסיון של למעלה מ-18 שנה בתחום הביטוח, אני מציע ייעוץ אישי ומותאם בדיוק לצרכים שלך. ביחד נבנה תוכנית ביטוח שתגן עליך ועל יקיריך.</p>
                         <div class="hero-actions">
-                            <a href="#contact" class="btn btn-primary">קבע פגישת ייעוץ חינם</a>
-                            <a href="tel:+972501234567" class="btn btn-glass">&#128222; חייג עכשיו</a>
+                            <a href="#contact" class="btn btn-primary btn-lg">קבע פגישת ייעוץ חינם</a>
+                            <a href="tel:+972501234567" class="btn btn-outline btn-lg">&#128222; חייג עכשיו</a>
                         </div>
-                        <div class="hero-stats">
-                            <div class="hero-stat">
-                                <strong>2,500+</strong>
-                                <small>לקוחות מרוצים</small>
+                        <div class="trust-bar">
+                            <div class="trust-item">
+                                <div class="trust-icon">&#128100;</div>
+                                <div><strong>2,500+</strong><small>לקוחות</small></div>
                             </div>
-                            <div class="hero-stat">
-                                <strong>18+</strong>
-                                <small>שנות ניסיון</small>
+                            <div class="trust-item">
+                                <div class="trust-icon">&#128197;</div>
+                                <div><strong>18+</strong><small>שנות ניסיון</small></div>
                             </div>
-                            <div class="hero-stat">
-                                <strong>98%</strong>
-                                <small>שביעות רצון</small>
+                            <div class="trust-item">
+                                <div class="trust-icon">&#11088;</div>
+                                <div><strong>98%</strong><small>שביעות רצון</small></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="hero-visual" aria-hidden="true">
-                        <div class="hero-main-card">
-                            <div class="card-profile">
-                                <div class="card-avatar">יכ</div>
+                    <div class="hero-visual">
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <div class="profile-avatar">יכ</div>
                                 <div>
-                                    <div class="card-name">יוסי כהן</div>
-                                    <div class="card-title">סוכן ביטוח בכיר</div>
+                                    <div class="profile-name">יוסי כהן</div>
+                                    <div class="profile-role">סוכן ביטוח בכיר</div>
                                 </div>
                             </div>
-                            <div class="card-badges">
-                                <span class="card-badge">&#128179; חיים</span>
-                                <span class="card-badge">&#128154; בריאות</span>
-                                <span class="card-badge">&#128663; רכב</span>
-                                <span class="card-badge">&#127968; דירה</span>
+                            <div class="profile-verified">&#10003; סוכן מוסמך ומורשה</div>
+                            <div class="profile-specialties">
+                                <span class="specialty">&#128179; ביטוח חיים</span>
+                                <span class="specialty">&#128154; בריאות</span>
+                                <span class="specialty">&#128663; רכב</span>
+                                <span class="specialty">&#127968; דירה</span>
                             </div>
-                            <div class="card-rating">
-                                &#9733;&#9733;&#9733;&#9733;&#9733;
-                                <span>4.9/5 (320 ביקורות)</span>
+                            <div class="profile-rating">
+                                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                <span class="rating-text"><strong>4.9</strong>/5 (320 ביקורות)</span>
                             </div>
-                            <button class="card-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-                                &#128197; קבע פגישה עכשיו
-                            </button>
+                            <button class="profile-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">&#128197; קבע פגישה עכשיו</button>
                         </div>
-                        <div class="float-card">
-                            <div class="icon">&#9889;</div>
-                            <div>
-                                <div class="value">7 ימים</div>
-                                <div class="label">זמן טיפול ממוצע</div>
-                            </div>
+                        <div class="float-badge">
+                            <div class="fb-icon">&#9889;</div>
+                            <div><div class="fb-value">7 ימים</div><div class="fb-label">זמן טיפול ממוצע</div></div>
                         </div>
-                        <div class="float-card">
-                            <div class="icon">&#128176;</div>
-                            <div>
-                                <div class="value">25% חיסכון</div>
-                                <div class="label">בממוצע ללקוח</div>
-                            </div>
+                        <div class="float-badge">
+                            <div class="fb-icon">&#128176;</div>
+                            <div><div class="fb-value">25% חיסכון</div><div class="fb-label">בממוצע ללקוח</div></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Services - Bento Grid -->
+        <!-- Stats Banner -->
+        <section style="padding: 0 0 20px;">
+            <div class="container">
+                <div class="stats-banner reveal">
+                    <div class="stat-item"><strong>2,500+</strong><span>לקוחות מרוצים</span></div>
+                    <div class="stat-item"><strong>18+</strong><span>שנות ניסיון</span></div>
+                    <div class="stat-item"><strong>98%</strong><span>שביעות רצון</span></div>
+                    <div class="stat-item"><strong>24/7</strong><span>זמינות מלאה</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
         <section class="section" id="services">
             <div class="container">
-                <div class="reveal">
-                    <div class="section-label">&#127919; שירותים</div>
+                <div class="section-header reveal">
+                    <div class="section-tag">&#127919; שירותים</div>
                     <h2 class="section-title">תחומי ההתמחות שלנו</h2>
-                    <p class="section-desc">פתרונות ביטוח מקיפים ומותאמים אישית לכל שלב בחיים</p>
+                    <p class="section-subtitle">פתרונות ביטוח מקיפים ומותאמים אישית לכל שלב בחיים</p>
                 </div>
-                <div class="bento-grid">
-                    <div class="bento-card featured reveal reveal-delay-1">
-                        <div class="bento-icon blue">&#128179;</div>
+                <div class="services-grid">
+                    <div class="service-card reveal reveal-d1">
+                        <div class="service-icon blue">&#128179;</div>
                         <h3>ביטוח חיים</h3>
-                        <p>הגנה כלכלית למשפחה שלך במקרים בלתי צפויים. תוכניות מותאמות אישית עם כיסויים מקיפים ותנאים מועדפים. אנחנו עובדים מול כל חברות הביטוח המובילות כדי למצוא את הפתרון הטוב ביותר עבורך.</p>
+                        <p>הגנה כלכלית למשפחה שלך במקרים בלתי צפויים. תוכניות מותאמות אישית עם כיסויים מקיפים.</p>
                     </div>
-                    <div class="bento-card reveal reveal-delay-2">
-                        <div class="bento-icon teal">&#128154;</div>
+                    <div class="service-card reveal reveal-d2">
+                        <div class="service-icon emerald">&#128154;</div>
                         <h3>ביטוח בריאות</h3>
                         <p>גישה לטיפולים הטובים ביותר בארץ ובעולם. ביטוחים משלימים, ניתוחים ותרופות.</p>
                     </div>
-                    <div class="bento-card reveal reveal-delay-3">
-                        <div class="bento-icon purple">&#128663;</div>
+                    <div class="service-card reveal reveal-d3">
+                        <div class="service-icon violet">&#128663;</div>
                         <h3>ביטוח רכב</h3>
                         <p>כיסוי מקיף לרכב שלך במחירים תחרותיים. ביטוח מקיף, צד ג' וחובה.</p>
                     </div>
-                    <div class="bento-card large reveal reveal-delay-4">
-                        <div class="bento-icon pink">&#127968;</div>
+                    <div class="service-card reveal reveal-d4">
+                        <div class="service-icon amber">&#127968;</div>
                         <h3>ביטוח דירה</h3>
-                        <p>הגנה מלאה על הנכס היקר ביותר שלך. כיסוי מבנה ותכולה, נזקי טבע, גניבה ואחריות כלפי צד שלישי.</p>
+                        <p>הגנה מלאה על הנכס שלך. כיסוי מבנה ותכולה, נזקי טבע וגניבה.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Why Us -->
-        <section class="section" id="why-us">
+        <section class="section section-alt" id="why-us">
             <div class="container">
-                <div class="reveal">
-                    <div class="section-label">&#128171; יתרונות</div>
+                <div class="section-header reveal">
+                    <div class="section-tag">&#128171; יתרונות</div>
                     <h2 class="section-title">למה לבחור בנו?</h2>
-                    <p class="section-desc">אנחנו לא סתם סוכני ביטוח - אנחנו השותפים שלכם לדרך</p>
+                    <p class="section-subtitle">אנחנו לא סתם סוכני ביטוח - אנחנו השותפים שלכם לדרך</p>
                 </div>
                 <div class="features-grid">
-                    <div class="feature-card reveal reveal-delay-1">
-                        <div class="feature-num">01</div>
+                    <div class="feature-card reveal reveal-d1">
+                        <div class="feature-number">01</div>
                         <h3>ליווי אישי</h3>
                         <p>כל לקוח מקבל סוכן אישי זמין שמכיר את הצרכים הייחודיים שלו ומלווה אותו לאורך כל הדרך.</p>
                     </div>
-                    <div class="feature-card reveal reveal-delay-2">
-                        <div class="feature-num">02</div>
+                    <div class="feature-card reveal reveal-d2">
+                        <div class="feature-number">02</div>
                         <h3>חיסכון מוכח</h3>
                         <p>השוואת מחירים מול כל חברות הביטוח. בממוצע חוסכים ללקוחותינו 25% מעלויות הביטוח.</p>
                     </div>
-                    <div class="feature-card reveal reveal-delay-3">
-                        <div class="feature-num">03</div>
+                    <div class="feature-card reveal reveal-d3">
+                        <div class="feature-number">03</div>
                         <h3>טיפול מהיר בתביעות</h3>
-                        <p>צוות מקצועי שמלווה אתכם מרגע הגשת התביעה ועד לקבלת הפיצוי. זמן טיפול ממוצע של 7 ימים.</p>
+                        <p>צוות מקצועי מרגע הגשת התביעה ועד הפיצוי. זמן טיפול ממוצע של 7 ימים.</p>
                     </div>
-                    <div class="feature-card reveal reveal-delay-1">
-                        <div class="feature-num">04</div>
+                    <div class="feature-card reveal reveal-d1">
+                        <div class="feature-number">04</div>
                         <h3>שקיפות מלאה</h3>
                         <p>מסמכים ברורים, הסברים מפורטים ותנאים שקופים. אין אותיות קטנות ואין הפתעות.</p>
                     </div>
-                    <div class="feature-card reveal reveal-delay-2">
-                        <div class="feature-num">05</div>
+                    <div class="feature-card reveal reveal-d2">
+                        <div class="feature-number">05</div>
                         <h3>מומחיות מקצועית</h3>
                         <p>הסמכות מקצועיות והשתלמויות שוטפות מבטיחות את הייעוץ העדכני והמקצועי ביותר.</p>
                     </div>
-                    <div class="feature-card reveal reveal-delay-3">
-                        <div class="feature-num">06</div>
+                    <div class="feature-card reveal reveal-d3">
+                        <div class="feature-number">06</div>
                         <h3>זמינות 24/7</h3>
-                        <p>בכל שעה ובכל יום - אנחנו כאן בשבילכם. קו חירום ייעודי למקרים דחופים וטיפול מיידי.</p>
+                        <p>בכל שעה ובכל יום אנחנו כאן בשבילכם. קו חירום ייעודי למקרים דחופים.</p>
                     </div>
                 </div>
             </div>
@@ -1085,16 +1090,16 @@
         <!-- Testimonials -->
         <section class="section" id="testimonials">
             <div class="container">
-                <div class="reveal">
-                    <div class="section-label">&#128172; המלצות</div>
+                <div class="section-header reveal">
+                    <div class="section-tag">&#128172; המלצות</div>
                     <h2 class="section-title">מה הלקוחות שלנו אומרים</h2>
-                    <p class="section-desc">הצלחנו לעזור למאות משפחות ועסקים</p>
+                    <p class="section-subtitle">הצלחנו לעזור למאות משפחות ועסקים</p>
                 </div>
                 <div class="testimonials-grid">
-                    <article class="testimonial-card reveal reveal-delay-1">
+                    <article class="testimonial-card reveal reveal-d1">
                         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <blockquote class="testimonial-text">"יוסי חסך לנו אלפי שקלים בביטוח הרכב והדירה. השירות האישי שהוא נותן הוא ברמה אחרת לגמרי. ממליצה בחום!"</blockquote>
-                        <div class="testimonial-author">
+                        <div class="testimonial-footer">
                             <div class="testimonial-avatar">רל</div>
                             <div>
                                 <div class="testimonial-name">רונית לוי</div>
@@ -1102,10 +1107,10 @@
                             </div>
                         </div>
                     </article>
-                    <article class="testimonial-card reveal reveal-delay-2">
+                    <article class="testimonial-card reveal reveal-d2">
                         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <blockquote class="testimonial-text">"כשהיה לי מקרה ביטוח, יוסי טיפל בתביעה באופן מקצועי ומהיר. קיבלתי את הפיצוי תוך שבוע. שירות יוצא מן הכלל."</blockquote>
-                        <div class="testimonial-author">
+                        <div class="testimonial-footer">
                             <div class="testimonial-avatar">דא</div>
                             <div>
                                 <div class="testimonial-name">דוד אברהם</div>
@@ -1113,10 +1118,10 @@
                             </div>
                         </div>
                     </article>
-                    <article class="testimonial-card reveal reveal-delay-3">
+                    <article class="testimonial-card reveal reveal-d3">
                         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <blockquote class="testimonial-text">"הביטוח הבריאותי שיוסי סידר לנו הציל את חיי המשפחה שלנו. הייעוץ המקצועי שלו שווה זהב. תודה מכל הלב!"</blockquote>
-                        <div class="testimonial-author">
+                        <div class="testimonial-footer">
                             <div class="testimonial-avatar">מכ</div>
                             <div>
                                 <div class="testimonial-name">מיכל כהנא</div>
@@ -1129,7 +1134,7 @@
         </section>
 
         <!-- CTA -->
-        <section class="section cta">
+        <section class="section">
             <div class="container">
                 <div class="cta-box reveal">
                     <h2>מוכנים להתחיל?</h2>
@@ -1140,76 +1145,68 @@
         </section>
 
         <!-- Contact -->
-        <section class="section" id="contact">
+        <section class="section section-alt" id="contact">
             <div class="container">
-                <div class="reveal">
-                    <div class="section-label">&#128231; יצירת קשר</div>
+                <div class="section-header reveal">
+                    <div class="section-tag">&#128231; יצירת קשר</div>
                     <h2 class="section-title">צור קשר</h2>
-                    <p class="section-desc">השאירו פרטים ונחזור אליכם תוך שעות ספורות</p>
+                    <p class="section-subtitle">השאירו פרטים ונחזור אליכם תוך שעות ספורות</p>
                 </div>
                 <div class="contact-grid">
-                    <div class="reveal reveal-delay-1">
-                        <h3 style="font-size:1.5rem;font-weight:700;margin-bottom:8px;">נשמח לשמוע מכם</h3>
-                        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:16px;">בין אם אתם מחפשים ביטוח חדש, רוצים לשפר את התנאים הקיימים, או צריכים עזרה עם תביעה - אנחנו כאן בשבילכם.</p>
-                        <div class="contact-info-list">
+                    <div class="contact-info reveal reveal-d1">
+                        <h3>נשמח לשמוע מכם</h3>
+                        <p>בין אם אתם מחפשים ביטוח חדש, רוצים לשפר את התנאים הקיימים, או צריכים עזרה עם תביעה - אנחנו כאן בשבילכם.</p>
+                        <div class="contact-list">
                             <div class="contact-item">
-                                <div class="contact-item-icon">&#128222;</div>
-                                <div>
-                                    <strong>טלפון</strong>
-                                    <span><a href="tel:+972501234567">050-123-4567</a></span>
-                                </div>
+                                <div class="contact-icon">&#128222;</div>
+                                <div><strong>טלפון</strong><br><span><a href="tel:+972501234567">050-123-4567</a></span></div>
                             </div>
                             <div class="contact-item">
-                                <div class="contact-item-icon">&#128231;</div>
-                                <div>
-                                    <strong>אימייל</strong>
-                                    <span><a href="mailto:yossi@insurance-pro.co.il">yossi@insurance-pro.co.il</a></span>
-                                </div>
+                                <div class="contact-icon">&#128231;</div>
+                                <div><strong>אימייל</strong><br><span><a href="mailto:yossi@insurance-pro.co.il">yossi@insurance-pro.co.il</a></span></div>
                             </div>
                             <div class="contact-item">
-                                <div class="contact-item-icon">&#128205;</div>
-                                <div>
-                                    <strong>משרד</strong>
-                                    <span>רחוב הרצל 45, תל אביב</span>
-                                </div>
+                                <div class="contact-icon">&#128205;</div>
+                                <div><strong>משרד</strong><br><span>רחוב הרצל 45, תל אביב</span></div>
                             </div>
                             <div class="contact-item">
-                                <div class="contact-item-icon">&#128339;</div>
-                                <div>
-                                    <strong>שעות פעילות</strong>
-                                    <span>א'-ה' 08:00-19:00 | ו' 08:00-13:00</span>
-                                </div>
+                                <div class="contact-icon">&#128339;</div>
+                                <div><strong>שעות פעילות</strong><br><span>א'-ה' 08:00-19:00 | ו' 08:00-13:00</span></div>
                             </div>
                         </div>
                     </div>
-                    <form class="contact-form-box reveal reveal-delay-2" onsubmit="handleFormSubmit(event)">
-                        <div class="form-group">
-                            <label for="fullName">שם מלא *</label>
-                            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="הכנס את שמך המלא" required autocomplete="name">
+                    <form class="contact-form reveal reveal-d2" onsubmit="handleFormSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">שם מלא *</label>
+                                <input type="text" id="fullName" class="form-input" placeholder="השם שלך" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">טלפון *</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="050-000-0000" required dir="ltr">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">טלפון *</label>
-                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="050-000-0000" required autocomplete="tel" dir="ltr">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">אימייל</label>
-                            <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com" autocomplete="email" dir="ltr">
-                        </div>
-                        <div class="form-group">
-                            <label for="insuranceType">סוג ביטוח</label>
-                            <select id="insuranceType" name="insuranceType" class="form-input">
-                                <option value="">בחר סוג ביטוח...</option>
-                                <option value="life">ביטוח חיים</option>
-                                <option value="health">ביטוח בריאות</option>
-                                <option value="car">ביטוח רכב</option>
-                                <option value="home">ביטוח דירה</option>
-                                <option value="business">ביטוח עסקי</option>
-                                <option value="other">אחר</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">אימייל</label>
+                                <input type="email" id="email" class="form-input" placeholder="example@email.com" dir="ltr">
+                            </div>
+                            <div class="form-group">
+                                <label for="insuranceType">סוג ביטוח</label>
+                                <select id="insuranceType" class="form-input">
+                                    <option value="">בחר סוג ביטוח...</option>
+                                    <option value="life">ביטוח חיים</option>
+                                    <option value="health">ביטוח בריאות</option>
+                                    <option value="car">ביטוח רכב</option>
+                                    <option value="home">ביטוח דירה</option>
+                                    <option value="business">ביטוח עסקי</option>
+                                    <option value="other">אחר</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="message">הודעה</label>
-                            <textarea id="message" name="message" class="form-input" placeholder="ספר לנו במה נוכל לעזור..."></textarea>
+                            <textarea id="message" class="form-input" placeholder="ספר לנו במה נוכל לעזור..."></textarea>
                         </div>
                         <button type="submit" class="form-submit">&#128232; שלח פנייה</button>
                     </form>
@@ -1223,7 +1220,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h4 style="font-size:1.1rem;">יוסי כהן - סוכן ביטוח</h4>
+                    <h4 style="font-size:1.05rem;">יוסי כהן - סוכן ביטוח</h4>
                     <p>סוכן ביטוח מוסמך עם ניסיון של למעלה מ-18 שנה. מספק פתרונות ביטוח מותאמים אישית למשפחות ועסקים בכל רחבי הארץ.</p>
                 </div>
                 <div>
@@ -1256,18 +1253,14 @@
         // Header scroll
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
+            header.classList.toggle('scrolled', window.scrollY > 20);
         }, { passive: true });
 
         // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileNav = document.getElementById('mobileNav');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.toggle('open');
-        });
-        mobileNav.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => mobileNav.classList.remove('open'));
-        });
+        mobileMenuBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+        mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
         // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
@@ -1280,43 +1273,24 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Bento card mouse glow
-        document.querySelectorAll('.bento-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                card.style.setProperty('--mouse-x', x + '%');
-                card.style.setProperty('--mouse-y', y + '%');
-            });
-        });
-
-        // Form submit
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const btn = event.target.querySelector('.form-submit');
-            const original = btn.innerHTML;
+        // Form
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.form-submit');
+            const orig = btn.innerHTML;
             btn.innerHTML = '&#10003; הפנייה נשלחה בהצלחה!';
             btn.style.background = '#10b981';
             btn.disabled = true;
-            setTimeout(() => {
-                btn.innerHTML = original;
-                btn.style.background = '';
-                btn.disabled = false;
-                event.target.reset();
-            }, 3000);
+            setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; e.target.reset(); }, 3000);
         }
 
         // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
                 const id = this.getAttribute('href');
                 if (id === '#') return;
-                const target = document.querySelector(id);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+                const t = document.querySelector(id);
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
             });
         });
     </script>
