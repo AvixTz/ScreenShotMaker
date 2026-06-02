@@ -3,50 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="יוסי כהן - סוכן ביטוח מוסמך. ביטוח חיים, בריאות, רכב ודירה. ייעוץ מקצועי וליווי אישי.">
-    <title>יוסי כהן - סוכן ביטוח | הגנה מקצועית למשפחה שלך</title>
+    <meta name="description" content="יוסי כהן - סוכן ביטוח מוסמך. ייעוץ ביטוחי חכם מבוסס AI. ביטוח חיים, בריאות, רכב ודירה.">
+    <title>יוסי כהן - סוכן ביטוח | ייעוץ ביטוחי חכם</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary: #2563eb;
-            --primary-light: #3b82f6;
-            --primary-dark: #1d4ed8;
-            --primary-50: #eff6ff;
-            --primary-100: #dbeafe;
-            --primary-200: #bfdbfe;
-            --accent: #8b5cf6;
-            --accent-light: #a78bfa;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --primary-50: #eef2ff;
+            --primary-100: #e0e7ff;
+            --primary-200: #c7d2fe;
+            --primary-900: #312e81;
+
+            --cyan: #06b6d4;
+            --cyan-light: #22d3ee;
             --emerald: #10b981;
+            --emerald-light: #34d399;
             --amber: #f59e0b;
             --rose: #f43f5e;
+            --fuchsia: #d946ef;
 
-            --bg: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
+            --bg: #fafbff;
+            --bg-dark: #0c0a1d;
+            --bg-dark-2: #110e2a;
             --surface: #ffffff;
-            --surface-hover: #f8fafc;
+            --surface-glass: rgba(255,255,255,0.7);
+            --surface-dark: rgba(255,255,255,0.05);
+            --surface-dark-border: rgba(255,255,255,0.08);
 
-            --text: #0f172a;
-            --text-secondary: #475569;
-            --text-tertiary: #94a3b8;
-            --border: #e2e8f0;
-            --border-light: #f1f5f9;
+            --text: #1e1b4b;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --text-light: #f1f5f9;
+            --text-light-secondary: rgba(255,255,255,0.65);
 
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-            --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.15);
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
 
-            --radius-sm: 8px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.07);
+            --shadow-md: 0 8px 25px -5px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.12);
+            --shadow-xl: 0 25px 60px -15px rgba(0,0,0,0.18);
+            --shadow-glow: 0 0 60px rgba(99,102,241,0.15);
+
             --radius: 12px;
             --radius-lg: 16px;
             --radius-xl: 20px;
             --radius-2xl: 24px;
+            --radius-3xl: 32px;
             --radius-full: 9999px;
         }
 
@@ -63,7 +72,6 @@
 
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
-
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
         /* ===== HEADER ===== */
@@ -71,15 +79,15 @@
             position: fixed;
             top: 0; right: 0; left: 0;
             z-index: 100;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(250,251,255,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid transparent;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
         }
         .header.scrolled {
             border-bottom-color: var(--border);
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 1px 20px rgba(0,0,0,0.06);
         }
         .header-inner {
             display: flex;
@@ -92,49 +100,47 @@
             align-items: center;
             gap: 10px;
             font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--text);
+            font-size: 1.15rem;
         }
         .logo-mark {
-            width: 40px; height: 40px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 42px; height: 42px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--primary), var(--fuchsia));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 900;
             font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
         }
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 2px;
         }
         .nav-links a {
             padding: 8px 16px;
             border-radius: var(--radius);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             color: var(--text-secondary);
             transition: all 0.2s;
+            position: relative;
         }
-        .nav-links a:hover {
-            color: var(--text);
-            background: var(--bg-secondary);
-        }
+        .nav-links a:hover { color: var(--text); background: var(--primary-50); }
         .nav-cta {
-            background: var(--primary) !important;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
             color: white !important;
             font-weight: 600 !important;
-            padding: 9px 20px !important;
+            padding: 9px 22px !important;
             border-radius: var(--radius-full) !important;
-            font-size: 0.85rem !important;
-            transition: all 0.2s !important;
+            box-shadow: 0 4px 15px rgba(99,102,241,0.3) !important;
+            transition: all 0.3s !important;
         }
         .nav-cta:hover {
-            background: var(--primary-dark) !important;
-            box-shadow: 0 4px 12px rgba(37,99,235,0.3) !important;
+            box-shadow: 0 6px 20px rgba(99,102,241,0.4) !important;
+            transform: translateY(-1px) !important;
         }
 
         .mobile-menu-btn {
@@ -148,71 +154,114 @@
 
         /* ===== HERO ===== */
         .hero {
-            padding-top: 140px;
-            padding-bottom: 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(180deg, var(--primary-50) 0%, var(--bg) 60%);
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 800px; height: 800px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(37,99,235,0.06), transparent 70%);
-            top: -300px; left: -200px;
-            pointer-events: none;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 600px; height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(139,92,246,0.05), transparent 70%);
-            bottom: -200px; right: -100px;
-            pointer-events: none;
+            background: var(--bg-dark);
+            padding: 120px 0 80px;
         }
 
+        .hero-mesh {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .mesh-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+        .mesh-orb-1 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(99,102,241,0.6), transparent 70%);
+            top: -15%; right: -10%;
+            animation-delay: 0s;
+        }
+        .mesh-orb-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(217,70,239,0.4), transparent 70%);
+            bottom: -10%; left: -5%;
+            animation-delay: -4s;
+        }
+        .mesh-orb-3 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(6,182,212,0.35), transparent 70%);
+            top: 40%; left: 30%;
+            animation-delay: -8s;
+        }
+        .mesh-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+
+        .hero-content { position: relative; z-index: 2; }
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 64px;
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
 
-        .hero-tag {
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 14px 6px 8px;
-            background: white;
-            border: 1px solid var(--border);
+            padding: 6px 16px 6px 8px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: var(--radius-full);
             font-size: 0.8rem;
             font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-sm);
+            color: var(--text-light-secondary);
+            margin-bottom: 28px;
+            backdrop-filter: blur(10px);
         }
-        .hero-tag .tag-dot {
+        .hero-badge .pulse {
             width: 8px; height: 8px;
             border-radius: 50%;
             background: var(--emerald);
-            display: inline-block;
+            position: relative;
+        }
+        .hero-badge .pulse::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: var(--emerald);
+            opacity: 0;
+            animation: pulse 2s ease-out infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(2.5); opacity: 0; }
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
             font-weight: 900;
             line-height: 1.15;
-            margin-bottom: 20px;
-            color: var(--text);
-            letter-spacing: -0.025em;
+            margin-bottom: 24px;
+            color: white;
+            letter-spacing: -0.03em;
         }
-        .hero h1 .highlight {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--cyan-light), var(--primary-light), var(--fuchsia));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -220,17 +269,17 @@
 
         .hero-desc {
             font-size: 1.1rem;
-            color: var(--text-secondary);
+            color: var(--text-light-secondary);
             line-height: 1.8;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
             max-width: 480px;
         }
 
         .hero-actions {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
-            margin-bottom: 48px;
+            margin-bottom: 56px;
         }
 
         .btn {
@@ -242,178 +291,235 @@
             font-weight: 600;
             border: none;
             cursor: pointer;
-            transition: all 0.2s ease;
-            border-radius: var(--radius);
-        }
-        .btn-lg {
-            padding: 14px 28px;
-            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
             border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
         }
-        .btn-primary {
-            background: var(--primary);
+        .btn-lg { padding: 15px 32px; font-size: 0.95rem; }
+        .btn-glow {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+            box-shadow: 0 4px 20px rgba(99,102,241,0.4);
         }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            box-shadow: 0 4px 16px rgba(37,99,235,0.35);
-            transform: translateY(-1px);
+        .btn-glow:hover {
+            box-shadow: 0 8px 30px rgba(99,102,241,0.5);
+            transform: translateY(-2px);
         }
-        .btn-outline {
-            background: white;
-            color: var(--text);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
         }
-        .btn-outline:hover {
-            background: var(--bg-secondary);
-            border-color: #cbd5e1;
+        .btn-glow:hover::after { transform: translateX(100%); }
+
+        .btn-ghost {
+            background: rgba(255,255,255,0.06);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
         }
 
-        /* Trust Bar */
-        .trust-bar {
+        /* Hero Stats Row */
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+        }
+        .hero-stat {
+            position: relative;
+        }
+        .hero-stat::after {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 30px;
+            background: rgba(255,255,255,0.1);
+        }
+        .hero-stat:first-child::after { display: none; }
+        .hero-stat-value {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: var(--text-light-secondary);
+            margin-top: 4px;
+        }
+
+        /* Hero Visual — AI Card */
+        .hero-visual { position: relative; display: flex; justify-content: center; }
+
+        .ai-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-3xl);
+            padding: 32px;
+            width: 100%;
+            max-width: 420px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--fuchsia), var(--cyan));
+        }
+        .ai-card-header {
             display: flex;
             align-items: center;
-            gap: 32px;
+            justify-content: space-between;
+            margin-bottom: 24px;
         }
-        .trust-item {
+        .ai-card-user {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
-        .trust-icon {
-            width: 36px; height: 36px;
-            border-radius: 10px;
-            background: var(--primary-50);
+        .ai-avatar {
+            width: 50px; height: 50px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--primary), var(--fuchsia));
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-weight: 900;
             font-size: 1rem;
         }
-        .trust-item strong {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--text);
-        }
-        .trust-item small {
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            display: block;
-        }
-
-        /* Hero Visual */
-        .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .profile-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-2xl);
-            padding: 28px;
-            width: 100%;
-            max-width: 380px;
-            box-shadow: var(--shadow-xl);
-            position: relative;
-        }
-
-        .profile-header {
+        .ai-card-name { color: white; font-weight: 700; font-size: 1rem; }
+        .ai-card-role { color: var(--text-light-secondary); font-size: 0.8rem; }
+        .ai-status {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-        }
-        .profile-avatar {
-            width: 52px; height: 52px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            font-size: 1.1rem;
-        }
-        .profile-name { font-weight: 700; font-size: 1.05rem; color: var(--text); }
-        .profile-role { font-size: 0.8rem; color: var(--text-tertiary); }
-
-        .profile-verified {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            border-radius: var(--radius-full);
-            background: #ecfdf5;
-            color: var(--emerald);
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .profile-specialties {
-            display: flex;
-            flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 16px;
-        }
-        .specialty {
-            padding: 5px 12px;
+            padding: 4px 12px;
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.2);
             border-radius: var(--radius-full);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            font-size: 0.78rem;
-            color: var(--text-secondary);
-            font-weight: 500;
+            color: var(--emerald-light);
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .ai-status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--emerald);
         }
 
-        .profile-rating {
+        .ai-recommendation {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+        .ai-rec-header {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 0;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-            margin-bottom: 16px;
+            margin-bottom: 10px;
+            font-size: 0.78rem;
+            color: var(--cyan-light);
+            font-weight: 600;
         }
-        .stars { color: var(--amber); font-size: 0.9rem; letter-spacing: 1px; }
-        .rating-text { font-size: 0.8rem; color: var(--text-tertiary); }
-        .rating-text strong { color: var(--text); font-weight: 700; }
+        .ai-rec-header svg { width: 16px; height: 16px; }
+        .ai-rec-text {
+            color: var(--text-light-secondary);
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+        .ai-rec-text strong { color: white; }
 
-        .profile-cta {
+        .ai-coverage-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .ai-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ai-bar-label {
+            font-size: 0.78rem;
+            color: var(--text-light-secondary);
+            min-width: 70px;
+        }
+        .ai-bar-track {
+            flex: 1;
+            height: 6px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .ai-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+            width: 0;
+        }
+        .ai-bar-fill.bar-life { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
+        .ai-bar-fill.bar-health { background: linear-gradient(90deg, var(--emerald), var(--cyan)); }
+        .ai-bar-fill.bar-car { background: linear-gradient(90deg, var(--fuchsia), var(--rose)); }
+        .ai-bar-fill.bar-home { background: linear-gradient(90deg, var(--amber), #fb923c); }
+        .ai-bar-pct {
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 700;
+            min-width: 35px;
+            text-align: left;
+        }
+
+        .ai-card-cta {
             width: 100%;
             padding: 13px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
             border-radius: var(--radius);
             font-family: 'Heebo', sans-serif;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
         }
-        .profile-cta:hover {
-            background: var(--primary-dark);
-            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        .ai-card-cta:hover {
+            box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+            transform: translateY(-1px);
         }
 
-        /* Floating badges */
+        /* Float badges */
         .float-badge {
             position: absolute;
-            background: white;
-            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: var(--radius-lg);
             padding: 12px 16px;
-            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(15px);
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 0.82rem;
-            animation: floatY 5s ease-in-out infinite;
+            animation: floatBadge 6s ease-in-out infinite;
             z-index: 2;
+            color: white;
         }
         .float-badge .fb-icon {
             width: 36px; height: 36px;
@@ -423,49 +529,53 @@
             justify-content: center;
             font-size: 1.1rem;
         }
-        .float-badge .fb-value { font-weight: 700; color: var(--text); }
-        .float-badge .fb-label { font-size: 0.7rem; color: var(--text-tertiary); }
+        .float-badge .fb-value { font-weight: 700; }
+        .float-badge .fb-label { font-size: 0.7rem; color: var(--text-light-secondary); }
+        .fb-1 { top: 10px; left: -20px; animation-delay: -2s; }
+        .fb-1 .fb-icon { background: rgba(16,185,129,0.2); }
+        .fb-2 { bottom: 30px; right: -10px; animation-delay: 0s; }
+        .fb-2 .fb-icon { background: rgba(245,158,11,0.2); }
 
-        .float-badge:nth-child(2) {
-            top: 20px; left: -30px;
-            animation-delay: -1.5s;
-        }
-        .float-badge:nth-child(2) .fb-icon { background: #ecfdf5; }
-        .float-badge:nth-child(3) {
-            bottom: 40px; right: -20px;
-            animation-delay: -3s;
-        }
-        .float-badge:nth-child(3) .fb-icon { background: #fef3c7; }
-
-        @keyframes floatY {
+        @keyframes floatBadge {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== TRANSITION SECTION ===== */
+        .section-transition {
+            height: 120px;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg) 100%);
+            position: relative;
         }
 
         /* ===== SECTIONS ===== */
         .section { padding: 100px 0; }
-        .section-alt { background: var(--bg-secondary); }
+        .section-dark { background: var(--bg-dark); }
 
-        .section-header { text-align: center; margin-bottom: 56px; }
+        .section-header { text-align: center; margin-bottom: 64px; }
         .section-tag {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 5px 14px;
+            gap: 8px;
+            padding: 6px 16px;
             border-radius: var(--radius-full);
             background: var(--primary-50);
             color: var(--primary);
             font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
+        }
+        .section-dark .section-tag {
+            background: rgba(99,102,241,0.15);
+            color: var(--primary-light);
         }
         .section-title {
-            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
             font-weight: 900;
-            margin-bottom: 12px;
-            color: var(--text);
-            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+            letter-spacing: -0.025em;
         }
+        .section-dark .section-title { color: white; }
         .section-subtitle {
             font-size: 1.05rem;
             color: var(--text-secondary);
@@ -473,156 +583,435 @@
             margin: 0 auto;
             line-height: 1.7;
         }
+        .section-dark .section-subtitle { color: var(--text-light-secondary); }
 
-        /* ===== SERVICES GRID ===== */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        .service-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: 28px;
-            transition: all 0.25s ease;
+        /* ===== STATS BANNER (marquee) ===== */
+        .stats-strip {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark), #7c3aed);
+            padding: 0;
             position: relative;
             overflow: hidden;
         }
-        .service-card::after {
+        .stats-marquee {
+            display: flex;
+            animation: marquee 25s linear infinite;
+        }
+        .stats-set {
+            display: flex;
+            flex-shrink: 0;
+        }
+        .stat-chip {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 40px;
+            white-space: nowrap;
+            color: white;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-chip-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+        .stat-chip-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== BENTO SERVICES ===== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(180px, auto);
+            gap: 16px;
+        }
+        .bento-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-2xl);
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            cursor: default;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-2xl);
+            padding: 1px;
+            background: linear-gradient(135deg, transparent 40%, var(--primary-200) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .bento-card:hover::before { opacity: 1; }
+
+        .bento-1 { grid-column: span 7; grid-row: span 2; }
+        .bento-2 { grid-column: span 5; }
+        .bento-3 { grid-column: span 5; }
+        .bento-4 { grid-column: span 4; }
+        .bento-5 { grid-column: span 4; }
+        .bento-6 { grid-column: span 4; }
+
+        .bento-icon {
+            width: 56px; height: 56px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .bento-icon::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: inherit;
+            opacity: 0.15;
+        }
+        .bento-icon.i-indigo { background: #eef2ff; }
+        .bento-icon.i-indigo::after { background: var(--primary); }
+        .bento-icon.i-emerald { background: #ecfdf5; }
+        .bento-icon.i-emerald::after { background: var(--emerald); }
+        .bento-icon.i-fuchsia { background: #fdf4ff; }
+        .bento-icon.i-fuchsia::after { background: var(--fuchsia); }
+        .bento-icon.i-amber { background: #fffbeb; }
+        .bento-icon.i-amber::after { background: var(--amber); }
+        .bento-icon.i-cyan { background: #ecfeff; }
+        .bento-icon.i-cyan::after { background: var(--cyan); }
+        .bento-icon.i-rose { background: #fff1f2; }
+        .bento-icon.i-rose::after { background: var(--rose); }
+
+        .bento-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .bento-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .bento-featured-visual {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .bento-mini-stat {
+            padding: 10px 16px;
+            background: var(--primary-50);
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+        }
+        .bento-mini-stat strong {
+            display: block;
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        /* ===== WHY US — DARK ===== */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .why-card {
+            background: var(--surface-dark);
+            border: 1px solid var(--surface-dark-border);
+            border-radius: var(--radius-2xl);
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .why-card::before {
+            content: '';
+            position: absolute;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        .why-card:hover::before { opacity: 1; }
+        .why-card:nth-child(1)::before { background: rgba(99,102,241,0.15); top: -50px; right: -50px; }
+        .why-card:nth-child(2)::before { background: rgba(6,182,212,0.15); top: -50px; right: -50px; }
+        .why-card:nth-child(3)::before { background: rgba(217,70,239,0.15); top: -50px; right: -50px; }
+        .why-card:nth-child(4)::before { background: rgba(16,185,129,0.15); top: -50px; right: -50px; }
+        .why-card:nth-child(5)::before { background: rgba(245,158,11,0.15); top: -50px; right: -50px; }
+        .why-card:nth-child(6)::before { background: rgba(244,63,94,0.15); top: -50px; right: -50px; }
+
+        .why-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-4px);
+        }
+
+        .why-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .why-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .why-card p {
+            font-size: 0.85rem;
+            color: var(--text-light-secondary);
+            line-height: 1.7;
+        }
+
+        /* ===== AI ADVISOR SECTION ===== */
+        .ai-section {
+            padding: 100px 0;
+            background: var(--bg);
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-section::before {
+            content: '';
+            position: absolute;
+            width: 800px; height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.04), transparent 70%);
+            top: -300px; left: -200px;
+            pointer-events: none;
+        }
+
+        .ai-advisor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .ai-advisor-content .section-tag { margin-bottom: 18px; }
+
+        .ai-feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .ai-feature-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .ai-feature-icon {
+            width: 44px; height: 44px;
+            border-radius: var(--radius);
+            background: var(--primary-50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        .ai-feature-item h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .ai-feature-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* AI Calculator Widget */
+        .ai-calc-widget {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-3xl);
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .ai-calc-widget::before {
             content: '';
             position: absolute;
             top: 0; right: 0; left: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            opacity: 0;
-            transition: opacity 0.3s;
+            border-radius: var(--radius-3xl) var(--radius-3xl) 0 0;
+            background: linear-gradient(90deg, var(--primary), var(--fuchsia), var(--cyan));
         }
-        .service-card:hover::after { opacity: 1; }
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--primary-200);
+        .calc-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
         }
-        .service-icon {
-            width: 52px; height: 52px;
-            border-radius: var(--radius);
+        .calc-ai-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            background: var(--primary-50);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .calc-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .calc-sliders {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        .calc-slider-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .calc-slider-group label span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .calc-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+            direction: ltr;
+        }
+        .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+            transition: box-shadow 0.2s;
+        }
+        .calc-slider::-webkit-slider-thumb:hover {
+            box-shadow: 0 4px 16px rgba(99,102,241,0.4);
+        }
+        .calc-slider::-moz-range-thumb {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: none;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, var(--primary-50), #fdf4ff);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .calc-result-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .calc-result-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .calc-result-value small {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .calc-savings {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 16px;
-        }
-        .service-icon.blue { background: #eff6ff; }
-        .service-icon.emerald { background: #ecfdf5; }
-        .service-icon.violet { background: #f5f3ff; }
-        .service-icon.amber { background: #fffbeb; }
-
-        .service-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-        .service-card p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            gap: 4px;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--emerald);
+            font-weight: 600;
         }
 
-        /* ===== FEATURES ===== */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .feature-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: 28px;
-            transition: all 0.25s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-        .feature-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--primary-100);
-            line-height: 1;
-            margin-bottom: 12px;
-        }
-        .feature-card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-        .feature-card p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* ===== STATS BANNER ===== */
-        .stats-banner {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark), var(--accent));
-            border-radius: var(--radius-2xl);
-            padding: 48px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-            text-align: center;
+        .calc-cta {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            margin-bottom: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .stats-banner::before {
-            content: '';
-            position: absolute;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
-            top: -200px; left: -100px;
-        }
-        .stat-item strong {
-            display: block;
-            font-size: 2.25rem;
-            font-weight: 900;
-            margin-bottom: 4px;
-        }
-        .stat-item span {
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Heebo', sans-serif;
+            font-weight: 700;
             font-size: 0.9rem;
-            opacity: 0.85;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+        }
+        .calc-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99,102,241,0.4);
         }
 
-        /* ===== TESTIMONIALS ===== */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        /* ===== TESTIMONIALS (horizontal scroll) ===== */
+        .testimonials-section { overflow: hidden; }
+        .testimonials-track {
+            display: flex;
             gap: 20px;
+            animation: scrollTestimonials 30s linear infinite;
         }
+        .testimonials-track:hover { animation-play-state: paused; }
+
         .testimonial-card {
-            background: white;
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-2xl);
             padding: 28px;
-            transition: all 0.25s ease;
+            min-width: 360px;
+            flex-shrink: 0;
+            transition: all 0.3s;
         }
         .testimonial-card:hover {
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
             transform: translateY(-2px);
         }
         .testimonial-stars {
             color: var(--amber);
             font-size: 0.95rem;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             letter-spacing: 2px;
         }
         .testimonial-text {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 20px;
@@ -635,8 +1024,8 @@
             border-top: 1px solid var(--border-light);
         }
         .testimonial-avatar {
-            width: 40px; height: 40px;
-            border-radius: 10px;
+            width: 42px; height: 42px;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -644,61 +1033,105 @@
             font-weight: 700;
             font-size: 0.8rem;
         }
-        .testimonial-card:nth-child(1) .testimonial-avatar { background: linear-gradient(135deg, var(--primary), var(--accent)); }
-        .testimonial-card:nth-child(2) .testimonial-avatar { background: linear-gradient(135deg, var(--emerald), var(--primary-light)); }
-        .testimonial-card:nth-child(3) .testimonial-avatar { background: linear-gradient(135deg, var(--rose), var(--accent)); }
+        .t-av-1 { background: linear-gradient(135deg, var(--primary), var(--fuchsia)); }
+        .t-av-2 { background: linear-gradient(135deg, var(--emerald), var(--cyan)); }
+        .t-av-3 { background: linear-gradient(135deg, var(--rose), var(--amber)); }
+        .t-av-4 { background: linear-gradient(135deg, var(--amber), var(--emerald)); }
+        .t-av-5 { background: linear-gradient(135deg, var(--cyan), var(--primary)); }
         .testimonial-name { font-weight: 700; font-size: 0.88rem; }
-        .testimonial-role { font-size: 0.75rem; color: var(--text-tertiary); }
+        .testimonial-role { font-size: 0.75rem; color: var(--text-muted); }
+
+        @keyframes scrollTestimonials {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
 
         /* ===== CTA ===== */
-        .cta-box {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: var(--radius-2xl);
-            padding: 64px 48px;
-            text-align: center;
-            color: white;
+        .cta-section {
+            padding: 100px 0;
             position: relative;
             overflow: hidden;
         }
-        .cta-box::before {
-            content: '';
-            position: absolute;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
-            top: -300px; right: -200px;
+        .cta-box {
+            background: var(--bg-dark);
+            border-radius: var(--radius-3xl);
+            padding: 72px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box .mesh-orb {
+            opacity: 0.35;
+        }
+        .cta-box .mesh-orb-1 {
+            width: 400px; height: 400px;
+            top: -100px; right: -100px;
+        }
+        .cta-box .mesh-orb-2 {
+            width: 350px; height: 350px;
+            bottom: -100px; left: -50px;
         }
         .cta-box h2 {
-            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
             font-weight: 900;
-            margin-bottom: 12px;
+            color: white;
+            margin-bottom: 14px;
             position: relative;
+            z-index: 1;
         }
         .cta-box p {
             font-size: 1.05rem;
-            opacity: 0.9;
-            max-width: 480px;
-            margin: 0 auto 32px;
+            color: var(--text-light-secondary);
+            max-width: 500px;
+            margin: 0 auto 36px;
             position: relative;
+            z-index: 1;
         }
-        .btn-cta {
+        .cta-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-cta-primary {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 32px;
-            background: white;
-            color: var(--primary-dark);
+            padding: 15px 36px;
+            background: linear-gradient(135deg, var(--primary), var(--fuchsia));
+            color: white;
             border: none;
             border-radius: var(--radius-lg);
             font-family: 'Heebo', sans-serif;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(99,102,241,0.3);
         }
-        .btn-cta:hover {
+        .btn-cta-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(99,102,241,0.4);
+        }
+        .btn-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 36px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-lg);
+            font-family: 'Heebo', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-cta-secondary:hover {
+            background: rgba(255,255,255,0.12);
         }
 
         /* ===== CONTACT ===== */
@@ -708,58 +1141,62 @@
             gap: 48px;
             align-items: start;
         }
-        .contact-info h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+        .contact-info h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
         .contact-info > p {
             color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.7;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
-        .contact-list {
-            display: flex;
-            flex-direction: column;
+        .contact-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            transition: all 0.2s;
+        .contact-card {
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            transition: all 0.3s;
+            text-align: center;
         }
-        .contact-item:hover {
-            background: white;
-            border-color: var(--border);
-            box-shadow: var(--shadow);
+        .contact-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-200);
+            transform: translateY(-2px);
         }
-        .contact-icon {
-            width: 42px; height: 42px;
-            border-radius: 10px;
-            background: var(--primary-50);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.15rem;
-            flex-shrink: 0;
+        .contact-card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
         }
-        .contact-item strong { font-size: 0.9rem; }
-        .contact-item span { color: var(--text-secondary); font-size: 0.85rem; }
-        .contact-item a { color: var(--text-secondary); transition: color 0.2s; }
-        .contact-item a:hover { color: var(--primary); }
+        .contact-card strong {
+            display: block;
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+        }
+        .contact-card span, .contact-card a {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+        .contact-card a:hover { color: var(--primary); }
 
         .contact-form {
-            background: white;
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-2xl);
-            padding: 32px;
+            border-radius: var(--radius-3xl);
+            padding: 36px;
             box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; left: 0;
+            height: 3px;
+            border-radius: var(--radius-3xl) var(--radius-3xl) 0 0;
+            background: linear-gradient(90deg, var(--primary), var(--fuchsia), var(--cyan));
         }
         .form-row {
             display: grid;
@@ -771,33 +1208,32 @@
             display: block;
             font-weight: 600;
             font-size: 0.85rem;
-            color: var(--text);
             margin-bottom: 6px;
         }
         .form-input {
             width: 100%;
             padding: 12px 14px;
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius);
             font-family: 'Heebo', sans-serif;
             font-size: 0.9rem;
             color: var(--text);
             background: var(--bg);
-            transition: all 0.2s;
+            transition: all 0.3s;
             outline: none;
         }
         .form-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.08);
         }
-        .form-input::placeholder { color: var(--text-tertiary); }
+        .form-input::placeholder { color: var(--text-muted); }
         textarea.form-input { resize: vertical; min-height: 100px; }
         select.form-input { cursor: pointer; }
 
         .form-submit {
             width: 100%;
             padding: 14px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
             border-radius: var(--radius);
@@ -805,31 +1241,32 @@
             font-weight: 700;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
         }
         .form-submit:hover {
-            background: var(--primary-dark);
-            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+            box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+            transform: translateY(-1px);
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--text);
-            color: #94a3b8;
-            padding: 56px 0 28px;
+            background: var(--bg-dark);
+            color: rgba(255,255,255,0.5);
+            padding: 64px 0 28px;
         }
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 48px;
-            margin-bottom: 40px;
-            padding-bottom: 28px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .footer-brand p { font-size: 0.85rem; line-height: 1.8; margin-top: 12px; }
-        .footer h4 { color: white; font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; }
+        .footer h4 { color: white; font-size: 0.88rem; font-weight: 700; margin-bottom: 16px; }
         .footer-links { display: flex; flex-direction: column; gap: 10px; }
-        .footer-links a { font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a { font-size: 0.82rem; transition: color 0.2s; }
         .footer-links a:hover { color: white; }
         .footer-bottom {
             display: flex;
@@ -838,30 +1275,222 @@
             font-size: 0.78rem;
         }
 
+        /* ===== AI CHAT WIDGET ===== */
+        .ai-chat-fab {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 200;
+        }
+        .ai-chat-btn {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--fuchsia));
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 30px rgba(99,102,241,0.4);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .ai-chat-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 40px rgba(99,102,241,0.5);
+        }
+        .ai-chat-btn .chat-pulse {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            opacity: 0;
+            animation: chatPulse 2.5s ease-out infinite;
+        }
+        @keyframes chatPulse {
+            0% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        .ai-chat-window {
+            position: absolute;
+            bottom: 72px;
+            left: 0;
+            width: 360px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            display: none;
+            animation: chatSlideUp 0.3s ease;
+        }
+        .ai-chat-window.open { display: block; }
+        @keyframes chatSlideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-window-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .chat-window-avatar {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .chat-window-title { font-weight: 700; font-size: 0.9rem; }
+        .chat-window-subtitle { font-size: 0.72rem; opacity: 0.8; }
+
+        .chat-messages {
+            padding: 16px;
+            height: 260px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chat-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: var(--radius) var(--radius) 4px var(--radius);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .chat-msg-bot {
+            background: var(--primary-50);
+            color: var(--text);
+            align-self: flex-start;
+            border-radius: var(--radius) var(--radius) var(--radius) 4px;
+        }
+        .chat-msg-user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
+        .chat-typing {
+            display: flex;
+            gap: 4px;
+            padding: 10px 14px;
+            background: var(--primary-50);
+            border-radius: var(--radius) var(--radius) var(--radius) 4px;
+            align-self: flex-start;
+            max-width: 60px;
+        }
+        .chat-typing span {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--primary-200);
+            animation: typingDot 1.4s infinite;
+        }
+        .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingDot {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        .chat-quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0 16px 12px;
+        }
+        .chat-quick-btn {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            background: var(--surface);
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+        .chat-quick-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-50);
+        }
+
+        .chat-input-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            border-top: 1px solid var(--border-light);
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .chat-input:focus { border-color: var(--primary); }
+        .chat-send-btn {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .chat-send-btn:hover { background: var(--primary-dark); }
+
         /* ===== SCROLL REVEAL ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .reveal-d1 { transition-delay: 0.1s; }
         .reveal-d2 { transition-delay: 0.2s; }
         .reveal-d3 { transition-delay: 0.3s; }
-        .reveal-d4 { transition-delay: 0.4s; }
+        .reveal-d4 { transition-delay: 0.35s; }
+        .reveal-d5 { transition-delay: 0.4s; }
+        .reveal-d6 { transition-delay: 0.45s; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 48px; }
-            .hero-desc { margin: 0 auto 32px; }
+            .hero-desc { margin: 0 auto 36px; }
             .hero-actions { justify-content: center; }
-            .trust-bar { justify-content: center; }
+            .hero-stats { justify-content: center; }
             .hero-visual { order: -1; }
-            .profile-card { max-width: 340px; margin: 0 auto; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
-            .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-            .stats-banner { grid-template-columns: repeat(2, 1fr); }
+            .ai-card { max-width: 380px; margin: 0 auto; }
+            .float-badge { display: none; }
+
+            .bento-grid { grid-template-columns: repeat(6, 1fr); }
+            .bento-1 { grid-column: span 6; grid-row: span 1; }
+            .bento-2 { grid-column: span 3; }
+            .bento-3 { grid-column: span 3; }
+            .bento-4 { grid-column: span 6; }
+            .bento-5 { grid-column: span 3; }
+            .bento-6 { grid-column: span 3; }
+
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .ai-advisor-grid { grid-template-columns: 1fr; gap: 48px; }
             .contact-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -869,22 +1498,31 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
-            .hero { padding-top: 110px; padding-bottom: 60px; }
+            .hero { min-height: auto; padding: 100px 0 60px; }
             .hero h1 { font-size: 2rem; }
-            .services-grid { grid-template-columns: 1fr; }
-            .features-grid { grid-template-columns: 1fr; }
-            .stats-banner { grid-template-columns: 1fr; padding: 32px; gap: 24px; }
-            .float-badge { display: none; }
-            .cta-box { padding: 40px 24px; }
+
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-1, .bento-2, .bento-3, .bento-4, .bento-5, .bento-6 { grid-column: span 1; grid-row: span 1; }
+
+            .why-grid { grid-template-columns: 1fr; }
+            .stats-marquee { animation-duration: 15s; }
+            .stat-chip { padding: 16px 24px; }
+            .stat-chip-value { font-size: 1.2rem; }
+
+            .testimonial-card { min-width: 300px; }
+            .contact-cards { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
+            .cta-box { padding: 48px 24px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
             .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+            .ai-chat-window { width: calc(100vw - 48px); left: 0; }
 
             .mobile-nav {
                 display: none;
                 position: fixed;
                 top: 72px; right: 0; left: 0;
-                background: white;
+                background: rgba(255,255,255,0.95);
+                backdrop-filter: blur(20px);
                 border-bottom: 1px solid var(--border);
                 padding: 12px;
                 z-index: 99;
@@ -896,14 +1534,19 @@
                 padding: 12px 16px;
                 color: var(--text);
                 font-weight: 500;
-                border-radius: var(--radius-sm);
+                border-radius: var(--radius);
             }
-            .mobile-nav a:hover { background: var(--bg-secondary); }
+            .mobile-nav a:hover { background: var(--primary-50); }
         }
 
         @media (prefers-reduced-motion: reduce) {
             .reveal { opacity: 1; transform: none; transition: none; }
+            .mesh-orb { animation: none; }
             .float-badge { animation: none; }
+            .stats-marquee { animation: none; }
+            .testimonials-track { animation: none; overflow-x: auto; }
+            .ai-chat-btn .chat-pulse { animation: none; }
+            .hero-badge .pulse::after { animation: none; }
         }
     </style>
 </head>
@@ -918,6 +1561,7 @@
             <nav class="nav-links">
                 <a href="#services">שירותים</a>
                 <a href="#why-us">למה אנחנו</a>
+                <a href="#ai-advisor">יועץ AI</a>
                 <a href="#testimonials">המלצות</a>
                 <a href="#contact">צור קשר</a>
                 <a href="tel:+972501234567" class="nav-cta">&#128222; 050-123-4567</a>
@@ -929,6 +1573,7 @@
         <div class="mobile-nav" id="mobileNav">
             <a href="#services">שירותים</a>
             <a href="#why-us">למה אנחנו</a>
+            <a href="#ai-advisor">יועץ AI</a>
             <a href="#testimonials">המלצות</a>
             <a href="#contact">צור קשר</a>
             <a href="tel:+972501234567">&#128222; 050-123-4567</a>
@@ -938,59 +1583,92 @@
     <main>
         <!-- Hero -->
         <section class="hero">
-            <div class="container">
+            <div class="hero-mesh">
+                <div class="mesh-orb mesh-orb-1"></div>
+                <div class="mesh-orb mesh-orb-2"></div>
+                <div class="mesh-orb mesh-orb-3"></div>
+                <div class="mesh-grid"></div>
+            </div>
+            <div class="container hero-content">
                 <div class="hero-grid">
-                    <div class="hero-content">
-                        <div class="hero-tag"><span class="tag-dot"></span> סוכן מוסמך | פעיל מאז 2005</div>
-                        <h1>הגנה <span class="highlight">מקצועית</span><br>למשפחה שלך</h1>
-                        <p class="hero-desc">עם ניסיון של למעלה מ-18 שנה בתחום הביטוח, אני מציע ייעוץ אישי ומותאם בדיוק לצרכים שלך. ביחד נבנה תוכנית ביטוח שתגן עליך ועל יקיריך.</p>
+                    <div>
+                        <div class="hero-badge"><span class="pulse"></span> ייעוץ ביטוחי חכם מבוסס AI</div>
+                        <h1>הביטוח שלך.<br><span class="gradient-text">חכם יותר.</span></h1>
+                        <p class="hero-desc">מערכת ייעוץ חכמה שמנתחת את הצרכים שלך ומתאימה לך את הכיסוי הביטוחי המושלם. 18+ שנות ניסיון משולבות עם טכנולוגיה מתקדמת.</p>
                         <div class="hero-actions">
-                            <a href="#contact" class="btn btn-primary btn-lg">קבע פגישת ייעוץ חינם</a>
-                            <a href="tel:+972501234567" class="btn btn-outline btn-lg">&#128222; חייג עכשיו</a>
+                            <a href="#contact" class="btn btn-glow btn-lg">קבל ניתוח ביטוחי חכם</a>
+                            <a href="tel:+972501234567" class="btn btn-ghost btn-lg">&#128222; חייג עכשיו</a>
                         </div>
-                        <div class="trust-bar">
-                            <div class="trust-item">
-                                <div class="trust-icon">&#128100;</div>
-                                <div><strong>2,500+</strong><small>לקוחות</small></div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value" data-count="2500">0</div>
+                                <div class="hero-stat-label">לקוחות מרוצים</div>
                             </div>
-                            <div class="trust-item">
-                                <div class="trust-icon">&#128197;</div>
-                                <div><strong>18+</strong><small>שנות ניסיון</small></div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value" data-count="98" data-suffix="%">0</div>
+                                <div class="hero-stat-label">שביעות רצון</div>
                             </div>
-                            <div class="trust-item">
-                                <div class="trust-icon">&#11088;</div>
-                                <div><strong>98%</strong><small>שביעות רצון</small></div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value" data-count="25" data-suffix="%">0</div>
+                                <div class="hero-stat-label">חיסכון ממוצע</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="hero-visual">
-                        <div class="profile-card">
-                            <div class="profile-header">
-                                <div class="profile-avatar">יכ</div>
-                                <div>
-                                    <div class="profile-name">יוסי כהן</div>
-                                    <div class="profile-role">סוכן ביטוח בכיר</div>
+                        <div class="ai-card">
+                            <div class="ai-card-header">
+                                <div class="ai-card-user">
+                                    <div class="ai-avatar">יכ</div>
+                                    <div>
+                                        <div class="ai-card-name">יוסי כהן</div>
+                                        <div class="ai-card-role">סוכן ביטוח בכיר</div>
+                                    </div>
+                                </div>
+                                <div class="ai-status">
+                                    <span class="ai-status-dot"></span>
+                                    זמין עכשיו
                                 </div>
                             </div>
-                            <div class="profile-verified">&#10003; סוכן מוסמך ומורשה</div>
-                            <div class="profile-specialties">
-                                <span class="specialty">&#128179; ביטוח חיים</span>
-                                <span class="specialty">&#128154; בריאות</span>
-                                <span class="specialty">&#128663; רכב</span>
-                                <span class="specialty">&#127968; דירה</span>
+
+                            <div class="ai-recommendation">
+                                <div class="ai-rec-header">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    המלצת AI
+                                </div>
+                                <p class="ai-rec-text">בהתבסס על הפרופיל שלך, מומלץ לשדרג את <strong>ביטוח הבריאות</strong> ולבדוק חיסכון בביטוח הרכב.</p>
                             </div>
-                            <div class="profile-rating">
-                                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                                <span class="rating-text"><strong>4.9</strong>/5 (320 ביקורות)</span>
+
+                            <div class="ai-coverage-bars">
+                                <div class="ai-bar-item">
+                                    <span class="ai-bar-label">חיים</span>
+                                    <div class="ai-bar-track"><div class="ai-bar-fill bar-life" data-width="85"></div></div>
+                                    <span class="ai-bar-pct">85%</span>
+                                </div>
+                                <div class="ai-bar-item">
+                                    <span class="ai-bar-label">בריאות</span>
+                                    <div class="ai-bar-track"><div class="ai-bar-fill bar-health" data-width="62"></div></div>
+                                    <span class="ai-bar-pct">62%</span>
+                                </div>
+                                <div class="ai-bar-item">
+                                    <span class="ai-bar-label">רכב</span>
+                                    <div class="ai-bar-track"><div class="ai-bar-fill bar-car" data-width="90"></div></div>
+                                    <span class="ai-bar-pct">90%</span>
+                                </div>
+                                <div class="ai-bar-item">
+                                    <span class="ai-bar-label">דירה</span>
+                                    <div class="ai-bar-track"><div class="ai-bar-fill bar-home" data-width="45"></div></div>
+                                    <span class="ai-bar-pct">45%</span>
+                                </div>
                             </div>
-                            <button class="profile-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">&#128197; קבע פגישה עכשיו</button>
+
+                            <button class="ai-card-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">&#128640; קבל ניתוח מלא חינם</button>
                         </div>
-                        <div class="float-badge">
+                        <div class="float-badge fb-1">
                             <div class="fb-icon">&#9889;</div>
                             <div><div class="fb-value">7 ימים</div><div class="fb-label">זמן טיפול ממוצע</div></div>
                         </div>
-                        <div class="float-badge">
+                        <div class="float-badge fb-2">
                             <div class="fb-icon">&#128176;</div>
                             <div><div class="fb-value">25% חיסכון</div><div class="fb-label">בממוצע ללקוח</div></div>
                         </div>
@@ -999,87 +1677,115 @@
             </div>
         </section>
 
-        <!-- Stats Banner -->
-        <section style="padding: 0 0 20px;">
-            <div class="container">
-                <div class="stats-banner reveal">
-                    <div class="stat-item"><strong>2,500+</strong><span>לקוחות מרוצים</span></div>
-                    <div class="stat-item"><strong>18+</strong><span>שנות ניסיון</span></div>
-                    <div class="stat-item"><strong>98%</strong><span>שביעות רצון</span></div>
-                    <div class="stat-item"><strong>24/7</strong><span>זמינות מלאה</span></div>
+        <!-- Section Transition -->
+        <div class="section-transition"></div>
+
+        <!-- Stats Marquee -->
+        <section class="stats-strip">
+            <div class="stats-marquee" aria-hidden="true">
+                <div class="stats-set">
+                    <div class="stat-chip"><span class="stat-chip-value">2,500+</span><span class="stat-chip-label">לקוחות מרוצים</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">18+</span><span class="stat-chip-label">שנות ניסיון</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">98%</span><span class="stat-chip-label">שביעות רצון</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">24/7</span><span class="stat-chip-label">זמינות מלאה</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">25%</span><span class="stat-chip-label">חיסכון ממוצע</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">7 ימים</span><span class="stat-chip-label">טיפול בתביעות</span></div>
+                </div>
+                <div class="stats-set">
+                    <div class="stat-chip"><span class="stat-chip-value">2,500+</span><span class="stat-chip-label">לקוחות מרוצים</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">18+</span><span class="stat-chip-label">שנות ניסיון</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">98%</span><span class="stat-chip-label">שביעות רצון</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">24/7</span><span class="stat-chip-label">זמינות מלאה</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">25%</span><span class="stat-chip-label">חיסכון ממוצע</span></div>
+                    <div class="stat-chip"><span class="stat-chip-value">7 ימים</span><span class="stat-chip-label">טיפול בתביעות</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Services -->
+        <!-- Services (Bento Grid) -->
         <section class="section" id="services">
             <div class="container">
                 <div class="section-header reveal">
                     <div class="section-tag">&#127919; שירותים</div>
                     <h2 class="section-title">תחומי ההתמחות שלנו</h2>
-                    <p class="section-subtitle">פתרונות ביטוח מקיפים ומותאמים אישית לכל שלב בחיים</p>
+                    <p class="section-subtitle">פתרונות ביטוח מקיפים ומותאמים אישית, מונעים בטכנולוגיה חכמה</p>
                 </div>
-                <div class="services-grid">
-                    <div class="service-card reveal reveal-d1">
-                        <div class="service-icon blue">&#128179;</div>
+                <div class="bento-grid">
+                    <div class="bento-card bento-1 reveal reveal-d1">
+                        <div class="bento-icon i-indigo">&#128179;</div>
                         <h3>ביטוח חיים</h3>
-                        <p>הגנה כלכלית למשפחה שלך במקרים בלתי צפויים. תוכניות מותאמות אישית עם כיסויים מקיפים.</p>
+                        <p>הגנה כלכלית מקיפה למשפחה שלך. תוכניות מותאמות אישית עם כיסויים מתקדמים לכל תרחיש - ביטוח ריסק, ביטוח חיים משולב חיסכון, וביטוחי מנהלים.</p>
+                        <div class="bento-featured-visual">
+                            <div class="bento-mini-stat"><strong>₪1.2M</strong>כיסוי ממוצע</div>
+                            <div class="bento-mini-stat"><strong>95%</strong>אישור תביעות</div>
+                            <div class="bento-mini-stat"><strong>850+</strong>פוליסות פעילות</div>
+                        </div>
                     </div>
-                    <div class="service-card reveal reveal-d2">
-                        <div class="service-icon emerald">&#128154;</div>
+                    <div class="bento-card bento-2 reveal reveal-d2">
+                        <div class="bento-icon i-emerald">&#128154;</div>
                         <h3>ביטוח בריאות</h3>
-                        <p>גישה לטיפולים הטובים ביותר בארץ ובעולם. ביטוחים משלימים, ניתוחים ותרופות.</p>
+                        <p>גישה לטיפולים הטובים ביותר. ביטוחים משלימים, ניתוחים, תרופות ושיקום.</p>
                     </div>
-                    <div class="service-card reveal reveal-d3">
-                        <div class="service-icon violet">&#128663;</div>
+                    <div class="bento-card bento-3 reveal reveal-d3">
+                        <div class="bento-icon i-fuchsia">&#128663;</div>
                         <h3>ביטוח רכב</h3>
-                        <p>כיסוי מקיף לרכב שלך במחירים תחרותיים. ביטוח מקיף, צד ג' וחובה.</p>
+                        <p>כיסוי מקיף לרכב שלך. ביטוח מקיף, צד ג', חובה, וביטוח לרכבים חשמליים.</p>
                     </div>
-                    <div class="service-card reveal reveal-d4">
-                        <div class="service-icon amber">&#127968;</div>
+                    <div class="bento-card bento-4 reveal reveal-d4">
+                        <div class="bento-icon i-amber">&#127968;</div>
                         <h3>ביטוח דירה</h3>
-                        <p>הגנה מלאה על הנכס שלך. כיסוי מבנה ותכולה, נזקי טבע וגניבה.</p>
+                        <p>הגנה מלאה על הנכס שלך. כיסוי מבנה ותכולה, נזקי טבע, נזקי צנרת וגניבה.</p>
+                    </div>
+                    <div class="bento-card bento-5 reveal reveal-d5">
+                        <div class="bento-icon i-cyan">&#128188;</div>
+                        <h3>ביטוח עסקי</h3>
+                        <p>הגנה מקיפה לעסק שלך. אחריות מקצועית, רכוש עסקי וביטוח עובדים.</p>
+                    </div>
+                    <div class="bento-card bento-6 reveal reveal-d6">
+                        <div class="bento-icon i-rose">&#9992;&#65039;</div>
+                        <h3>ביטוח נסיעות</h3>
+                        <p>כיסוי מלא לנסיעות. ביטול טיסות, אבדן מזוודות וביטוח רפואי בחו״ל.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Why Us -->
-        <section class="section section-alt" id="why-us">
+        <!-- Why Us (Dark Section) -->
+        <section class="section section-dark" id="why-us">
             <div class="container">
                 <div class="section-header reveal">
                     <div class="section-tag">&#128171; יתרונות</div>
                     <h2 class="section-title">למה לבחור בנו?</h2>
-                    <p class="section-subtitle">אנחנו לא סתם סוכני ביטוח - אנחנו השותפים שלכם לדרך</p>
+                    <p class="section-subtitle">אנחנו לא סתם סוכני ביטוח — אנחנו השותפים שלכם לדרך</p>
                 </div>
-                <div class="features-grid">
-                    <div class="feature-card reveal reveal-d1">
-                        <div class="feature-number">01</div>
+                <div class="why-grid">
+                    <div class="why-card reveal reveal-d1">
+                        <div class="why-number">01</div>
                         <h3>ליווי אישי</h3>
                         <p>כל לקוח מקבל סוכן אישי זמין שמכיר את הצרכים הייחודיים שלו ומלווה אותו לאורך כל הדרך.</p>
                     </div>
-                    <div class="feature-card reveal reveal-d2">
-                        <div class="feature-number">02</div>
+                    <div class="why-card reveal reveal-d2">
+                        <div class="why-number">02</div>
                         <h3>חיסכון מוכח</h3>
                         <p>השוואת מחירים מול כל חברות הביטוח. בממוצע חוסכים ללקוחותינו 25% מעלויות הביטוח.</p>
                     </div>
-                    <div class="feature-card reveal reveal-d3">
-                        <div class="feature-number">03</div>
+                    <div class="why-card reveal reveal-d3">
+                        <div class="why-number">03</div>
                         <h3>טיפול מהיר בתביעות</h3>
-                        <p>צוות מקצועי מרגע הגשת התביעה ועד הפיצוי. זמן טיפול ממוצע של 7 ימים.</p>
+                        <p>צוות מקצועי מרגע הגשת התביעה ועד הפיצוי. זמן טיפול ממוצע של 7 ימים בלבד.</p>
                     </div>
-                    <div class="feature-card reveal reveal-d1">
-                        <div class="feature-number">04</div>
+                    <div class="why-card reveal reveal-d1">
+                        <div class="why-number">04</div>
                         <h3>שקיפות מלאה</h3>
                         <p>מסמכים ברורים, הסברים מפורטים ותנאים שקופים. אין אותיות קטנות ואין הפתעות.</p>
                     </div>
-                    <div class="feature-card reveal reveal-d2">
-                        <div class="feature-number">05</div>
-                        <h3>מומחיות מקצועית</h3>
-                        <p>הסמכות מקצועיות והשתלמויות שוטפות מבטיחות את הייעוץ העדכני והמקצועי ביותר.</p>
+                    <div class="why-card reveal reveal-d2">
+                        <div class="why-number">05</div>
+                        <h3>טכנולוגיה חכמה</h3>
+                        <p>כלי AI מתקדמים שמנתחים את הצרכים שלך ומוצאים את הפתרון הביטוחי המושלם.</p>
                     </div>
-                    <div class="feature-card reveal reveal-d3">
-                        <div class="feature-number">06</div>
+                    <div class="why-card reveal reveal-d3">
+                        <div class="why-number">06</div>
                         <h3>זמינות 24/7</h3>
                         <p>בכל שעה ובכל יום אנחנו כאן בשבילכם. קו חירום ייעודי למקרים דחופים.</p>
                     </div>
@@ -1087,46 +1793,167 @@
             </div>
         </section>
 
-        <!-- Testimonials -->
-        <section class="section" id="testimonials">
+        <!-- AI Advisor Section -->
+        <section class="ai-section" id="ai-advisor">
+            <div class="container">
+                <div class="ai-advisor-grid">
+                    <div class="ai-advisor-content reveal">
+                        <div class="section-tag">&#129302; בינה מלאכותית</div>
+                        <h2 class="section-title" style="text-align:right;">יועץ ביטוח חכם</h2>
+                        <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:8px;">המערכת החכמה שלנו מנתחת את הפרופיל האישי שלך — גיל, מצב משפחתי, נכסים, סגנון חיים — ומייצרת המלצת ביטוח מותאמת אישית תוך שניות.</p>
+                        <div class="ai-feature-list">
+                            <div class="ai-feature-item">
+                                <div class="ai-feature-icon">&#128202;</div>
+                                <div>
+                                    <h4>ניתוח צרכים אוטומטי</h4>
+                                    <p>המערכת סורקת את הפרופיל שלך ומזהה פערים בכיסוי הביטוחי.</p>
+                                </div>
+                            </div>
+                            <div class="ai-feature-item">
+                                <div class="ai-feature-icon">&#128176;</div>
+                                <div>
+                                    <h4>השוואת מחירים חכמה</h4>
+                                    <p>השוואה בזמן אמת מול כל חברות הביטוח למציאת המחיר הטוב ביותר.</p>
+                                </div>
+                            </div>
+                            <div class="ai-feature-item">
+                                <div class="ai-feature-icon">&#128640;</div>
+                                <div>
+                                    <h4>התאמה אישית מתקדמת</h4>
+                                    <p>המלצות מדויקות שמתעדכנות עם כל שינוי בחיים שלך.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal reveal-d2">
+                        <div class="ai-calc-widget">
+                            <div class="calc-header">
+                                <div class="calc-ai-badge">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    AI מחשבון
+                                </div>
+                                <span class="calc-title">מחשבון ביטוח חכם</span>
+                            </div>
+
+                            <div class="calc-sliders">
+                                <div class="calc-slider-group">
+                                    <label>גיל <span id="ageValue">35</span></label>
+                                    <input type="range" class="calc-slider" id="ageSlider" min="18" max="70" value="35">
+                                </div>
+                                <div class="calc-slider-group">
+                                    <label>מספר נפשות <span id="familyValue">3</span></label>
+                                    <input type="range" class="calc-slider" id="familySlider" min="1" max="8" value="3">
+                                </div>
+                                <div class="calc-slider-group">
+                                    <label>רמת כיסוי <span id="coverValue">בסיסי+</span></label>
+                                    <input type="range" class="calc-slider" id="coverSlider" min="1" max="3" value="2">
+                                </div>
+                            </div>
+
+                            <div class="calc-result">
+                                <div class="calc-result-label">הערכת עלות חודשית</div>
+                                <div class="calc-result-value" id="calcResult">₪<span id="calcPrice">480</span> <small>/חודש</small></div>
+                                <div class="calc-savings">&#8595; חיסכון של ₪<span id="calcSavings">120</span>/חודש לעומת הממוצע בשוק</div>
+                            </div>
+
+                            <button class="calc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">&#128640; קבל הצעה מותאמת אישית</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials (Auto-scroll) -->
+        <section class="section testimonials-section" id="testimonials">
             <div class="container">
                 <div class="section-header reveal">
                     <div class="section-tag">&#128172; המלצות</div>
                     <h2 class="section-title">מה הלקוחות שלנו אומרים</h2>
-                    <p class="section-subtitle">הצלחנו לעזור למאות משפחות ועסקים</p>
+                    <p class="section-subtitle">אלפי לקוחות מרוצים שכבר נהנים מייעוץ חכם וחיסכון אמיתי</p>
                 </div>
-                <div class="testimonials-grid">
-                    <article class="testimonial-card reveal reveal-d1">
+            </div>
+            <div style="overflow:hidden;">
+                <div class="testimonials-track">
+                    <article class="testimonial-card">
                         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <blockquote class="testimonial-text">"יוסי חסך לנו אלפי שקלים בביטוח הרכב והדירה. השירות האישי שהוא נותן הוא ברמה אחרת לגמרי. ממליצה בחום!"</blockquote>
                         <div class="testimonial-footer">
-                            <div class="testimonial-avatar">רל</div>
-                            <div>
-                                <div class="testimonial-name">רונית לוי</div>
-                                <div class="testimonial-role">לקוחה מאז 2018</div>
-                            </div>
+                            <div class="testimonial-avatar t-av-1">רל</div>
+                            <div><div class="testimonial-name">רונית לוי</div><div class="testimonial-role">לקוחה מאז 2018</div></div>
                         </div>
                     </article>
-                    <article class="testimonial-card reveal reveal-d2">
+                    <article class="testimonial-card">
                         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <blockquote class="testimonial-text">"כשהיה לי מקרה ביטוח, יוסי טיפל בתביעה באופן מקצועי ומהיר. קיבלתי את הפיצוי תוך שבוע. שירות יוצא מן הכלל."</blockquote>
                         <div class="testimonial-footer">
-                            <div class="testimonial-avatar">דא</div>
-                            <div>
-                                <div class="testimonial-name">דוד אברהם</div>
-                                <div class="testimonial-role">לקוח מאז 2015</div>
-                            </div>
+                            <div class="testimonial-avatar t-av-2">דא</div>
+                            <div><div class="testimonial-name">דוד אברהם</div><div class="testimonial-role">לקוח מאז 2015</div></div>
                         </div>
                     </article>
-                    <article class="testimonial-card reveal reveal-d3">
+                    <article class="testimonial-card">
                         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <blockquote class="testimonial-text">"הביטוח הבריאותי שיוסי סידר לנו הציל את חיי המשפחה שלנו. הייעוץ המקצועי שלו שווה זהב. תודה מכל הלב!"</blockquote>
                         <div class="testimonial-footer">
-                            <div class="testimonial-avatar">מכ</div>
-                            <div>
-                                <div class="testimonial-name">מיכל כהנא</div>
-                                <div class="testimonial-role">לקוחה מאז 2020</div>
-                            </div>
+                            <div class="testimonial-avatar t-av-3">מכ</div>
+                            <div><div class="testimonial-name">מיכל כהנא</div><div class="testimonial-role">לקוחה מאז 2020</div></div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <blockquote class="testimonial-text">"הייעוץ החכם של המערכת הצביע על פער בביטוח שלנו שלא ידענו עליו. חסכנו 30% ושידרגנו כיסוי. מדהים!"</blockquote>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar t-av-4">אב</div>
+                            <div><div class="testimonial-name">אבי בן דוד</div><div class="testimonial-role">לקוח מאז 2022</div></div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <blockquote class="testimonial-text">"כבעלת עסק קטן, יוסי סידר לנו חבילת ביטוח מקיפה שמכסה הכל. השקט הנפשי שווה כל שקל. ממליצה!"</blockquote>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar t-av-5">שג</div>
+                            <div><div class="testimonial-name">שרה גולדשטיין</div><div class="testimonial-role">לקוחה מאז 2021</div></div>
+                        </div>
+                    </article>
+                    <!-- Duplicated for seamless loop -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <blockquote class="testimonial-text">"יוסי חסך לנו אלפי שקלים בביטוח הרכב והדירה. השירות האישי שהוא נותן הוא ברמה אחרת לגמרי. ממליצה בחום!"</blockquote>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar t-av-1">רל</div>
+                            <div><div class="testimonial-name">רונית לוי</div><div class="testimonial-role">לקוחה מאז 2018</div></div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <blockquote class="testimonial-text">"כשהיה לי מקרה ביטוח, יוסי טיפל בתביעה באופן מקצועי ומהיר. קיבלתי את הפיצוי תוך שבוע. שירות יוצא מן הכלל."</blockquote>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar t-av-2">דא</div>
+                            <div><div class="testimonial-name">דוד אברהם</div><div class="testimonial-role">לקוח מאז 2015</div></div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <blockquote class="testimonial-text">"הביטוח הבריאותי שיוסי סידר לנו הציל את חיי המשפחה שלנו. הייעוץ המקצועי שלו שווה זהב. תודה מכל הלב!"</blockquote>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar t-av-3">מכ</div>
+                            <div><div class="testimonial-name">מיכל כהנא</div><div class="testimonial-role">לקוחה מאז 2020</div></div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <blockquote class="testimonial-text">"הייעוץ החכם של המערכת הצביע על פער בביטוח שלנו שלא ידענו עליו. חסכנו 30% ושידרגנו כיסוי. מדהים!"</blockquote>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar t-av-4">אב</div>
+                            <div><div class="testimonial-name">אבי בן דוד</div><div class="testimonial-role">לקוח מאז 2022</div></div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <blockquote class="testimonial-text">"כבעלת עסק קטן, יוסי סידר לנו חבילת ביטוח מקיפה שמכסה הכל. השקט הנפשי שווה כל שקל. ממליצה!"</blockquote>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar t-av-5">שג</div>
+                            <div><div class="testimonial-name">שרה גולדשטיין</div><div class="testimonial-role">לקוחה מאז 2021</div></div>
                         </div>
                     </article>
                 </div>
@@ -1134,44 +1961,53 @@
         </section>
 
         <!-- CTA -->
-        <section class="section">
+        <section class="cta-section">
             <div class="container">
                 <div class="cta-box reveal">
-                    <h2>מוכנים להתחיל?</h2>
-                    <p>פגישת ייעוץ ראשונה ללא עלות וללא התחייבות. בואו נמצא ביחד את הפתרון המושלם עבורכם.</p>
-                    <a href="#contact" class="btn-cta">&#128197; קבע פגישה חינם עכשיו</a>
+                    <div class="mesh-orb mesh-orb-1"></div>
+                    <div class="mesh-orb mesh-orb-2"></div>
+                    <h2>מוכנים לקבל ייעוץ חכם?</h2>
+                    <p>פגישת ייעוץ ראשונה ללא עלות וללא התחייבות. מערכת ה-AI שלנו תנתח את הצרכים שלכם ותמצא את הפתרון המושלם.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn-cta-primary">&#128640; קבע ייעוץ חכם חינם</a>
+                        <a href="tel:+972501234567" class="btn-cta-secondary">&#128222; חייג 050-123-4567</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact -->
-        <section class="section section-alt" id="contact">
+        <section class="section" id="contact">
             <div class="container">
                 <div class="section-header reveal">
                     <div class="section-tag">&#128231; יצירת קשר</div>
                     <h2 class="section-title">צור קשר</h2>
-                    <p class="section-subtitle">השאירו פרטים ונחזור אליכם תוך שעות ספורות</p>
+                    <p class="section-subtitle">השאירו פרטים ונחזור אליכם עם ניתוח ביטוחי מותאם אישית</p>
                 </div>
                 <div class="contact-grid">
                     <div class="contact-info reveal reveal-d1">
                         <h3>נשמח לשמוע מכם</h3>
-                        <p>בין אם אתם מחפשים ביטוח חדש, רוצים לשפר את התנאים הקיימים, או צריכים עזרה עם תביעה - אנחנו כאן בשבילכם.</p>
-                        <div class="contact-list">
-                            <div class="contact-item">
-                                <div class="contact-icon">&#128222;</div>
-                                <div><strong>טלפון</strong><br><span><a href="tel:+972501234567">050-123-4567</a></span></div>
+                        <p>בין אם אתם מחפשים ביטוח חדש, רוצים לשפר את התנאים הקיימים, או צריכים עזרה עם תביעה — אנחנו כאן בשבילכם.</p>
+                        <div class="contact-cards">
+                            <div class="contact-card">
+                                <div class="contact-card-icon">&#128222;</div>
+                                <strong>טלפון</strong>
+                                <span><a href="tel:+972501234567">050-123-4567</a></span>
                             </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">&#128231;</div>
-                                <div><strong>אימייל</strong><br><span><a href="mailto:yossi@insurance-pro.co.il">yossi@insurance-pro.co.il</a></span></div>
+                            <div class="contact-card">
+                                <div class="contact-card-icon">&#128231;</div>
+                                <strong>אימייל</strong>
+                                <span><a href="mailto:yossi@insurance-pro.co.il">yossi@insurance-pro.co.il</a></span>
                             </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">&#128205;</div>
-                                <div><strong>משרד</strong><br><span>רחוב הרצל 45, תל אביב</span></div>
+                            <div class="contact-card">
+                                <div class="contact-card-icon">&#128205;</div>
+                                <strong>משרד</strong>
+                                <span>רחוב הרצל 45, תל אביב</span>
                             </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">&#128339;</div>
-                                <div><strong>שעות פעילות</strong><br><span>א'-ה' 08:00-19:00 | ו' 08:00-13:00</span></div>
+                            <div class="contact-card">
+                                <div class="contact-card-icon">&#128339;</div>
+                                <strong>שעות פעילות</strong>
+                                <span>א'-ה' 08:00-19:00</span>
                             </div>
                         </div>
                     </div>
@@ -1200,15 +2036,16 @@
                                     <option value="car">ביטוח רכב</option>
                                     <option value="home">ביטוח דירה</option>
                                     <option value="business">ביטוח עסקי</option>
+                                    <option value="travel">ביטוח נסיעות</option>
                                     <option value="other">אחר</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="message">הודעה</label>
-                            <textarea id="message" class="form-input" placeholder="ספר לנו במה נוכל לעזור..."></textarea>
+                            <textarea id="message" class="form-input" placeholder="ספרו לנו במה נוכל לעזור..."></textarea>
                         </div>
-                        <button type="submit" class="form-submit">&#128232; שלח פנייה</button>
+                        <button type="submit" class="form-submit">&#128640; שלח לניתוח חכם</button>
                     </form>
                 </div>
             </div>
@@ -1220,15 +2057,18 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h4 style="font-size:1.05rem;">יוסי כהן - סוכן ביטוח</h4>
-                    <p>סוכן ביטוח מוסמך עם ניסיון של למעלה מ-18 שנה. מספק פתרונות ביטוח מותאמים אישית למשפחות ועסקים בכל רחבי הארץ.</p>
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                        <div class="logo-mark" style="width:36px;height:36px;font-size:0.75rem;">יכ</div>
+                        <h4 style="font-size:1rem;margin:0;">יוסי כהן ביטוח</h4>
+                    </div>
+                    <p>סוכן ביטוח מוסמך עם ניסיון של למעלה מ-18 שנה. מספק פתרונות ביטוח מותאמים אישית עם טכנולוגיה חכמה.</p>
                 </div>
                 <div>
-                    <h4>קישורים מהירים</h4>
+                    <h4>ניווט</h4>
                     <ul class="footer-links">
                         <li><a href="#services">שירותים</a></li>
                         <li><a href="#why-us">למה אנחנו</a></li>
-                        <li><a href="#testimonials">המלצות</a></li>
+                        <li><a href="#ai-advisor">יועץ AI</a></li>
                         <li><a href="#contact">צור קשר</a></li>
                     </ul>
                 </div>
@@ -1241,6 +2081,15 @@
                         <li><a href="#services">ביטוח דירה</a></li>
                     </ul>
                 </div>
+                <div>
+                    <h4>מידע</h4>
+                    <ul class="footer-links">
+                        <li><a href="#ai-advisor">מחשבון ביטוח</a></li>
+                        <li><a href="#testimonials">המלצות לקוחות</a></li>
+                        <li><a href="tel:+972501234567">קו חירום 24/7</a></li>
+                        <li><a href="#contact">קבע פגישה</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
                 <span>&copy; 2026 יוסי כהן - סוכן ביטוח. כל הזכויות שמורות.</span>
@@ -1248,6 +2097,38 @@
             </div>
         </div>
     </footer>
+
+    <!-- AI Chat Widget -->
+    <div class="ai-chat-fab">
+        <div class="ai-chat-window" id="chatWindow">
+            <div class="chat-window-header">
+                <div class="chat-window-avatar">&#129302;</div>
+                <div>
+                    <div class="chat-window-title">יועץ הביטוח החכם</div>
+                    <div class="chat-window-subtitle">זמין 24/7 לכל שאלה</div>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-msg chat-msg-bot">שלום! &#128075; אני היועץ החכם של יוסי כהן. איך אוכל לעזור לך היום?</div>
+            </div>
+            <div class="chat-quick-replies" id="quickReplies">
+                <button class="chat-quick-btn" data-msg="מחפש ביטוח חיים">ביטוח חיים</button>
+                <button class="chat-quick-btn" data-msg="רוצה להשוות מחירים">השוואת מחירים</button>
+                <button class="chat-quick-btn" data-msg="יש לי תביעה">טיפול בתביעה</button>
+                <button class="chat-quick-btn" data-msg="רוצה לקבוע פגישה">קביעת פגישה</button>
+            </div>
+            <div class="chat-input-bar">
+                <input type="text" class="chat-input" id="chatInput" placeholder="כתוב הודעה...">
+                <button class="chat-send-btn" id="chatSendBtn" aria-label="שלח">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </div>
+        </div>
+        <button class="ai-chat-btn" id="chatFabBtn" aria-label="פתח צ'אט AI">
+            <span class="chat-pulse"></span>
+            &#129302;
+        </button>
+    </div>
 
     <script>
         // Header scroll
@@ -1263,15 +2144,156 @@
         mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
         // Scroll reveal
-        const observer = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Animated counters
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.count);
+                    const suffix = el.dataset.suffix || '';
+                    const duration = 2000;
+                    const start = performance.now();
+                    function update(now) {
+                        const p = Math.min((now - start) / duration, 1);
+                        const ease = 1 - Math.pow(1 - p, 3);
+                        el.textContent = Math.floor(target * ease).toLocaleString() + suffix;
+                        if (p < 1) requestAnimationFrame(update);
+                    }
+                    requestAnimationFrame(update);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+        // Coverage bars animation
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.ai-bar-fill').forEach(bar => {
+                        bar.style.width = bar.dataset.width + '%';
+                    });
+                    barObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.ai-coverage-bars').forEach(el => barObserver.observe(el));
+
+        // Insurance Calculator
+        const ageSlider = document.getElementById('ageSlider');
+        const familySlider = document.getElementById('familySlider');
+        const coverSlider = document.getElementById('coverSlider');
+        const coverLabels = ['בסיסי', 'בסיסי+', 'פרימיום'];
+
+        function updateCalc() {
+            const age = parseInt(ageSlider.value);
+            const family = parseInt(familySlider.value);
+            const cover = parseInt(coverSlider.value);
+
+            document.getElementById('ageValue').textContent = age;
+            document.getElementById('familyValue').textContent = family;
+            document.getElementById('coverValue').textContent = coverLabels[cover - 1];
+
+            const basePrice = 200;
+            const ageFactor = 1 + (age - 18) * 0.015;
+            const familyFactor = 1 + (family - 1) * 0.3;
+            const coverFactor = [0.7, 1, 1.5][cover - 1];
+            const price = Math.round(basePrice * ageFactor * familyFactor * coverFactor);
+            const savings = Math.round(price * 0.25);
+
+            document.getElementById('calcPrice').textContent = price.toLocaleString();
+            document.getElementById('calcSavings').textContent = savings.toLocaleString();
+        }
+
+        ageSlider.addEventListener('input', updateCalc);
+        familySlider.addEventListener('input', updateCalc);
+        coverSlider.addEventListener('input', updateCalc);
+
+        // AI Chat Widget
+        const chatFabBtn = document.getElementById('chatFabBtn');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const quickReplies = document.getElementById('quickReplies');
+
+        chatFabBtn.addEventListener('click', () => {
+            chatWindow.classList.toggle('open');
+        });
+
+        const aiResponses = {
+            'ביטוח חיים': 'ביטוח חיים מעניק הגנה כלכלית למשפחה. אנחנו מציעים תוכניות מ-₪89/חודש עם כיסוי של עד ₪2M. רוצה לקבוע פגישת ייעוץ?',
+            'השוואת מחירים': 'אנחנו משווים מחירים מול כל חברות הביטוח בישראל ומוצאים לך את ההצעה הטובה ביותר. בממוצע חוסכים ללקוחותינו 25%! שלח לנו פרטים ונחזור אליך.',
+            'טיפול בתביעה': 'אנחנו מטפלים בתביעות באופן מקצועי עם זמן טיפול ממוצע של 7 ימים. שלח לנו את פרטי המקרה ונתחיל לטפל מיד.',
+            'קביעת פגישה': 'מצוין! אפשר לקבוע פגישה טלפונית או במשרד. התקשר ל-050-123-4567 או השאר פרטים בטופס ונחזור אליך תוך שעות ספורות. &#128222;',
+            'default': 'תודה על הפנייה! כדי לתת לך מענה מדויק, אשמח לקבוע שיחת ייעוץ אישית. תוכל להשאיר פרטים בטופס למטה או להתקשר ל-050-123-4567. &#128516;'
+        };
+
+        function addMessage(text, isUser) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-msg ' + (isUser ? 'chat-msg-user' : 'chat-msg-bot');
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const typing = document.createElement('div');
+            typing.className = 'chat-typing';
+            typing.id = 'typingIndicator';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            chatMessages.appendChild(typing);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTyping() {
+            const t = document.getElementById('typingIndicator');
+            if (t) t.remove();
+        }
+
+        function sendUserMessage(text) {
+            addMessage(text, true);
+            quickReplies.style.display = 'none';
+            showTyping();
+
+            let response = aiResponses.default;
+            for (const [key, val] of Object.entries(aiResponses)) {
+                if (key !== 'default' && text.includes(key)) {
+                    response = val;
+                    break;
+                }
+            }
+
+            setTimeout(() => {
+                removeTyping();
+                addMessage(response, false);
+            }, 1200);
+        }
+
+        document.querySelectorAll('.chat-quick-btn').forEach(btn => {
+            btn.addEventListener('click', () => sendUserMessage(btn.dataset.msg));
+        });
+
+        chatSendBtn.addEventListener('click', () => {
+            const text = chatInput.value.trim();
+            if (text) { sendUserMessage(text); chatInput.value = ''; }
+        });
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const text = chatInput.value.trim();
+                if (text) { sendUserMessage(text); chatInput.value = ''; }
+            }
+        });
 
         // Form
         function handleFormSubmit(e) {
@@ -1279,7 +2301,7 @@
             const btn = e.target.querySelector('.form-submit');
             const orig = btn.innerHTML;
             btn.innerHTML = '&#10003; הפנייה נשלחה בהצלחה!';
-            btn.style.background = '#10b981';
+            btn.style.background = 'linear-gradient(135deg, #10b981, #06b6d4)';
             btn.disabled = true;
             setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; e.target.reset(); }, 3000);
         }
