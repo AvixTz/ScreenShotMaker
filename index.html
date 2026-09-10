@@ -4111,23 +4111,10 @@
                     if (mainImage) {
                         extractedImages.push(mainImage);
                         currentImageUrl = mainImage;
-                        // Try loading main image directly, fallback to proxy
-                        const testMainImg = new Image();
-                        testMainImg.crossOrigin = 'anonymous';
-                        testMainImg.onload = function() {
-                            preview.adImage.style.backgroundImage = `url('${mainImage}')`;
-                            preview.adImage.classList.add('has-image');
-                            preview.adImage.textContent = '';
-                        };
-                        testMainImg.onerror = function() {
-                            const proxiedMain = proxyImageUrl(mainImage);
-                            currentImageUrl = proxiedMain;
-                            preview.adImage.style.backgroundImage = `url('${proxiedMain}')`;
-                            preview.adImage.classList.add('has-image');
-                            preview.adImage.textContent = '';
-                            console.log('Main image loaded via proxy:', proxiedMain);
-                        };
-                        testMainImg.src = mainImage;
+                        // SIMPLE: Just set CSS background-image directly — same as paste URL
+                        preview.adImage.style.backgroundImage = `url('${mainImage}')`;
+                        preview.adImage.classList.add('has-image');
+                        preview.adImage.textContent = '';
                     }
                     
                     // CRITICAL FIX: Add ALL additional images, don't limit to 8
@@ -4383,9 +4370,6 @@
             imageGrid.classList.remove('hidden');
             imageGrid.innerHTML = '';
 
-            let loadedCount = 0;
-            let failedCount = 0;
-
             if (extractedImages.length > 0) {
                 const header = document.createElement('div');
                 header.id = 'imageGridHeader';
@@ -4396,79 +4380,22 @@
                     margin-bottom: 5px;
                     text-align: center;
                 `;
-                header.textContent = `🖼️ Loading ${extractedImages.length} images from blog...`;
+                header.textContent = `🖼️ ${extractedImages.length} images found in blog`;
                 imageGrid.appendChild(header);
             }
 
+            // SIMPLE APPROACH: Just set background-image directly via CSS
+            // This works the same as manually pasting a URL — the browser loads
+            // CSS background images without CORS restrictions.
+            // No new Image() testing needed — that was BREAKING everything
+            // because crossOrigin='anonymous' fails on most blog images.
             extractedImages.forEach((imageUrl, index) => {
                 const imageOption = document.createElement('div');
-                imageOption.className = 'image-option loading';
-                imageOption.textContent = '📷';
+                imageOption.className = 'image-option';
                 imageOption.onclick = () => selectImage(index, false);
-
-                let retried = false;
-
-                function tryLoadImage(srcUrl) {
-                    const img = new Image();
-                    img.crossOrigin = 'anonymous';
-
-                    // Timeout: if image doesn't load in 6s, try proxy
-                    const timeoutId = setTimeout(() => {
-                        if (!retried) {
-                            retried = true;
-                            console.log(`Image ${index} timeout, trying proxy:`, imageUrl);
-                            tryLoadImage(proxyImageUrl(imageUrl));
-                        } else {
-                            onFail();
-                        }
-                    }, 6000);
-
-                    img.onload = function() {
-                        clearTimeout(timeoutId);
-                        loadedCount++;
-                        imageOption.classList.remove('loading');
-                        imageOption.textContent = '';
-                        imageOption.style.backgroundImage = `url('${srcUrl}')`;
-                        // Store the working URL for later use
-                        imageOption.dataset.workingUrl = srcUrl;
-                        updateGridHeader();
-                    };
-
-                    img.onerror = function() {
-                        clearTimeout(timeoutId);
-                        if (!retried) {
-                            retried = true;
-                            console.log(`Image ${index} failed direct, trying proxy:`, imageUrl);
-                            tryLoadImage(proxyImageUrl(imageUrl));
-                        } else {
-                            onFail();
-                        }
-                    };
-
-                    img.src = srcUrl;
-                }
-
-                function onFail() {
-                    failedCount++;
-                    imageOption.classList.remove('loading');
-                    imageOption.textContent = '❌';
-                    imageOption.style.cursor = 'not-allowed';
-                    imageOption.style.opacity = '0.3';
-                    imageOption.onclick = null;
-                    updateGridHeader();
-                }
-
-                function updateGridHeader() {
-                    const hdr = document.getElementById('imageGridHeader');
-                    if (hdr) {
-                        const total = extractedImages.length;
-                        hdr.textContent = `🖼️ ${loadedCount}/${total} images loaded${failedCount > 0 ? ` (${failedCount} failed)` : ''}`;
-                    }
-                }
-
-                // Try direct load first, fallback to proxy
-                tryLoadImage(imageUrl);
-
+                // Direct CSS background — same approach as the paste URL handler
+                imageOption.style.backgroundImage = `url('${imageUrl}')`;
+                imageOption.dataset.workingUrl = imageUrl;
                 imageGrid.appendChild(imageOption);
             });
 
@@ -4481,42 +4408,22 @@
                     font-size: 12px;
                     padding: 20px;
                 `;
-                placeholder.textContent = '⏳ Extracting images from blog...';
+                placeholder.textContent = '⏳ No images found';
                 imageGrid.appendChild(placeholder);
             }
         }
 
         function selectImage(index, isAutoSelected = false) {
             selectedImageIndex = index;
-            const originalUrl = extractedImages[index];
+            const imageUrl = extractedImages[index];
 
-            // Use the working URL from the grid tile if available (may be proxied)
-            const gridTiles = document.querySelectorAll('.image-option');
-            let workingUrl = originalUrl;
-            if (gridTiles[index] && gridTiles[index].dataset.workingUrl) {
-                workingUrl = gridTiles[index].dataset.workingUrl;
-            }
+            currentImageUrl = imageUrl;
 
-            currentImageUrl = workingUrl;
-
-            // Try loading directly first, fallback to proxy
-            const testImg = new Image();
-            testImg.crossOrigin = 'anonymous';
-            testImg.onload = function() {
-                preview.adImage.style.backgroundImage = `url('${workingUrl}')`;
-                preview.adImage.classList.add('has-image');
-                preview.adImage.textContent = '';
-            };
-            testImg.onerror = function() {
-                // Direct load failed, try via proxy
-                const proxied = proxyImageUrl(originalUrl);
-                currentImageUrl = proxied;
-                preview.adImage.style.backgroundImage = `url('${proxied}')`;
-                preview.adImage.classList.add('has-image');
-                preview.adImage.textContent = '';
-                console.log('Image loaded via proxy:', proxied);
-            };
-            testImg.src = workingUrl;
+            // SIMPLE: Just set the CSS background-image directly
+            // Same approach as manually pasting a URL — works without CORS
+            preview.adImage.style.backgroundImage = `url('${imageUrl}')`;
+            preview.adImage.classList.add('has-image');
+            preview.adImage.textContent = '';
             
             optimizeImageForTemplate(currentTemplate);
             
@@ -4708,38 +4615,15 @@
             
             updateDimensionsFromAspectRatio();
             
-            // Handle image display - preserve current image state, use proxy if needed
+            // SIMPLE: Just set CSS background-image directly — same as paste URL
             if (currentImageUrl) {
-                const imgUrl = currentImageUrl;
-                // If already proxied or data:, use directly
-                if (imgUrl.includes('wsrv.nl') || imgUrl.startsWith('data:')) {
-                    preview.adImage.style.backgroundImage = `url('${imgUrl}')`;
-                    preview.adImage.classList.add('has-image');
-                    preview.adImage.textContent = '';
-                } else {
-                    // Test if image loads, use proxy fallback
-                    const testImg = new Image();
-                    testImg.crossOrigin = 'anonymous';
-                    testImg.onload = function() {
-                        preview.adImage.style.backgroundImage = `url('${imgUrl}')`;
-                        preview.adImage.classList.add('has-image');
-                        preview.adImage.textContent = '';
-                    };
-                    testImg.onerror = function() {
-                        const proxied = proxyImageUrl(imgUrl);
-                        currentImageUrl = proxied;
-                        preview.adImage.style.backgroundImage = `url('${proxied}')`;
-                        preview.adImage.classList.add('has-image');
-                        preview.adImage.textContent = '';
-                    };
-                    testImg.src = imgUrl;
-                }
-                console.log('Preview updated with image:', currentImageUrl);
+                preview.adImage.style.backgroundImage = `url('${currentImageUrl}')`;
+                preview.adImage.classList.add('has-image');
+                preview.adImage.textContent = '';
             } else if (!preview.adImage.classList.contains('has-image')) {
                 preview.adImage.style.backgroundImage = 'none';
                 preview.adImage.textContent = '📷 Image will appear here';
             }
-            // Note: If has-image class is present but no currentImageUrl, preserve existing image
 
             const zoom = elements.imageZoom.value;
             const scale = elements.imageScale.value;
