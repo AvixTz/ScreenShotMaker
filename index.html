@@ -3585,7 +3585,77 @@
                         }
                     }
                     
-                    let mainImage = '';
+                    // === REGEX-BASED IMAGE EXTRACTION FROM RAW HTML ===
+                    // This is the "dumb" approach — extract ALL image URLs directly from the HTML string
+                    // using regex. More reliable than DOMParser because it avoids .src URL resolution bugs.
+                    const rawHtml = data.contents;
+                    const regexImages = [];
+                    const regexProcessed = new Set();
+
+                    // 1. og:image and twitter:image from meta tags
+                    const ogImageMatch = rawHtml.match(/property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
+                                        rawHtml.match(/content=["']([^"']+)["'][^>]*property=["']og:image["']/i);
+                    if (ogImageMatch) {
+                        const ogUrl = convertToAbsoluteUrl(ogImageMatch[1], url);
+                        regexImages.push(ogUrl);
+                        regexProcessed.add(ogUrl);
+                        console.log('Regex found og:image:', ogUrl);
+                    }
+
+                    const twitterImageMatch = rawHtml.match(/(?:name|property)=["']twitter:image["'][^>]*content=["']([^"']+)["']/i) ||
+                                             rawHtml.match(/content=["']([^"']+)["'][^>]*(?:name|property)=["']twitter:image["']/i);
+                    if (twitterImageMatch) {
+                        const twUrl = convertToAbsoluteUrl(twitterImageMatch[1], url);
+                        if (!regexProcessed.has(twUrl)) {
+                            regexImages.push(twUrl);
+                            regexProcessed.add(twUrl);
+                        }
+                    }
+
+                    // 2. All img src attributes
+                    const imgSrcRegex = /<img[^>]+(?:src|data-src|data-lazy-src|data-original)=["']([^"']+)["']/gi;
+                    let imgMatch;
+                    while ((imgMatch = imgSrcRegex.exec(rawHtml)) !== null) {
+                        let imgUrl = imgMatch[1].trim();
+                        if (!imgUrl || imgUrl.startsWith('data:text') || imgUrl.startsWith('data:application')) continue;
+                        // Skip tiny icons/trackers
+                        const lower = imgUrl.toLowerCase();
+                        if (lower.includes('favicon') || lower.includes('pixel') || lower.includes('gravatar') ||
+                            lower.includes('doubleclick') || lower.includes('googleadservices') ||
+                            lower.includes('google-analytics') || lower.includes('facebook.com/tr') ||
+                            lower.endsWith('.gif') && lower.includes('track')) continue;
+
+                        imgUrl = convertToAbsoluteUrl(imgUrl, url);
+                        if (!regexProcessed.has(imgUrl)) {
+                            regexImages.push(imgUrl);
+                            regexProcessed.add(imgUrl);
+                        }
+                    }
+
+                    // 3. srcset attributes — get the largest image from each
+                    const srcsetRegex = /srcset=["']([^"']+)["']/gi;
+                    let srcsetMatch;
+                    while ((srcsetMatch = srcsetRegex.exec(rawHtml)) !== null) {
+                        const srcsetParts = srcsetMatch[1].split(',');
+                        if (srcsetParts.length > 0) {
+                            // Get the last entry (usually largest)
+                            let bestUrl = srcsetParts[srcsetParts.length - 1].trim().split(/\s+/)[0];
+                            if (bestUrl && !bestUrl.startsWith('data:')) {
+                                bestUrl = convertToAbsoluteUrl(bestUrl, url);
+                                if (!regexProcessed.has(bestUrl)) {
+                                    regexImages.push(bestUrl);
+                                    regexProcessed.add(bestUrl);
+                                }
+                            }
+                        }
+                    }
+
+                    console.log(`Regex extracted ${regexImages.length} image URLs from raw HTML`);
+
+                    // === DOMParser extraction for title/subtitle (still useful for structured data) ===
+                    let mainImage = regexImages.length > 0 ? regexImages[0] : '';
+
+                    // Try DOMParser for og:image as a complement
                     const imageSelectors = [
                         'meta[property="og:image"]',
                         'meta[name="twitter:image"]',
@@ -3595,32 +3665,27 @@
                         '.entry-thumbnail img',
                         '.wp-post-image',
                         '.attachment-post-thumbnail',
-                        'article .wp-image',
-                        'article img[class*="wp-image"]',
-                        '.post-content img:first-of-type',
-                        '.entry-content img:first-of-type',
-                        '.content img:first-of-type',
                         'article img:first-of-type',
-                        '.hero-image img',
-                        '.banner img',
-                        'img[src*="featured"]',
-                        'img[src*="header"]',
-                        'img[alt*="featured"]'
+                        '.hero-image img'
                     ];
-                    
+
                     for (const selector of imageSelectors) {
                         const element = doc.querySelector(selector);
                         if (element) {
+                            let domImg = '';
                             if (element.tagName === 'META') {
-                                mainImage = element.content || element.getAttribute('content') || '';
+                                domImg = element.getAttribute('content') || '';
                             } else {
-                                mainImage = element.src || element.getAttribute('src') || element.getAttribute('data-src') || '';
-                                if (!mainImage) {
-                                    mainImage = element.getAttribute('data-lazy-src') || element.getAttribute('data-original') || '';
-                                }
+                                // IMPORTANT: Use getAttribute, NOT .src — .src resolves against wrong base URL in DOMParser
+                                domImg = element.getAttribute('src') || element.getAttribute('data-src') || element.getAttribute('data-lazy-src') || '';
                             }
-                            if (mainImage && isValidImageUrl(mainImage)) {
-                                mainImage = convertToAbsoluteUrl(mainImage, url);
+                            if (domImg) {
+                                domImg = convertToAbsoluteUrl(domImg, url);
+                                if (!mainImage) mainImage = domImg;
+                                if (!regexProcessed.has(domImg)) {
+                                    regexImages.push(domImg);
+                                    regexProcessed.add(domImg);
+                                }
                                 break;
                             }
                         }
@@ -3639,7 +3704,8 @@
                     for (const selector of faviconSelectors) {
                         const element = doc.querySelector(selector);
                         if (element) {
-                            faviconUrl = element.href || element.content || element.getAttribute('href') || element.getAttribute('content') || '';
+                            // Use getAttribute, not .href — .href resolves against wrong base in DOMParser
+                            faviconUrl = element.getAttribute('href') || element.getAttribute('content') || '';
                             if (faviconUrl) {
                                 faviconUrl = convertToAbsoluteUrl(faviconUrl, url);
                                 break;
@@ -3737,10 +3803,10 @@
 
                         // Function to process image element
                         const processImageElement = (imgElement) => {
-                            let imgSrc = imgElement.src || 
-                                        imgElement.getAttribute('src') || 
-                                        imgElement.getAttribute('data-src') || 
-                                        imgElement.getAttribute('data-lazy-src') || 
+                            // IMPORTANT: Use getAttribute, NOT .src — .src resolves against wrong base URL in DOMParser
+                            let imgSrc = imgElement.getAttribute('src') ||
+                                        imgElement.getAttribute('data-src') ||
+                                        imgElement.getAttribute('data-lazy-src') ||
                                         imgElement.getAttribute('data-original') ||
                                         imgElement.getAttribute('data-srcset') ||
                                         '';
@@ -4026,11 +4092,10 @@
                     console.log(`Found ${allImageElements.size} total image elements`); // Debug log
                     
                     allImageElements.forEach(img => {
-                        // Enhanced image source extraction
-                        let imgSrc = img.src || 
-                                    img.getAttribute('src') || 
-                                    img.getAttribute('data-src') || 
-                                    img.getAttribute('data-lazy-src') || 
+                        // IMPORTANT: Use getAttribute, NOT .src — .src resolves against wrong base URL in DOMParser
+                        let imgSrc = img.getAttribute('src') ||
+                                    img.getAttribute('data-src') ||
+                                    img.getAttribute('data-lazy-src') ||
                                     img.getAttribute('data-original') ||
                                     img.getAttribute('data-srcset') ||
                                     img.getAttribute('srcset') ||
@@ -4107,21 +4172,36 @@
                         isExtracted: true
                     };
                     
+                    // Build final image list — merge regex images + DOMParser images, deduplicated
+                    const finalImageSet = new Set();
                     extractedImages = [];
+
+                    // Add regex-extracted images first (most reliable)
+                    regexImages.forEach(img => {
+                        if (!finalImageSet.has(img)) {
+                            finalImageSet.add(img);
+                            extractedImages.push(img);
+                        }
+                    });
+
+                    // Add DOMParser additional images
+                    additionalImages.forEach(img => {
+                        if (!finalImageSet.has(img)) {
+                            finalImageSet.add(img);
+                            extractedImages.push(img);
+                        }
+                    });
+
+                    console.log(`Total images: ${extractedImages.length} (regex: ${regexImages.length}, dom: ${additionalImages.length})`);
+
                     if (mainImage) {
-                        extractedImages.push(mainImage);
                         currentImageUrl = mainImage;
                         // SIMPLE: Just set CSS background-image directly — same as paste URL
                         preview.adImage.style.backgroundImage = `url('${mainImage}')`;
                         preview.adImage.classList.add('has-image');
                         preview.adImage.textContent = '';
                     }
-                    
-                    // CRITICAL FIX: Add ALL additional images, don't limit to 8
-                    additionalImages.forEach(img => {
-                        extractedImages.push(img);
-                    });
-                    
+
                     if (extractedImages.length === 0) {
                         extractedImages = getFallbackImages();
                     }
