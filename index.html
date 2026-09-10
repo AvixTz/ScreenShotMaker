@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>Advanced Native Ad Studio with Email Marketing</title>
     <style>
         * {
@@ -3487,31 +3488,42 @@
                 console.log('Starting content extraction for URL:', url);
                 
                 // Try multiple proxy services for better reliability
+                // Each entry: { url, type } where type is 'json' (allorigins format) or 'raw'
                 const proxyServices = [
-                    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-                    `https://cors-anywhere.herokuapp.com/${url}`,
-                    `https://thingproxy.freeboard.io/fetch/${url}`
+                    { url: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, type: 'json' },
+                    { url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`, type: 'raw' },
+                    { url: `https://corsproxy.io/?${encodeURIComponent(url)}`, type: 'raw' },
+                    { url: `https://thingproxy.freeboard.io/fetch/${url}`, type: 'raw' },
+                    { url: `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`, type: 'raw' }
                 ];
-                
+
                 let response, data;
                 let lastError;
-                
+
                 for (let i = 0; i < proxyServices.length; i++) {
+                    const proxy = proxyServices[i];
                     try {
-                        console.log(`Trying proxy ${i + 1}:`, proxyServices[i]);
-                        response = await fetch(proxyServices[i]);
-                        
+                        console.log(`Trying proxy ${i + 1}:`, proxy.url);
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), 8000);
+                        response = await fetch(proxy.url, { signal: controller.signal });
+                        clearTimeout(timeoutId);
+
                         if (response.ok) {
-                            if (i === 0) { // allorigins returns JSON
-                                data = await response.json();
-                                if (data.contents) {
-                                    console.log('Successfully fetched content via allorigins');
+                            if (proxy.type === 'json') {
+                                const jsonData = await response.json();
+                                if (jsonData.contents) {
+                                    data = jsonData;
+                                    console.log('Successfully fetched content via proxy', i + 1);
                                     break;
                                 }
-                            } else { // Other proxies return raw HTML
-                                data = { contents: await response.text() };
-                                console.log('Successfully fetched content via proxy', i + 1);
-                                break;
+                            } else {
+                                const text = await response.text();
+                                if (text && text.length > 200) {
+                                    data = { contents: text };
+                                    console.log('Successfully fetched content via proxy', i + 1);
+                                    break;
+                                }
                             }
                         }
                     } catch (error) {
@@ -3520,7 +3532,7 @@
                         continue;
                     }
                 }
-                
+
                 if (!data || !data.contents) {
                     throw new Error(`All proxy services failed. Last error: ${lastError?.message || 'Unknown error'}`);
                 }
@@ -4099,9 +4111,23 @@
                     if (mainImage) {
                         extractedImages.push(mainImage);
                         currentImageUrl = mainImage;
-                        preview.adImage.style.backgroundImage = `url('${mainImage}')`;
-                        preview.adImage.classList.add('has-image');
-                        preview.adImage.textContent = '';
+                        // Try loading main image directly, fallback to proxy
+                        const testMainImg = new Image();
+                        testMainImg.crossOrigin = 'anonymous';
+                        testMainImg.onload = function() {
+                            preview.adImage.style.backgroundImage = `url('${mainImage}')`;
+                            preview.adImage.classList.add('has-image');
+                            preview.adImage.textContent = '';
+                        };
+                        testMainImg.onerror = function() {
+                            const proxiedMain = proxyImageUrl(mainImage);
+                            currentImageUrl = proxiedMain;
+                            preview.adImage.style.backgroundImage = `url('${proxiedMain}')`;
+                            preview.adImage.classList.add('has-image');
+                            preview.adImage.textContent = '';
+                            console.log('Main image loaded via proxy:', proxiedMain);
+                        };
+                        testMainImg.src = mainImage;
                     }
                     
                     // CRITICAL FIX: Add ALL additional images, don't limit to 8
@@ -4177,38 +4203,63 @@
         }
 
         function isValidImageUrl(url) {
-            if (!url || url.length < 10) return false;
-            
-            const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg', '.avif'];
+            if (!url || url.length < 5) return false;
+
             const urlLower = url.toLowerCase();
-            
-            const hasImageExtension = imageExtensions.some(ext => urlLower.includes(ext));
-            
-            const hasImageKeywords = urlLower.includes('image') || 
-                                   urlLower.includes('photo') ||
-                                   urlLower.includes('picture') ||
-                                   urlLower.includes('img') ||
-                                   urlLower.includes('pic');
-            
-            const isImageHost = url.includes('unsplash') ||
-                              url.includes('pexels') ||
-                              url.includes('pixabay') ||
-                              url.includes('imgur') ||
-                              url.includes('cloudinary') ||
-                              url.includes('wp-content/uploads') ||
-                              url.includes('images') ||
-                              url.includes('media');
-            
-            const isExcluded = urlLower.includes('.css') ||
-                             urlLower.includes('.js') ||
-                             urlLower.includes('.json') ||
-                             urlLower.includes('.xml') ||
-                             urlLower.includes('.txt') ||
-                             urlLower.includes('data:text') ||
-                             urlLower.includes('favicon') ||
-                             urlLower.includes('sprite');
-            
-            return !isExcluded && (hasImageExtension || hasImageKeywords || isImageHost);
+
+            // Hard exclusions — definitely not images
+            const isExcluded = urlLower.endsWith('.css') ||
+                             urlLower.endsWith('.js') ||
+                             urlLower.endsWith('.json') ||
+                             urlLower.endsWith('.xml') ||
+                             urlLower.endsWith('.txt') ||
+                             urlLower.endsWith('.woff') ||
+                             urlLower.endsWith('.woff2') ||
+                             urlLower.endsWith('.ttf') ||
+                             urlLower.endsWith('.eot') ||
+                             urlLower.startsWith('data:text') ||
+                             urlLower.startsWith('data:application') ||
+                             urlLower.includes('favicon.ico') ||
+                             urlLower.includes('/sprite') ||
+                             urlLower.includes('doubleclick.net') ||
+                             urlLower.includes('googleadservices') ||
+                             urlLower.includes('google-analytics') ||
+                             urlLower.includes('facebook.com/tr') ||
+                             urlLower.includes('pixel');
+
+            if (isExcluded) return false;
+
+            // Image extensions — check end of pathname (before query string)
+            const pathOnly = urlLower.split('?')[0].split('#')[0];
+            const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg', '.avif', '.tiff', '.ico'];
+            const hasImageExtension = imageExtensions.some(ext => pathOnly.endsWith(ext));
+            if (hasImageExtension) return true;
+
+            // Image format in query params (e.g. ?format=jpg)
+            if (urlLower.includes('format=jpg') || urlLower.includes('format=png') ||
+                urlLower.includes('format=webp') || urlLower.includes('format=avif')) return true;
+
+            // Known image CDN hosts and paths
+            const imageHosts = [
+                'unsplash', 'pexels', 'pixabay', 'imgur', 'cloudinary', 'imgix',
+                'wp-content/uploads', 'wp-content/themes', 'i0.wp.com', 'i1.wp.com', 'i2.wp.com',
+                'images.', 'image.', '/images/', '/media/', '/photos/', '/photo/',
+                'cdn.shopify', 'res.cloudinary', 'imagedelivery', 'imgbb', 'ibb.co',
+                'googleusercontent.com', 'ggpht.com', 'twimg.com', 'fbcdn.net',
+                'shortpixel', 'smushcdn', 'nitrocdn', 'staticflickr',
+                'amazonaws.com', 'storage.googleapis.com', 'blob.core.windows.net',
+                '/uploads/', '/img/', '/thumb', '/photo', '/gallery'
+            ];
+            const isImageHost = imageHosts.some(host => urlLower.includes(host));
+            if (isImageHost) return true;
+
+            // Accept any http(s) URL that isn't in the exclusion list
+            // This is the key fix — be permissive since og:image tags reliably point to images
+            if (urlLower.startsWith('http://') || urlLower.startsWith('https://')) {
+                return true;
+            }
+
+            return false;
         }
 
         function getFallbackImages() {
@@ -4223,72 +4274,94 @@
         }
 
         async function smartFallbackExtraction(url) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    const urlObj = new URL(url);
-                    const domain = urlObj.hostname.replace('www.', '');
-                    const cleanDomain = domain.split('.')[0];
-                    const pathParts = urlObj.pathname.split('/').filter(part => part);
-                    
-                    const blogName = cleanDomain.charAt(0).toUpperCase() + cleanDomain.slice(1);
-                    
-                    let titleHint = '';
-                    if (pathParts.length > 0) {
-                        titleHint = pathParts[pathParts.length - 1]
-                            .replace(/-/g, ' ')
-                            .replace(/_/g, ' ')
-                            .replace(/\.(html|php|asp|jsp)$/i, '')
-                            .split(' ')
-                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ');
+            const urlObj = new URL(url);
+            const domain = urlObj.hostname.replace('www.', '');
+            const cleanDomain = domain.split('.')[0];
+            const pathParts = urlObj.pathname.split('/').filter(part => part);
+
+            const blogName = cleanDomain.charAt(0).toUpperCase() + cleanDomain.slice(1);
+
+            let titleHint = '';
+            if (pathParts.length > 0) {
+                titleHint = pathParts[pathParts.length - 1]
+                    .replace(/-/g, ' ')
+                    .replace(/_/g, ' ')
+                    .replace(/\.(html|php|asp|jsp)$/i, '')
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+            }
+
+            const finalTitle = titleHint || 'Discover Amazing Insights and Tips';
+            const finalSubtitle = `Latest updates and exclusive content from ${blogName}`;
+
+            elements.blogName.value = blogName;
+            elements.primaryTitle.value = finalTitle;
+            elements.secondaryTitle.value = finalSubtitle;
+
+            // Try to at least get screenshots/images from the URL using proxy services
+            const possibleImages = [
+                // Try common WordPress featured image patterns
+                `${urlObj.protocol}//${urlObj.host}/wp-content/uploads/${new Date().getFullYear()}/`,
+                // og:image is often at a predictable path
+                `${urlObj.protocol}//${urlObj.host}/wp-content/uploads/`,
+            ];
+
+            // Use website screenshot service as a guaranteed fallback image
+            const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
+            let screenshotImage = '';
+            try {
+                const controller = new AbortController();
+                setTimeout(() => controller.abort(), 5000);
+                const ssResp = await fetch(screenshotUrl, { signal: controller.signal });
+                if (ssResp.ok) {
+                    const ssData = await ssResp.json();
+                    if (ssData.data && ssData.data.screenshot && ssData.data.screenshot.url) {
+                        screenshotImage = ssData.data.screenshot.url;
+                        console.log('Got screenshot from microlink:', screenshotImage);
                     }
-                    
-                    const finalTitle = titleHint || 'Discover Amazing Insights and Tips';
-                    const finalSubtitle = `Latest updates and exclusive content from ${cleanDomain}`;
-                    
-                    elements.blogName.value = blogName;
-                    elements.primaryTitle.value = finalTitle;
-                    elements.secondaryTitle.value = finalSubtitle;
-                    
-                    extractedContent = {
-                        title: finalTitle,
-                        subtitle: finalSubtitle,
-                        blogName: blogName,
-                        imageUrl: '',
-                        extractedImages: getFallbackImages(),
-                        fullContent: [
-                            { type: 'text', content: `Welcome to ${cleanDomain}! This is where amazing content begins.` },
-                            { type: 'text', content: 'Our team works tirelessly to bring you the most relevant and engaging articles that will help you stay ahead of the curve.' },
-                            { type: 'text', content: 'From industry insights to practical tips, we cover everything you need to know in your field of interest.' },
-                            { type: 'text', content: 'Join thousands of readers who trust us to deliver quality content that makes a difference in their daily lives.' },
-                            { type: 'text', content: 'Subscribe to our newsletter and never miss an update from our expert writers and industry professionals.' }
-                        ],
-                        isExtracted: true
-                    };
-                    
-                    extractedImages = getFallbackImages();
-                    extractedContent.extractedImages = [...extractedImages];
-                    
-                    displayImageGrid();
-                    autoSelectBestImage();
-                    
-                    document.getElementById('autoImageUpload').classList.remove('hidden');
-                    
-                    showNotification(`🔄 Smart fallback | ${extractedImages.length} demo images | Sample content created`);
-                    
-                    console.log('Fallback content created:', {
-                        extractedImages: extractedImages.length,
-                        fullContent: extractedContent.fullContent.length
-                    });
-                    
-                    if (isEmailMode) {
-                        updateEmailContent();
-                    } else {
-                        updatePreview();
-                    }
-                    resolve();
-                }, 1000);
-            });
+                }
+            } catch (e) {
+                console.log('Microlink screenshot failed:', e.message);
+            }
+
+            // Build image list: screenshot first, then generic fallbacks
+            extractedImages = [];
+            if (screenshotImage) {
+                extractedImages.push(screenshotImage);
+            }
+            // Add generic high-quality fallback images
+            extractedImages.push(...getFallbackImages());
+
+            extractedContent = {
+                title: finalTitle,
+                subtitle: finalSubtitle,
+                blogName: blogName,
+                imageUrl: screenshotImage || extractedImages[0] || '',
+                extractedImages: [...extractedImages],
+                fullContent: [
+                    { type: 'heading', content: finalTitle },
+                    { type: 'text', content: finalSubtitle },
+                    { type: 'text', content: `Read the full article at ${blogName} for more details and insights.` }
+                ],
+                isExtracted: false // Mark as NOT extracted — it's a fallback
+            };
+
+            currentImageUrl = extractedContent.imageUrl;
+
+            displayImageGrid();
+            autoSelectBestImage();
+
+            document.getElementById('autoImageUpload').classList.remove('hidden');
+
+            const imgSource = screenshotImage ? 'page screenshot' : 'demo images';
+            showNotification(`🔄 Smart fallback | ${imgSource} | ${extractedImages.length} images available`);
+
+            if (isEmailMode) {
+                updateEmailContent();
+            } else {
+                updatePreview();
+            }
         }
 
         function autoSelectBestImage() {
@@ -4297,13 +4370,25 @@
             selectImage(selectedImageIndex, true);
         }
 
+        // Image proxy to bypass CORS and hotlinking restrictions
+        function proxyImageUrl(originalUrl) {
+            if (!originalUrl) return originalUrl;
+            // wsrv.nl is a free, fast, reliable image proxy/CDN
+            // It fetches the image server-side and serves it with proper CORS headers
+            return `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}&default=1&n=-1`;
+        }
+
         function displayImageGrid() {
             const imageGrid = document.getElementById('imageGrid');
             imageGrid.classList.remove('hidden');
             imageGrid.innerHTML = '';
 
+            let loadedCount = 0;
+            let failedCount = 0;
+
             if (extractedImages.length > 0) {
                 const header = document.createElement('div');
+                header.id = 'imageGridHeader';
                 header.style.cssText = `
                     grid-column: 1 / -1;
                     font-size: 10px;
@@ -4311,7 +4396,7 @@
                     margin-bottom: 5px;
                     text-align: center;
                 `;
-                header.textContent = `🖼️ Found ${extractedImages.length} images from blog`;
+                header.textContent = `🖼️ Loading ${extractedImages.length} images from blog...`;
                 imageGrid.appendChild(header);
             }
 
@@ -4320,21 +4405,70 @@
                 imageOption.className = 'image-option loading';
                 imageOption.textContent = '📷';
                 imageOption.onclick = () => selectImage(index, false);
-                
-                const img = new Image();
-                img.onload = function() {
-                    imageOption.classList.remove('loading');
-                    imageOption.textContent = '';
-                    imageOption.style.backgroundImage = `url('${imageUrl}')`;
-                };
-                img.onerror = function() {
+
+                let retried = false;
+
+                function tryLoadImage(srcUrl) {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+
+                    // Timeout: if image doesn't load in 6s, try proxy
+                    const timeoutId = setTimeout(() => {
+                        if (!retried) {
+                            retried = true;
+                            console.log(`Image ${index} timeout, trying proxy:`, imageUrl);
+                            tryLoadImage(proxyImageUrl(imageUrl));
+                        } else {
+                            onFail();
+                        }
+                    }, 6000);
+
+                    img.onload = function() {
+                        clearTimeout(timeoutId);
+                        loadedCount++;
+                        imageOption.classList.remove('loading');
+                        imageOption.textContent = '';
+                        imageOption.style.backgroundImage = `url('${srcUrl}')`;
+                        // Store the working URL for later use
+                        imageOption.dataset.workingUrl = srcUrl;
+                        updateGridHeader();
+                    };
+
+                    img.onerror = function() {
+                        clearTimeout(timeoutId);
+                        if (!retried) {
+                            retried = true;
+                            console.log(`Image ${index} failed direct, trying proxy:`, imageUrl);
+                            tryLoadImage(proxyImageUrl(imageUrl));
+                        } else {
+                            onFail();
+                        }
+                    };
+
+                    img.src = srcUrl;
+                }
+
+                function onFail() {
+                    failedCount++;
                     imageOption.classList.remove('loading');
                     imageOption.textContent = '❌';
                     imageOption.style.cursor = 'not-allowed';
+                    imageOption.style.opacity = '0.3';
                     imageOption.onclick = null;
-                };
-                img.src = imageUrl;
-                
+                    updateGridHeader();
+                }
+
+                function updateGridHeader() {
+                    const hdr = document.getElementById('imageGridHeader');
+                    if (hdr) {
+                        const total = extractedImages.length;
+                        hdr.textContent = `🖼️ ${loadedCount}/${total} images loaded${failedCount > 0 ? ` (${failedCount} failed)` : ''}`;
+                    }
+                }
+
+                // Try direct load first, fallback to proxy
+                tryLoadImage(imageUrl);
+
                 imageGrid.appendChild(imageOption);
             });
 
@@ -4354,12 +4488,35 @@
 
         function selectImage(index, isAutoSelected = false) {
             selectedImageIndex = index;
-            const selectedImageUrl = extractedImages[index];
-            
-            currentImageUrl = selectedImageUrl;
-            preview.adImage.style.backgroundImage = `url('${selectedImageUrl}')`;
-            preview.adImage.classList.add('has-image');
-            preview.adImage.textContent = '';
+            const originalUrl = extractedImages[index];
+
+            // Use the working URL from the grid tile if available (may be proxied)
+            const gridTiles = document.querySelectorAll('.image-option');
+            let workingUrl = originalUrl;
+            if (gridTiles[index] && gridTiles[index].dataset.workingUrl) {
+                workingUrl = gridTiles[index].dataset.workingUrl;
+            }
+
+            currentImageUrl = workingUrl;
+
+            // Try loading directly first, fallback to proxy
+            const testImg = new Image();
+            testImg.crossOrigin = 'anonymous';
+            testImg.onload = function() {
+                preview.adImage.style.backgroundImage = `url('${workingUrl}')`;
+                preview.adImage.classList.add('has-image');
+                preview.adImage.textContent = '';
+            };
+            testImg.onerror = function() {
+                // Direct load failed, try via proxy
+                const proxied = proxyImageUrl(originalUrl);
+                currentImageUrl = proxied;
+                preview.adImage.style.backgroundImage = `url('${proxied}')`;
+                preview.adImage.classList.add('has-image');
+                preview.adImage.textContent = '';
+                console.log('Image loaded via proxy:', proxied);
+            };
+            testImg.src = workingUrl;
             
             optimizeImageForTemplate(currentTemplate);
             
@@ -4551,12 +4708,33 @@
             
             updateDimensionsFromAspectRatio();
             
-            // Handle image display - preserve current image state
+            // Handle image display - preserve current image state, use proxy if needed
             if (currentImageUrl) {
-                preview.adImage.style.backgroundImage = `url('${currentImageUrl}')`;
-                preview.adImage.classList.add('has-image');
-                preview.adImage.textContent = '';
-                console.log('Preview updated with preserved image:', currentImageUrl); // Debug log
+                const imgUrl = currentImageUrl;
+                // If already proxied or data:, use directly
+                if (imgUrl.includes('wsrv.nl') || imgUrl.startsWith('data:')) {
+                    preview.adImage.style.backgroundImage = `url('${imgUrl}')`;
+                    preview.adImage.classList.add('has-image');
+                    preview.adImage.textContent = '';
+                } else {
+                    // Test if image loads, use proxy fallback
+                    const testImg = new Image();
+                    testImg.crossOrigin = 'anonymous';
+                    testImg.onload = function() {
+                        preview.adImage.style.backgroundImage = `url('${imgUrl}')`;
+                        preview.adImage.classList.add('has-image');
+                        preview.adImage.textContent = '';
+                    };
+                    testImg.onerror = function() {
+                        const proxied = proxyImageUrl(imgUrl);
+                        currentImageUrl = proxied;
+                        preview.adImage.style.backgroundImage = `url('${proxied}')`;
+                        preview.adImage.classList.add('has-image');
+                        preview.adImage.textContent = '';
+                    };
+                    testImg.src = imgUrl;
+                }
+                console.log('Preview updated with image:', currentImageUrl);
             } else if (!preview.adImage.classList.contains('has-image')) {
                 preview.adImage.style.backgroundImage = 'none';
                 preview.adImage.textContent = '📷 Image will appear here';
